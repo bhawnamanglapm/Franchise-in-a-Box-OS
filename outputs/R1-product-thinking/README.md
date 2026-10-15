@@ -8,6 +8,7 @@
 | [ai-human-split.xlsx](ai-human-split.xlsx) | 1b | The same 37 rows with the formulas already built in: the 4 split measures, hours, brands per consultant, and a per-module summary. Yellow cells are editable estimates; blue cells recalculate. |
 | [**Live Google Sheet**](https://docs.google.com/spreadsheets/d/1pl8JSEAvlPR1mexlfx0cwiFMPU-B4-QJFga4N31pl1o/edit?usp=sharing) | 1b | The workbook above, converted to a native Google Sheet. This is the link for reviewers. |
 | [1c-takeover-spec.md](1c-takeover-spec.md) | 1c | How the feature was chosen (6 candidates screened), then the Conversation Takeover spec: 7 states, 9 transitions, UI, empty/loading/error states, validation, 10 edge cases, 8 acceptance criteria, metrics, and the events it writes for the Autonomy Rate |
+| [**Task 1 as one Google Doc**](https://docs.google.com/document/d/18ThKEZmmZ-7fAyAi9UFVFgm0G9DyfJg3Lt2Ze_lIjME/edit) | 1a–1c | 1a, 1b and 1c combined, plus an appendix of the assumptions and decisions they cite. Built from the three .md files on 15 Oct 2026; the .md files stay the source of truth. |
 
 ## Key numbers
 
