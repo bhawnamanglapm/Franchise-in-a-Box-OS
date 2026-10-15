@@ -1,5 +1,7 @@
 # R2B: WhatsApp AI Agent Panel: phases
 
+> **Changed 15 Oct 2026 (D-01 revised):** Claude Code builds the prototype, so "Prompt N" means a Claude Code build step from the [build brief](../../../outputs/R2B-whatsapp-agent-panel/build-brief.md). Exit criteria are unchanged. Phase 1's entry condition "R3 final" was not met; the draft R3 triggers are used (D-12). Live status: [`phases-status.md`](../../../outputs/R2B-whatsapp-agent-panel/phases-status.md).
+
 | Phase | Goal | Entry | Activities | Exit | Time |
 |---|---|---|---|---|---|
 | **1. Brief** | Remove ambiguity before building | R1 1c + R3 final | Build brief, prompt pack, mock-data spec | Every Must feature has a prompt | 30 m (Decide block) |

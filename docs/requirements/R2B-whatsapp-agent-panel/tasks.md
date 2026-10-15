@@ -2,6 +2,8 @@
 
 Total estimate: **2.75 h** (Build block, first of the three prototypes, after the decisions are locked).
 
+> **Changed 15 Oct 2026 (D-01 revised):** Claude Code builds the prototype instead of Lovable. "Prompt N" tasks are now build steps done by Claude Code, with you reviewing at each checkpoint. The table below is the original plan; current owners and status are in [`outputs/R2B-whatsapp-agent-panel/tasks-status.md`](../../../outputs/R2B-whatsapp-agent-panel/tasks-status.md).
+
 | # | Task | Output | Est. | Owner | Depends on |
 |---|---|---|---|---|---|
 | T2B.01 | Write the one-page build brief (screens, components, mock data, interactions, tokens) | Build brief | (Decide block) | Claude | R1 1c, R3 |

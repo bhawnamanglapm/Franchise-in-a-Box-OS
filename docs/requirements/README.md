@@ -11,7 +11,7 @@ Each requirement maps to one task in the brief, plus R8 for the submission rules
 | `definition-of-done.md` | A checklist that must be fully ticked before the requirement counts as done |
 | `build-log-template.md` | Prototypes only (R2A, R2B, R2C): prompt → what AI got wrong → fix, filled in while building |
 
-Task 2 is split into three requirements because all three options are built (D-10). They share one design shell, one set of mock data (A26) and a footer linking them together, but each has its own Lovable project, URL and write-up.
+Task 2 is split into three requirements because all three options are built (D-10). They share one design shell, one set of mock data (A26) and a footer linking them together, but each has its own project, URL and write-up (B is built in Claude Code, D-01; A and C are planned in Lovable).
 
 ## Evaluation summary
 

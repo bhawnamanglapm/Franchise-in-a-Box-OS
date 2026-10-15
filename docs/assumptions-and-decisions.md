@@ -46,7 +46,7 @@ All assumptions are stated openly in the submission. IDs are cited wherever an a
 
 | ID | Decision | Status | Date |
 |---|---|---|---|
-| D-01 | Prototype B (WhatsApp AI Agent Panel) is built in Lovable with GitHub sync; scripted replies plus a stretch LLM goal. Originally "Task 2 = Option B"; scope widened by D-10. | Confirmed | Day 0 |
+| D-01 | Prototype B (WhatsApp AI Agent Panel) is built by **Claude Code** (Vite + React + TypeScript + Tailwind, in `prototypes/r2b-whatsapp-agent-panel/`) and deployed to Vercel; scripted replies plus a stretch LLM goal. **Revised 15 Oct 2026:** originally Lovable with GitHub sync. Changed so the state machine and rules are unit-tested and the 9-step test is automated, and because Lovable couldn't be driven from the build session. Originally "Task 2 = Option B"; scope widened by D-10. | Confirmed (revised) | 15 Oct 2026 |
 | D-02 | Task 5 = FreshBrew main view plus portfolio scenario | Confirmed | Day 0 |
 | D-03 | Task 6B framed as Scale100x's go/no-go decision on the category | Confirmed | Day 0 |
 | D-04 | 30-day order: Sales Agent + CRM slice → thin ROI → thin Onboarding → Collateral deferred | Confirmed | 15 Oct 2026 |
@@ -56,4 +56,5 @@ All assumptions are stated openly in the submission. IDs are cited wherever an a
 | D-08 | Default LLM for the WhatsApp agent | Open, decided in R3 | — |
 | D-09 | Final Task 4 top 4 | Open, decided in R4 | — |
 | D-10 | Build all three Task 2 options (A Onboarding Wizard, B WhatsApp AI Agent Panel, C ROI Dashboard) as separate working prototypes, each with its own URL and write-up. The brief file in `brief/` says "Choose ONE"; the version we're working from asks for all three. | Confirmed | Today |
+| D-12 | Prototype B is built before R3 is final. Its trigger engine uses the R3 **draft** rules F3.A1–A9 exactly as drafted. When R3 is written, its trigger table is the single source and the engine is re-synced to it. | Confirmed | 15 Oct 2026 |
 | D-11 | Prototype A's revenue split = revenue by sales channel (A30) | **Decided while building R2A** (T2A.01); working default until then | — |

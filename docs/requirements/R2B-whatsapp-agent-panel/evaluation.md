@@ -18,7 +18,7 @@ Task 2 lists three options: A Onboarding Wizard · **B WhatsApp AI Agent Panel**
 | Product judgment beyond the brief | Realistic Hinglish mock data, the 24 h window, claim conflict, opt-out, a computed autonomy badge |
 
 ## Decision
-**Option B**, built in **Lovable** with GitHub sync; targeted fixes in Claude Code (D-01).
+**Option B**, built by **Claude Code** as a Vite + React + TypeScript + Tailwind app in `prototypes/r2b-whatsapp-agent-panel/`, deployed to Vercel (D-01, revised 15 Oct 2026). *Originally Lovable with GitHub sync; changed so the state machine and rules can be unit-tested and the 9-step script automated, and because Lovable couldn't be driven from the build session.*
 - **Why it is built first of the three:** it sits on the revenue path (franchisee funnel), it ties together R1 1c + R3 + R4 #1–2 + R6A, and it fits the candidate's lead-to-closure and handoff experience.
 - **Logic:** scripted AI replies + deterministic rules. The stretch goal is one live LLM reply using the R3 prompt, attempted only if time allows (A17).
 - **Link to the other prototypes:** the facts the agent quotes match the Model Card approved in R2C (A32); the footer links to the A and C URLs.
@@ -27,14 +27,14 @@ Task 2 lists three options: A Onboarding Wizard · **B WhatsApp AI Agent Panel**
 | Ambiguity | Resolution | Assumption |
 |---|---|---|
 | "Working": real backend? | Mock data + client-side state; stated openly | A11, A17 |
-| Hosting | `*.lovable.app` or Vercel | A15 |
+| Hosting | Vercel (originally `*.lovable.app` or Vercel) | A15 |
 | Brands in mock data | FreshBrew (QSR, from the brief) + one fictional gym brand. No real company names. | A26 |
 
 ## Risks
 | Risk | Likelihood | Mitigation |
 |---|---|---|
 | Looks like a static chat mock | Medium | Visible state changes, a "Why flagged" card, and a simulate box on the first screen |
-| Lovable generates generic light-theme UI | High | The first prompt sets design tokens; check the hex values in the code |
+| Generic light-theme UI | Medium | Tokens are set in the Tailwind config before any screen is built; check the hex values in the built CSS |
 | Scope creep past 2 h | High | Build Must features first (MoSCoW); unbuilt items move to the "1 more day" list |
 | Stretch LLM goal uses a different provider than R3's choice | Medium | Call the R3 default model, or state the mismatch in the write-up |
 | Agent quotes numbers that differ from the C dashboard | Medium | Mock facts are copied from the R2C approved Model Card (A32) |
@@ -43,4 +43,4 @@ Task 2 lists three options: A Onboarding Wizard · **B WhatsApp AI Agent Panel**
 ## Effort and priority
 - **Estimate:** 2.75 h (2 h build, 0.75 h deploy, test and write-up) · **Priority:** P0 (Task 2 est. 20% weight, shared across A/B/C)
 - **Depends on:** R1 1c (spec), R3 (triggers, prompt), R4 (scope) · **Feeds:** R7 (proof), R8
-- **Status:** Not started. The build brief and prompt sequence are written after R3.
+- **Status:** In progress. Live status: [`outputs/R2B-whatsapp-agent-panel/`](../../../outputs/R2B-whatsapp-agent-panel/). Built before R3 is final, using the draft R3 triggers (D-12).

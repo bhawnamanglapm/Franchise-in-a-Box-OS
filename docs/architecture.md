@@ -247,7 +247,7 @@ flowchart TB
   EXT -. "not connected" .-> PB
 ```
 
-Each prototype is a separate Lovable project with its own URL and GitHub sync. Logic runs in the browser. The JSON hand-offs are file exports and imports, not a shared backend (A11). One number set flows through all three: R5 → C → B (A32).
+Each prototype is a separate project with its own URL and GitHub sync: B is a Vite app built by Claude Code and hosted on Vercel (D-01); A and C are planned as Lovable projects. Logic runs in the browser. The JSON hand-offs are file exports and imports, not a shared backend (A11). One number set flows through all three: R5 → C → B (A32).
 
 ## 7. Delivery plan (requirements → artefacts)
 

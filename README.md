@@ -26,7 +26,7 @@ The assignment asks for seven tasks, delivered as five links:
 |---|---|---|
 | Written submission | Tasks 1, 3, 4, 6, 7 + the Task 2 write-up for each prototype | Google Doc (anyone-with-link view) + PDF backup |
 | Live prototype A | Task 2 Option A: Onboarding Wizard | Lovable build, public URL |
-| Live prototype B | Task 2 Option B: WhatsApp AI Agent Panel | Lovable build, public URL |
+| Live prototype B | Task 2 Option B: WhatsApp AI Agent Panel | Claude Code build on Vercel, public URL (D-01) |
 | Live prototype C | Task 2 Option C: ROI Dashboard | Lovable build, public URL |
 | Financial model | Task 5 (FreshBrew QSR) | Google Sheets |
 
@@ -90,8 +90,8 @@ These are reference points to position the product, not researched claims. Verif
 | Tool | Used for | Real usage? |
 |---|---|---|
 | Claude | Analysis, drafting, research synthesis, model logic | Yes |
-| Claude Code | Repo setup, targeted prototype fixes, docs | Yes |
-| Lovable | Build and hosting for all three prototypes (one project each) | Yes |
+| Claude Code | Repo setup, docs, building prototype B (D-01), targeted fixes | Yes |
+| Lovable | Planned build and hosting for prototypes A and C (B moved to Claude Code, D-01) | Planned |
 | Google Sheets | Financial model (R5), AI/Human split tab (R1) | Yes |
 | Google Docs | Written submission (assumed available, A16) | Assumed |
 | GitHub | Version control, Lovable sync | Yes (this repo) |
@@ -131,7 +131,7 @@ Each requirement is evaluated in its own folder under [`docs/requirements/`](doc
 - the same FreshBrew + fictional gym mock data (A26)
 - the same computed autonomy badge
 - a footer that links to the other two prototypes
-- a separate Lovable project and URL for each, synced to GitHub
+- a separate project and URL for each, synced to GitHub (B: Claude Code on Vercel; A and C: Lovable, as planned)
 
 ## 9. Feature list (summary)
 
@@ -178,7 +178,7 @@ Detailed, numbered tasks live in each requirement's `tasks.md`. Master view:
 | 3 | Rank top 4 features, Month 2 / Cut, QSR variation | R4 | 0.5 h | Decide | You + Claude |
 | 4 | Write HITL triggers, system prompt (word-count), model choice, eval | R3 | 1 h | Decide | You + Claude |
 | 5 | Write the shared Prompt 1 shell + prototype B build brief and prompts | R2B | (in 4) | Decide | Claude |
-| 6 | Build prototype B in Lovable; log prompt → error → fix | R2B | 2 h | Build | You |
+| 6 | Build prototype B in Claude Code (D-01); log prompt → error → fix | R2B | 2 h | Build | Claude Code builds, you review |
 | 7 | Deploy B, run 9-step test, write Task 2 Option B section | R2B | 0.75 h | Build | You |
 | 8 | Build FreshBrew model in Sheets; run integrity checks | R5 | 2 h | Build | You + Claude |
 | 9 | Build prototype C on R5's formulas; check 3 numbers against the Sheet; deploy, test, write up; hand approved facts to B | R2C | 2.25 h | Build | You |
