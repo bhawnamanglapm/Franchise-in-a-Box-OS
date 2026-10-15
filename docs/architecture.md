@@ -232,6 +232,102 @@ flowchart TB
 
 Prototype B is a Vite app built by Claude Code and hosted on Vercel (D-01). Logic runs in the browser with mock data; there is no backend, and the brief's Supabase is not used (A11). Task 2 says "Choose ONE", so Options A (Onboarding Wizard) and C (ROI Dashboard) are not built (D-10).
 
+### 6.1 WhatsApp AI Agent Panel end to end: who uses it and what's inside
+
+```mermaid
+flowchart LR
+  subgraph PEOPLE["Who uses it"]
+    P["Prospect<br/>wants to buy a franchise<br/>(chats on WhatsApp)"]
+    C["Consultant<br/>Neha, Priya, Arjun"]
+    M["Brand manager<br/>Ravi"]
+  end
+
+  subgraph PANEL["WhatsApp AI Agent Panel (what the team sees)"]
+    H["Top bar<br/>Agent Switchboard + agent status per brand<br/>+ AI share of work badge"]
+    I["Inbox<br/>live counts: leads, messages, chats, needs human<br/>chat list, filters, claim timers"]
+    T["Open chat<br/>messages, Why flagged, lead summary,<br/>Take over / Claim / Return / Won / Lost, reply box"]
+  end
+
+  subgraph BRAIN["Logic (runs in the browser)"]
+    R["Rule checker<br/>does this message need a human?"]
+    S["Chat state machine<br/>AI active, flagged, escalated,<br/>human active, won, lost, opted out"]
+    A["AI agent<br/>scripted replies from approved facts"]
+    K["Clock<br/>claim timers, 24 h reply window"]
+    U["Autonomy calculator<br/>how much work AI did vs humans"]
+  end
+
+  subgraph DATA["Data (mock)"]
+    D1["2 brands: FreshBrew + fictional gym"]
+    D2["10 sample chats<br/>English, Hinglish, Rs lakh"]
+    D3["Brand facts<br/>illustrative until R5 model"]
+    D4["Event log"]
+  end
+
+  subgraph LATER["Not connected in the prototype"]
+    X1["Real WhatsApp"]
+    X2["Meta Ads, Voice, Email agents"]
+    X3["Supabase database + login"]
+    X4["Live AI model"]
+  end
+
+  P -- "sends message<br/>(prototype: Simulate box)" --> R
+  R --> S
+  S --> A
+  A -- "AI reply" --> P
+  K --> S
+  S --> D4 --> U
+  C -- "claims, replies, returns" --> T
+  M -- "assigns escalated chats,<br/>pauses agents" --> H
+  S --> I
+  S --> T
+  U --> H
+  D1 --> I
+  D2 --> I
+  D3 --> A
+  D3 --> R
+  LATER -. "1 more day / production" .-> PANEL
+```
+
+Image: [`diagrams/10-panel-end-to-end.png`](diagrams/10-panel-end-to-end.png). The AI handles routine chats, and the rule checker spots when a person is needed. In the prototype the Simulate box plays the prospect and nothing is sent to real WhatsApp.
+
+### 6.2 WhatsApp AI Agent Panel user journey: one chat, end to end
+
+```mermaid
+sequenceDiagram
+  actor P as Prospect
+  participant AI as AI agent
+  participant PN as Panel
+  actor C as Consultant
+  actor M as Manager
+
+  P->>PN: "Hi, FreshBrew franchise kitna ka hai?"
+  PN->>PN: Rule checker: no human needed
+  AI->>P: Answers from brand facts (after 2 s)
+  P->>PN: "Mere paas 45 lakh hai, owner se baat karni hai"
+  PN->>PN: Rule fires: budget over limit + asks for a person
+  PN->>P: Holding message: "A consultant will reply shortly"
+  PN->>C: Chat moves to "Needs human" with "Why flagged" and a claim timer
+  alt Consultant claims in time
+    C->>PN: Claim (first click wins)
+    Note over AI: AI stays silent while a person has the chat
+    C->>P: Replies personally
+    alt Hand back
+      C->>PN: Return to AI (reason required)
+      AI->>P: AI continues the chat
+    else Close
+      C->>PN: Mark Won or Lost
+    end
+  else Nobody claims in 10 business minutes
+    PN->>M: Escalated to manager
+    M->>PN: Assigns a consultant
+  end
+  P->>PN: "STOP"
+  PN->>PN: Opted out, all sending stops
+  PN->>PN: Badge and live counts update after every step
+```
+
+Image: [`diagrams/11-panel-user-journey.png`](diagrams/11-panel-user-journey.png). A consultant claims a flagged chat and the AI goes quiet. If no one claims it in time, the manager is pulled in. The state names and rules come from the takeover state machine in §4.
+
 ## 7. Delivery plan (requirements → artefacts)
 
 ```mermaid
