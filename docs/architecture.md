@@ -247,6 +247,7 @@ flowchart TB
 
   subgraph PANEL["WhatsApp AI Agent Panel (what the team sees)"]
     direction LR
+    SH["App shell (F2B.01)<br/>dark theme tokens, Inter + mono<br/>5-module nav, only Sales Agent active<br/>footer: mock data, nothing sent"]
     SIM["Simulate box (F2B.12)<br/>plays the prospect,<br/>second consultant (F2B.16),<br/>outage and failed-send toggles"]
     H["Top bar<br/>Agent Switchboard (F2B.24)<br/>agent status, Pause agent (F2B.23)<br/>AI share of work badge (F2B.02)"]
     I["Inbox (F2B.03)<br/>live counts (F2B.25, part of F2B.18)<br/>state chips, Needs human filter<br/>claim timers, red under 2 min (F2B.04)"]
