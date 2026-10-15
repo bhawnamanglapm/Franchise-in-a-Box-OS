@@ -1,10 +1,10 @@
 # 1c. Developer-ready spec: Conversation Takeover (HITL)
 
-> **TL;DR.** The brief describes human takeover in one line: "Includes Human-in-the-Loop (HITL) takeover". That one line hides the hardest behaviour in the product: who owns a live WhatsApp conversation, what happens when two people grab it, and what happens when nobody does. This spec defines 7 states and 9 transitions, a 10-business-minute claim SLA (D-06), the WhatsApp 24-hour window, opt-out, 8 edge cases and 8 testable acceptance criteria. Prototype B (R2B) implements it.
+> **TL;DR.** The brief describes human takeover in one line: "Includes Human-in-the-Loop (HITL) takeover". That one line hides the hardest behaviour in the product: who owns a live WhatsApp conversation, what happens when two people grab it, and what happens when nobody does. This spec defines 7 states and 9 transitions, a 10-business-minute claim SLA (D-06), the WhatsApp 24-hour window, opt-out, 10 edge cases, 8 testable acceptance criteria, and the events it writes for the Autonomy Rate ([1b](1b-ai-human-split.md)). Prototype B (R2B) implements it.
 
 ## Why this feature, not the AI Readiness Score
 
-The Readiness Score is unclear too, but the uncertainty is in *what to measure*: a rubric that can be iterated on (prototype A shows one, A31). Takeover is unclear in *how it behaves*, and mistakes there are costly. A missed handover loses a ready-to-buy prospect, and a double reply from both AI and a human damages trust. It also sits on the revenue path (1a, rank 1), so it's the feature that most needs a precise spec.
+The Readiness Score is unclear too, but the uncertainty is in *what to measure*: a rubric that can be iterated on (prototype A shows one, A31). Takeover is unclear in *how it behaves*, and mistakes there are costly. A missed handover loses a ready-to-buy prospect, and a double reply from both AI and a human damages trust. It also sits on the revenue path (1a, rank 1), and it's where human work begins: 93% of the human hours left after AI (54.6 of 58.8 a month per brand) are in the CRM, starting with takeovers ([1b](1b-ai-human-split.md)). That makes it the feature that most needs a precise spec.
 
 ## 1. Users and stories
 
@@ -52,6 +52,8 @@ Every transition increments `conversation.state_version` and writes a `STATE_EVE
 
 **Holding message (EN; HI and Hinglish versions are also stored):**
 > "Thanks, a member of our franchise team will reply to you here shortly." Outside hours, "shortly" becomes "after 9 am".
+
+The holding message is an acknowledgement, not a **meaningful reply**, so it doesn't count toward the speed-to-lead target in [1a §8](1a-prioritisation.md#8-day-30-success-criteria). For a flagged conversation, the clock stops at the consultant's first reply.
 
 ```mermaid
 stateDiagram-v2
@@ -151,6 +153,8 @@ stateDiagram-v2
 6. **The consultant goes offline mid-conversation.** If the prospect's message sits unanswered for 30 business minutes, T7 re-flags it.
 7. **The window expires while the consultant is typing.** The draft is kept, Send switches to "Send as template", and nothing is sent as free text.
 8. **The assignee is deactivated.** Their HUMAN_ACTIVE conversations re-flag immediately with reason "Assignee unavailable".
+9. **The AI is switched off for a brand.** This happens before WhatsApp approval lands (the fallback in [1a §6](1a-prioritisation.md#6-day-1-critical-path-whatsapp-access)), or when a manager pauses the agent. Every inbound message goes straight to FLAGGED through T1, with reason "AI off for brand". The same SLA applies, and no AI messages are sent apart from the holding message.
+10. **The same prospect arrives as a new lead.** A Lead Ads submission whose phone number matches an open conversation for the same brand attaches to that conversation as a timeline event. It doesn't create a second conversation or reset the state.
 
 ## 8. Success criteria: acceptance tests
 
@@ -176,7 +180,20 @@ Prototype B's test script covers AC1, AC2, AC4, AC5 and AC7 directly. AC3 and AC
 | Missed-escalation rate (weekly 50-conversation audit, [1b](1b-ai-human-split.md#audit)) | ≤ 5% | Audit sheet |
 | Double replies (AI and human within 60 s of each other) | 0 | `MESSAGE` log |
 | "Wrong flag" share of Return-to-AI reasons | Tracked; above 30% triggers a review of the rule thresholds | Flag reasons |
+| Median time from flag to the consultant's first reply (the holding message doesn't count) | ≤ 10 business minutes | `MESSAGE` log |
 | Takeovers that reach a booked discovery call | Baseline in month 1; no target until we have data | `DEAL` stage |
+
+## 10. Events this feature writes (for the Autonomy Rate)
+
+Each step writes an `ACTION_EVENT` ([1b §5](1b-ai-human-split.md#event-schema)). The table below shows how the steps count toward the badge.
+
+| Step | Action map row | `actor` | Counts as |
+|---|---|---|---|
+| Detect the rule and raise the flag (T1) | 29 Detect HITL triggers | `ai_model` | AI. It becomes human if the weekly audit finds a missed escalation. |
+| Send the holding message | 23-style template | `software` | Automation, shown as software rules, not AI |
+| Build the takeover summary | 32 Summarise lead | `ai_model` | AI |
+| Consultant replies, including a suggested reply sent unedited | 33 Take over and reply | `human` | Human. A takeover is human work by definition (1b's unedited rule applies to AI→H drafts, not to takeovers). |
+| Mark Won / Lost (T8) | 37 Update deal stage | `human` (confirms an AI suggestion) | AI only if the suggested stage is accepted unchanged |
 
 ## Platform facts used (verified)
 - **24-hour window and error 131047:** "More than 24 hours have passed since the recipient last replied to the sender number. Send the recipient a template message instead." ([Meta error codes](https://developers.facebook.com/docs/whatsapp/cloud-api/support/error-codes), checked 15 Oct 2026).
