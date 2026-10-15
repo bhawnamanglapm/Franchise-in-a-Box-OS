@@ -1,38 +1,38 @@
-id,module,action,owner,freq_per_month,manual_min,ai_share,value_weight,why_this_owner
-1,1 Onboarding,Fill brand details form,AI→H,0.1667,60,0.7,2,AI pre-fills from deck and website; founder confirms
-2,1 Onboarding,Upload pitch deck and P&L,H,0.1667,15,0,1,Only the founder has the files
-3,1 Onboarding,Extract P&L figures from uploaded files,AI,0.1667,90,1,3,Document parsing
-4,1 Onboarding,Build revenue split (donut),AI,0.1667,30,1,1,Computed from extracted figures
-5,1 Onboarding,Compute AI Readiness Score (RAG sub-scores),AI,0.1667,120,1,3,Rule-based rubric (A31)
-6,1 Onboarding,Explain gaps and recommended fixes,AI,0.1667,60,1,2,Generated from failed rules
-7,1 Onboarding,Go/no-go: take the brand on,H,0.1667,60,0,5,Commercial judgement and reputation risk
-8,2 ROI Engine,Draft Franchise Model Card,AI→H,0.1667,240,0.7,4,AI drafts; consultant edits and approves before anyone quotes it
-9,2 ROI Engine,Generate 3-year ROI projections,AI,0.1667,240,1,4,Formula-driven from approved inputs
-10,2 ROI Engine,Run sensitivity scenarios,AI,0.1667,60,1,3,Formula-driven
-11,2 ROI Engine,Pull India + US benchmark comparisons,AI,0.1667,120,1,2,Lookup against a sourced table (A33)
-12,2 ROI Engine,Generate insights (Opportunity / Risk / Benchmark),AI,0.1667,60,1,2,Rule-based v0
-13,2 ROI Engine,Agree franchise fee / royalty / investment with the brand,H,0.1667,180,0,5,Commercial negotiation with the founder
-14,2 ROI Engine,Present the model to the brand founder,H,0.1667,90,0,4,Trust-building meeting
-15,3 Collateral,Generate pitch deck,AI,0.1667,480,1,3,Template + Model Card numbers
-16,3 Collateral,Generate sales brochure,AI,0.1667,240,1,2,Template + Model Card numbers
-17,3 Collateral,Generate ad creatives,AI,10,45,1,3,Monthly creative refresh for Meta ads
-18,3 Collateral,Generate WhatsApp scripts,AI,1,120,1,3,Monthly script refresh for the agent
-19,3 Collateral,Regenerate and download assets,AI,15,10,1,1,Self-serve iterations
-20,3 Collateral,Approve and send collateral,AI→H,4,30,0.5,3,Brand-facing output needs a human sign-off
-21,4 Sales Agent,Set up and optimise Meta ad campaigns,AI→H,8,60,0.75,4,AI proposes targeting and budget; human approves spend
-22,4 Sales Agent,Capture lead + consent; validate and dedupe,AI,500,3,1,2,Webhook ingestion
-23,4 Sales Agent,Send first WhatsApp reply (template),AI,500,3,1,3,Speed-to-lead
-24,4 Sales Agent,Qualify lead on WhatsApp (budget / city / timeline),AI,500,15,1,4,Core agent job
-25,4 Sales Agent,Answer FAQs from approved facts,AI,1000,2,1,3,Grounded answers only
-26,4 Sales Agent,Run Voice AI qualification call,AI,150,10,1,3,Second channel
-27,4 Sales Agent,Send email nurture sequence,AI,1500,2,1,1,3 emails per lead
-28,4 Sales Agent,Send follow-up / re-engagement nudges,AI,1000,1,1,2,Template-based
-29,4 Sales Agent,Detect HITL triggers and flag,AI,500,2,1,4,Rule engine (Task 3)
-30,4 Sales Agent,Update live tracking (leads / messages / conversations),AI,30,20,1,1,Daily roll-up
-31,5 CRM,Build unified interaction timeline,AI,500,3,1,2,Event log
-32,5 CRM,Summarise lead for the consultant at takeover,AI,60,10,1,3,5-bullet summary
-33,5 CRM,Take over the conversation and reply,H,60,20,0,4,The flagged moments are the high-value ones
-34,5 CRM,Live call intelligence (notes + prompts),AI,20,30,1,3,Transcription + checklist
-35,5 CRM,Run discovery call with the prospect,H,20,45,0,5,Trust and objection handling
-36,5 CRM,Negotiate and close (sign agreement),H,6,180,0,5,The revenue event
-37,5 CRM,Update deal stage,AI→H,80,3,0.6,2,AI suggests the stage from the conversation; consultant confirms
+id,module,action,owner,freq_per_month,manual_min,ai_share,value_weight,why_this_owner,engine
+1,1 Onboarding,Fill brand details form,AI→H,0.1667,60,0.7,2,AI pre-fills from deck and website; founder confirms,model
+2,1 Onboarding,Upload pitch deck and P&L,H,0.1667,15,0,1,Only the founder has the files,human
+3,1 Onboarding,Extract P&L figures from uploaded files,AI,0.1667,90,1,3,Document parsing,model
+4,1 Onboarding,Build revenue split (donut),AI,0.1667,30,1,1,Computed from extracted figures,rules
+5,1 Onboarding,Compute AI Readiness Score (RAG sub-scores),AI,0.1667,120,1,3,Rule-based rubric (A31),rules
+6,1 Onboarding,Explain gaps and recommended fixes,AI,0.1667,60,1,2,Generated from failed rules,model
+7,1 Onboarding,Go/no-go: take the brand on,H,0.1667,60,0,5,Commercial judgement and reputation risk,human
+8,2 ROI Engine,Draft Franchise Model Card,AI→H,0.1667,240,0.7,4,AI drafts; consultant edits and approves before anyone quotes it,model
+9,2 ROI Engine,Generate 3-year ROI projections,AI,0.1667,240,1,4,Formula-driven from approved inputs,rules
+10,2 ROI Engine,Run sensitivity scenarios,AI,0.1667,60,1,3,Formula-driven,rules
+11,2 ROI Engine,Pull India + US benchmark comparisons,AI,0.1667,120,1,2,Lookup against a sourced table (A33),model
+12,2 ROI Engine,Generate insights (Opportunity / Risk / Benchmark),AI,0.1667,60,1,2,Rule-based v0,rules
+13,2 ROI Engine,Agree franchise fee / royalty / investment with the brand,H,0.1667,180,0,5,Commercial negotiation with the founder,human
+14,2 ROI Engine,Present the model to the brand founder,H,0.1667,90,0,4,Trust-building meeting,human
+15,3 Collateral,Generate pitch deck,AI,0.1667,480,1,3,Template + Model Card numbers,model
+16,3 Collateral,Generate sales brochure,AI,0.1667,240,1,2,Template + Model Card numbers,model
+17,3 Collateral,Generate ad creatives,AI,10,45,1,3,Monthly creative refresh for Meta ads,model
+18,3 Collateral,Generate WhatsApp scripts,AI,1,120,1,3,Monthly script refresh for the agent,model
+19,3 Collateral,Regenerate and download assets,AI,15,10,1,1,Self-serve iterations,model
+20,3 Collateral,Approve and send collateral,AI→H,4,30,0.5,3,Brand-facing output needs a human sign-off,model
+21,4 Sales Agent,Set up and optimise Meta ad campaigns,AI→H,8,60,0.75,4,AI proposes targeting and budget; human approves spend,model
+22,4 Sales Agent,Capture lead + consent; validate and dedupe,AI,500,3,1,2,Webhook ingestion,rules
+23,4 Sales Agent,Send first WhatsApp reply (template),AI,500,3,1,3,Speed-to-lead,rules
+24,4 Sales Agent,Qualify lead on WhatsApp (budget / city / timeline),AI,500,15,1,4,Core agent job,model
+25,4 Sales Agent,Answer FAQs from approved facts,AI,1000,2,1,3,Grounded answers only,model
+26,4 Sales Agent,Run Voice AI qualification call,AI,150,10,1,3,Second channel,model
+27,4 Sales Agent,Send email nurture sequence,AI,1500,2,1,1,3 emails per lead,rules
+28,4 Sales Agent,Send follow-up / re-engagement nudges,AI,1000,1,1,2,Template-based,rules
+29,4 Sales Agent,Detect HITL triggers and flag,AI,500,2,1,4,Rule engine (Task 3),model
+30,4 Sales Agent,Update live tracking (leads / messages / conversations),AI,30,20,1,1,Daily roll-up,rules
+31,5 CRM,Build unified interaction timeline,AI,500,3,1,2,Event log,rules
+32,5 CRM,Summarise lead for the consultant at takeover,AI,60,10,1,3,5-bullet summary,model
+33,5 CRM,Take over the conversation and reply,H,60,20,0,4,The flagged moments are the high-value ones,human
+34,5 CRM,Live call intelligence (notes + prompts),AI,20,30,1,3,Transcription + checklist,model
+35,5 CRM,Run discovery call with the prospect,H,20,45,0,5,Trust and objection handling,human
+36,5 CRM,Negotiate and close (sign agreement),H,6,180,0,5,The revenue event,human
+37,5 CRM,Update deal stage,AI→H,80,3,0.6,2,AI suggests the stage from the conversation; consultant confirms,model

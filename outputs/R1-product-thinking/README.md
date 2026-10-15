@@ -3,8 +3,8 @@
 | File | Brief item | What it contains |
 |---|---|---|
 | [1a-prioritisation.md](1a-prioritisation.md) | 1a | Four bottleneck hypotheses, weighted module scoring, the 30-day ranking, the dependency trap, the WhatsApp critical path, a day-by-day roadmap with a day-5 decision gate, day-30 success criteria, risks |
-| [1b-ai-human-split.md](1b-ai-human-split.md) | 1b | Action map summary, the split measured three ways with sensitivity, the verdict on 76%, consultant capacity, and the Autonomy Rate (definition, events, audit, investor view) |
-| [ai-human-split.csv](ai-human-split.csv) | 1b | All 37 actions with owner, frequency, minutes, AI share and value weight. Import it as the Sheet tab `AI_Human_Split`; the formulas are in 1b §2. |
+| [1b-ai-human-split.md](1b-ai-human-split.md) | 1b | Action map with an AI-model vs software-rules split, the split measured three ways with sensitivity, the verdict on 76%, consultant capacity, and the Autonomy Rate (definition, three measures kept apart, events, audit, investor view), and the pilot plan to validate 76% |
+| [ai-human-split.csv](ai-human-split.csv) | 1b | All 37 actions with owner, frequency, minutes, AI share, value weight and engine (model / rules / human). Import it as the Sheet tab `AI_Human_Split`; the formulas are in 1b §2. |
 | [ai-human-split.xlsx](ai-human-split.xlsx) | 1b | The same 37 rows with the formulas already built in: the 4 split measures, hours, brands per consultant, and a per-module summary. Yellow cells are editable estimates; blue cells recalculate. |
 | [**Live Google Sheet**](https://docs.google.com/spreadsheets/d/1pl8JSEAvlPR1mexlfx0cwiFMPU-B4-QJFga4N31pl1o/edit?usp=sharing) | 1b | The workbook above, converted to a native Google Sheet. This is the link for reviewers. |
 | [1c-takeover-spec.md](1c-takeover-spec.md) | 1c | Conversation Takeover spec: 7 states, 9 transitions, UI, empty/loading/error states, validation, 8 edge cases, 8 acceptance criteria, metrics |
@@ -18,6 +18,7 @@ All of these come from `ai-human-split.csv` and use estimates A19, A20, A34 and 
 | AI share by count (strict / generous) | 68% / 81% |
 | AI share by time (full build / day-30 slice) | 87% / 76.5% |
 | AI share by value | 68% |
+| Of the 87% automated time: AI models / software rules | 53.6% / 33.5% |
 | Human hours per brand per month (with AI / without) | 58.8 / 456.6 |
 | Brands per consultant (with AI / without) | ~2.7 / ~0.35 |
 
