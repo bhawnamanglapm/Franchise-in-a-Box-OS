@@ -179,7 +179,7 @@ Detailed, numbered tasks live in each requirement's `tasks.md`. Master view:
 | 4 | Write HITL triggers, system prompt (word-count), model choice, eval | R3 | 1 h | Decide | You + Claude |
 | 5 | Write the shared Prompt 1 shell + prototype B build brief and prompts | R2B | (in 4) | Decide | Claude |
 | 6 | Build prototype B in Lovable; log prompt → error → fix | R2B | 2 h | Build | You |
-| 7 | Deploy B, run 5-point test, write Task 2 Option B section | R2B | 0.75 h | Build | You |
+| 7 | Deploy B, run 9-step test, write Task 2 Option B section | R2B | 0.75 h | Build | You |
 | 8 | Build FreshBrew model in Sheets; run integrity checks | R5 | 2 h | Build | You + Claude |
 | 9 | Build prototype C on R5's formulas; check 3 numbers against the Sheet; deploy, test, write up; hand approved facts to B | R2C | 2.25 h | Build | You |
 | 10 | Build prototype A; deploy, test, write up | R2A | 2 h | Build | You |

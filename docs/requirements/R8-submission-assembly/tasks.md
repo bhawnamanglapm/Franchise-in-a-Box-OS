@@ -6,7 +6,7 @@ Total estimate: **1 h** (Finish block) + 0.5 h live prep after submitting.
 |---|---|---|---|---|---|
 | T8.01 | Create the Google Doc from the section outline; paste the final R1, R3, R4, R6, R7 text | Doc v1 | 10 m | You | R1–R7 |
 | T8.02 | Add the Task 2A, 2B, 2C and Task 5 sections (links + TL;DR + write-up each) | Doc v2 | 10 m | You | R2A, R2B, R2C, R5 |
-| T8.03 | Write the executive summary (5 decisions, 4 artefact links, top assumptions) | F8.1 | 8 m | Claude drafts, you edit | T8.02 |
+| T8.03 | Write the executive summary (5 decisions, 4 artefact links, top assumptions, 76% verdict + capacity line from R1 1b) | F8.1 | 8 m | Claude drafts, you edit | T8.02 |
 | T8.04 | Completeness table against the brief | F8.4 | 4 m | Claude | T8.02 |
 | T8.05 | Consistency check across tasks; fix contradictions | F8.5 | 8 m | Claude | T8.02 |
 | T8.06 | Founder skim test + filler/hedge/unsourced sweep | F8.6, F8.7 | 10 m | Claude flags, you fix | T8.05 |

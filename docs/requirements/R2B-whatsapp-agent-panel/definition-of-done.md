@@ -9,7 +9,7 @@
 - [ ] The AI does not reply while HUMAN_ACTIVE (test step 3)
 - [ ] Mock data includes Hinglish and ₹ values, and no real company names except FreshBrew from the brief
 - [ ] Usable at 375 px width
-- [ ] All 5 test-script steps pass
+- [ ] All 9 test-script steps pass
 - [ ] Numbers the agent quotes match the R2C approved Model Card (A32)
 - [ ] Footer links to the Option A and Option C URLs work
 

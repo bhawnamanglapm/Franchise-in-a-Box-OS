@@ -2,7 +2,7 @@
 
 | ID | Component | MoSCoW |
 |---|---|---|
-| F8.1 | One-page executive summary: 5 key decisions, 3 prototype links (A, B, C), model link, top assumptions | M |
+| F8.1 | One-page executive summary: 5 key decisions, 3 prototype links (A, B, C), model link, top assumptions, the 76% verdict and the consultant-capacity line (R1 1b) | M |
 | F8.2 | Doc order: Summary → Task 1 → Task 2A, 2B, 2C (link + write-up each) → Task 3 → Task 4 → Task 5 (link + TL;DR) → Task 6 → Task 7 → Appendix (assumptions A1–A35, action map, sources) | M |
 | F8.3 | 2–3 line TL;DR at the top of each task | M |
 | F8.4 | Completeness table (brief deliverable → section → status) | M |
