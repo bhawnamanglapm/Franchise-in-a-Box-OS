@@ -1,0 +1,23 @@
+component,layer,module,technology,responsibility,inputs,outputs,in_prototype,30_day_scope,owner_role
+Onboarding Portal UI,Client,1 Brand Onboarding,React + Tailwind,4-step brand intake and file upload,Brand details; deck; P&L,Brand record; files,No,Thin (consultant-filled),Consultant / Brand founder
+AI Readiness Score,AI,1 Brand Onboarding,Rules v0 then model,RAG sub-scores for brand readiness,Brand record,Score + sub-scores,No,Rule-based v0,Consultant
+ROI Engine UI,Client,2 ROI Engine,React + Tailwind,Franchise Model Card and 3-yr ROI,Brand data; assumptions,Model card; projections,No,Thin,Consultant
+Approved Facts Store,Data,2 ROI Engine,Supabase Postgres,Holds human-approved numbers the agent may quote,Approved model card,Facts for grounding,Mocked,Yes,Consultant (approver)
+Collateral Studio,AI,3 Collateral,LLM + templates,Decks; brochures; ad creatives; WhatsApp scripts,Brand data,Assets,No,Deferred,Designer
+Meta Lead Ads Webhook,External,4 Sales Agent,Meta Graph API webhook,Delivers new lead form submissions,Ad form,Lead payload,Mocked,Yes,System
+Ingestion Edge Function,Backend,4 Sales Agent,Supabase Edge Function,Validate; dedupe; store consent; create lead,Lead payload,Lead + consent records,Mocked,Yes,System
+WhatsApp BSP,External,4 Sales Agent,WhatsApp Business API via BSP,Send/receive WhatsApp messages and templates,Outbound messages,Inbound messages; delivery status,Mocked,Yes,System
+Agent Orchestrator,AI,4 Sales Agent,Edge function + LLM,Generate grounded replies; extract fields,Messages; facts,Replies; extracted fields,Scripted (+ stretch live LLM),Yes,System
+HITL Rules Engine,AI,4 Sales Agent,Deterministic rules,Evaluate Task 3 triggers on each message,Message; extracted fields; counters,Flag with reasons,Yes,Yes,System
+Takeover State Machine,Backend,4/5 Agent + CRM,Postgres + state_version lock,Enforce 1c states and transitions,User actions; timers; rule flags,State events,Yes (client reducer),Yes,System
+Inbox + Conversation View,Client,4/5 Agent + CRM,React + Realtime,Queue; thread; Why-flagged; takeover panel; composer,State; messages,User actions,Yes,Yes,Consultant
+SLA Timer,Backend,5 CRM,Scheduled function,Escalate unclaimed flags after 10 business min,Flag created_at,Escalation event,Yes (client timer),Yes,Manager
+Unified Timeline,Client,5 CRM,React,All interactions per lead across channels,Messages; calls; events,Timeline view,Partial,Yes,Consultant
+Deal Tracking Panel,Client,5 CRM,React + Postgres,Deal stages to Won/Lost,User input,Deal record,No,Yes,Consultant
+Live Call Intelligence,AI,5 CRM,Speech-to-text + LLM,Transcribe and summarise calls,Call audio,Summary; suggestions,No,Month 2,Consultant
+Voice AI Agent,AI,4 Sales Agent,Voice provider + LLM,Qualification calls,Lead,Call outcome,No,Month 2,System
+Email Agent,AI,4 Sales Agent,Email provider + LLM,Follow-up emails,Lead,Emails,No,Month 2,System
+Action Event Log,Data,Platform,Postgres,Record every action with actor and edit flag,All actions,Autonomy Rate inputs,Yes (mock events),Yes,System
+Autonomy Badge,Client,Platform,React,Show computed AI share of work and human closes,Action events,Badge %,Yes,Yes,All
+Consent Records,Data,Platform,Postgres,DPDP consent and opt-out audit trail,Lead form; STOP keywords,Consent status,Partial (opt-out),Yes,System
+Auth + Roles,Backend,Platform,Supabase Auth + RLS,Consultant/manager/brand permissions,Login,Session; role,No,Yes,System
