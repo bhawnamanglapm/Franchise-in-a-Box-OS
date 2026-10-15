@@ -2,7 +2,7 @@
 
 | File | Brief item | What it contains |
 |---|---|---|
-| [1a-prioritisation.md](1a-prioritisation.md) | 1a | 30-day module ranking, the dependency trap, the WhatsApp critical path, day-30 success criteria |
+| [1a-prioritisation.md](1a-prioritisation.md) | 1a | Four bottleneck hypotheses, weighted module scoring, the 30-day ranking, the dependency trap, the WhatsApp critical path, a day-by-day roadmap with a day-5 decision gate, day-30 success criteria, risks |
 | [1b-ai-human-split.md](1b-ai-human-split.md) | 1b | Action map summary, the split measured three ways with sensitivity, the verdict on 76%, consultant capacity, and the Autonomy Rate (definition, events, audit, investor view) |
 | [ai-human-split.csv](ai-human-split.csv) | 1b | All 37 actions with owner, frequency, minutes, AI share and value weight. Import it as the Sheet tab `AI_Human_Split`; the formulas are in 1b §2. |
 | [ai-human-split.xlsx](ai-human-split.xlsx) | 1b | The same 37 rows with the formulas already built in: the 4 split measures, hours, brands per consultant, and a per-module summary. Yellow cells are editable estimates; blue cells recalculate. |
@@ -31,7 +31,7 @@ All of these come from `ai-human-split.csv` and use estimates A19, A20, A34 and 
 
 | Item | Status |
 |---|---|
-| 1a: 5 modules ranked; dependency trap; numeric day-30 criteria; BSP critical path | Done |
+| 1a: 5 modules ranked with a scored framework; dependency trap; numeric day-30 criteria; BSP critical path; roadmap with a decision gate; risks | Done |
 | 1b: 37 actions mapped; split 3 ways; explicit verdict; Autonomy Rate with events, unedited rule and audit; ≥ 2 outcome metrics; A19/A20 labelled | Done |
 | 1b: formulas live in a Google Sheet tab that matches the doc | Done: [live Sheet](https://docs.google.com/spreadsheets/d/1pl8JSEAvlPR1mexlfx0cwiFMPU-B4-QJFga4N31pl1o/edit?usp=sharing). The computed values in the Sheet were read back and match the doc (68 / 81 / 87.1 / 68%, 456.6 h, 58.8 h, 2.7 brands). |
 | 1c: stories, scope, states, transitions with guards, UI, error states, numeric validation, ≥ 6 edge cases, ≥ 6 testable ACs, metrics with targets, Meta facts verified | Done |

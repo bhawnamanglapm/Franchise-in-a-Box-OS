@@ -133,7 +133,7 @@ X is the live Autonomy Rate. Hovering over it shows the definition, the audit da
 
 1. **Human hours per signed franchisee:** modelled at about 20 h, versus about 152 h without AI.
 2. **Cost per signed franchisee:** ad spend + AI cost + human hours × loaded hourly cost, divided by signings. The inputs come from the pilot; no number is claimed here.
-3. **Speed to lead:** median minutes to first reply. The target is ≤ 5 ([1a](1a-prioritisation.md)).
+3. **Speed to lead:** median minutes to first meaningful reply (not a plain acknowledgement). The target is ≤ 5 ([1a](1a-prioritisation.md#8-day-30-success-criteria)).
 
 ## New assumptions introduced here
 - **A34:** One-off brand set-up actions (onboarding, model, collateral) are spread over a 6-month engagement, which is a frequency of 1/6 per month.
