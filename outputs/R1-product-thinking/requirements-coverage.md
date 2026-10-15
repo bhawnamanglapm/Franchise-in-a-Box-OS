@@ -103,6 +103,6 @@ This file checks every item in the R1 requirement files ([`docs/requirements/R1-
 |---|---|---|
 | 1c spec → R2B build spec; acceptance tests → R2B test script | `docs/requirements/R2B-whatsapp-agent-panel/`: F2B.09, F2B.16, F2B.17, F2B.23; the 9-step script covers AC1, AC2, AC4, AC5, AC7, AC9, AC10 | ✅ |
 | 1a ranking → R4 consistency baseline | R4 T4.03, T4.05, F4.5 | ✅ (the check itself runs when R4 is written) |
-| Autonomy Rate → R2A, R2B, R2C badge | F2A.14, F2B.02 (with the model-vs-rules split on hover), F2C.15 | ✅ |
+| Autonomy Rate → R2B badge | F2B.02 (with the model-vs-rules split on hover). R2A and R2C not built (D-10) | ✅ |
 | Autonomy Rate, 76% verdict and capacity line → R8 | R8 F8.1, T8.03 | ✅ |
-| 1b onboarding actions → R2A | F2A.05 (AI extracts, consultant reviews), T2A.02 | ✅ |
+| 1b onboarding actions → R2A | Not applicable: R2A not built (D-10) | — |

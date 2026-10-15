@@ -11,7 +11,7 @@
 | F4.5 | Consistency note vs 1a | M |
 | F4.6 | QSR lead-gen variation: before/after table showing what moves and why | M |
 | F4.7 | Scoring rubric (revenue impact × time to value ÷ effort) shown in a compact table | S |
-| F4.8 | Prototype-vs-production note: prototypes A and C demo the brief's module spec (donut, benchmarks, AI insights, Readiness Score); this ranking is the production build order. One line per cut feature that appears in a prototype. | M |
+| F4.8 | Prototype-vs-production note: prototype B demos Module 4 as the brief describes it (the Agent Switchboard shows Meta Ads, Voice and Email as tiles); this ranking is the production build order. One line per cut feature that appears in a prototype. | M |
 
 ## B. Product feature inventory (the input to ranking)
 

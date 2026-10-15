@@ -1,5 +1,7 @@
 # R2A: Onboarding Wizard (Task 2, Option A): evaluation
 
+> **Not being built (D-10, revised 15 Oct 2026).** Task 2 says "Choose ONE", and we chose Option B ([R2B](../R2B-whatsapp-agent-panel/evaluation.md)). This folder is kept as the plan written before that decision. Nothing here is a deliverable, and none of its checklists count towards done.
+
 ## What the brief asks
 Task 2, **Option A: Onboarding Wizard**. We build all three options as separate working prototypes (D-10); this folder covers Option A. The brief describes the module it prototypes (Brand Onboarding Portal) as:
 - a **4-step guided flow** with

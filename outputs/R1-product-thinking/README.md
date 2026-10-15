@@ -45,5 +45,5 @@ All of these come from `ai-human-split.csv` and use estimates A19, A20, A34 and 
 ## Hand-offs
 - **R4:** the 1a ranking is its consistency baseline.
 - **R2B:** the 1c spec is the build spec. AC1, AC2, AC4, AC5, AC7, AC9 and AC10 go into its test script.
-- **R2A, R2B, R2C:** the badge uses the Autonomy Rate rule from 1b §5.
+- **R2B:** the badge uses the Autonomy Rate rule from 1b §5 (Task 2 is Option B only, D-10).
 - **R8:** the 76% verdict and the capacity line go into the executive summary.

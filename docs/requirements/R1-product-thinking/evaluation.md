@@ -35,5 +35,5 @@
 ## Effort and priority
 - **Estimate:** 1.5 h (mostly done in Phase 2; remaining work is finalising and formatting)
 - **Priority:** P0. Every downstream requirement depends on it.
-- **Dependencies:** Phase 0 lens. **Feeds:** R4, R3, R2B (1c spec), R2A (1b onboarding actions).
+- **Dependencies:** Phase 0 lens. **Feeds:** R4, R3, R2B (1c spec and badge).
 - **Status:** Done. Outputs are in `outputs/R1-product-thinking/` (1a, 1b, 1c, live Sheet, PDF, Google Doc). D-04, D-05, D-06 confirmed; A23 verified; Sheet tab live and matching the doc. Every item is traced in `outputs/R1-product-thinking/requirements-coverage.md`. Open: the R4 consistency check, once R4 is written.

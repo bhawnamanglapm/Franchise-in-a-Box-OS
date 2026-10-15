@@ -1,6 +1,6 @@
 # Architecture sheet: Franchise-in-a-Box OS
 
-One page to understand how the business, the platform, the three prototypes and the submission fit together.
+One page to understand how the business, the platform, the Task 2 prototype (Option B) and the submission fit together.
 The component register is in [`architecture-components.csv`](architecture-components.csv), which can be imported into Google Sheets.
 Every diagram below is also saved as a PNG in [`diagrams/`](diagrams/), ready to paste into the Google Doc.
 
@@ -201,53 +201,36 @@ erDiagram
 
 `ACTION_EVENT` feeds the Autonomy Rate (Task 1b). `state_version` provides the optimistic lock for claims.
 
-## 6. Prototype architecture (Task 2: three apps, what's real vs mocked)
+## 6. Prototype architecture (Task 2, Option B: what's real vs mocked)
 
 ```mermaid
 flowchart TB
-  subgraph SH["Shared across A, B, C"]
-    TOK["Design tokens + Prompt 1 shell [P]"]
-    MD["Mock data: FreshBrew + fictional gym [M]"]
-    BG["Computed autonomy badge [P]"]
-  end
-  subgraph PA["A. Onboarding Wizard (own URL)"]
-    A1["4-step stepper + validation [P]"]
-    A2["File checks; CSV parsed, PDF/XLSX extraction mocked [P/M]"]
-    A3["Revenue-split donut, totals 100% [P]"]
-    A4["Readiness Score: rule-based v0 [P]"]
-  end
-  subgraph PC["C. ROI Dashboard (own URL)"]
-    C1["computeModel = R5 formulas [P]"]
-    C2["Model Card + 36-month chart + sensitivity [P]"]
-    C3["Benchmarks India + US, sourced only [P]"]
-    C4["Insights: rule-based v0 [P]"]
-    C5["Approve + export facts [P]"]
-  end
-  subgraph PB["B. WhatsApp AI Agent Panel (own URL)"]
+  subgraph PB["B. WhatsApp AI Agent Panel (one public URL)"]
+    TOK["Design tokens from the brief [P]"]
+    SW["Agent Switchboard: WhatsApp live, Meta/Voice/Email shown, not built [P]"]
+    LS["Live counts: leads, messages, chats, needs human [P]"]
     B1["Simulate inbound box [P]"]
     B2["Trigger engine from Task 3 [P]"]
     B3["State machine reducer from 1c [P]"]
-    B4["Inbox + thread + Why-flagged [P]"]
+    B4["Inbox + thread + Why-flagged + takeover [P]"]
+    BG["Computed autonomy badge [P]"]
+    MD["Mock data: FreshBrew + fictional gym [M]"]
+    FX["Agent facts: illustrative until R5 [M]"]
   end
   R5S["R5 Google Sheet"]
-  LLM2["Optional live LLM via edge fn (stretch, one per app)"]
+  LLM2["Optional live LLM (stretch)"]
   EXT["Real WhatsApp / Meta / Supabase storage + auth [M]"]
-  A1 --> A2 --> A3 --> A4
-  A4 -. "brand record JSON" .-> C1
-  R5S -. "inputs + formulas (A32)" .-> C1
-  C1 --> C2
-  C1 --> C4
-  C2 --> C5
-  C5 -. "approved facts JSON" .-> B2
   B1 --> B2 --> B3 --> B4
-  SH -.-> PA
-  SH -.-> PB
-  SH -.-> PC
+  B3 --> BG
+  B3 --> LS
+  MD --> B4
+  FX --> B2
+  R5S -. "approved figures replace placeholders (A32)" .-> FX
   PB -. "stretch" .-> LLM2
   EXT -. "not connected" .-> PB
 ```
 
-Each prototype is a separate project with its own URL and GitHub sync: B is a Vite app built by Claude Code and hosted on Vercel (D-01); A and C are planned as Lovable projects. Logic runs in the browser. The JSON hand-offs are file exports and imports, not a shared backend (A11). One number set flows through all three: R5 → C → B (A32).
+Prototype B is a Vite app built by Claude Code and hosted on Vercel (D-01). Logic runs in the browser with mock data; there is no backend, and the brief's Supabase is not used (A11). Task 2 says "Choose ONE", so Options A (Onboarding Wizard) and C (ROI Dashboard) are not built (D-10).
 
 ## 7. Delivery plan (requirements → artefacts)
 
@@ -258,27 +241,19 @@ flowchart LR
   R4 --> R3["R3 Task 3"]
   R3 --> R2B["R2B Prototype B"]
   L --> R5["R5 Model"]
-  R5 --> R2C["R2C Prototype C"]
-  R2C -. "approved facts" .-> R2B
-  R1 --> R2A["R2A Prototype A"]
+  R5 -. "approved figures" .-> R2B
   R3 --> R6["R6 Task 6"]
-  R2A --> R7["R7 Task 7"]
-  R2B --> R7
-  R2C --> R7
+  R2B --> R7["R7 Task 7"]
   R5 --> R7
   R1 --> DOC["Google Doc / PDF"]
   R3 --> DOC
   R4 --> DOC
   R6 --> DOC
   R7 --> DOC
-  R2A --> URLA["URL A"]
-  R2B --> URLB["URL B"]
-  R2C --> URLC["URL C"]
+  R2B --> URLB["Prototype URL"]
   R5 --> SHEET["Google Sheet"]
-  DOC --> SUB["Submit: 5 links, inside 72 h"]
-  URLA --> SUB
+  DOC --> SUB["Submit: 3 links, inside 72 h"]
   URLB --> SUB
-  URLC --> SUB
   SHEET --> SUB
 ```
 
@@ -297,13 +272,11 @@ gantt
   R2B Build                  :r2, after rb, 120m
   R2B Ship + write-up        :r2s, after r2, 45m
   R5 Model                   :r5, after r2s, 120m
-  R2C ROI Dashboard          :r2c, after r5, 135m
-  R2A Onboarding Wizard      :r2a, after r2c, 120m
-  Link-up A/B/C              :lk, after r2a, 10m
+  Swap R5 figures into B     :lk, after r5, 10m
   section Finish
   R6 Automation + research   :r6, after lk, 60m
   R7 How I work              :r7, after r6, 30m
   R8 Assemble + submit       :r8, after r7, 60m
 ```
 
-The Gantt shows elapsed hours from the moment you start (~15 h in total). Estimates are for planning only; quality comes first, and the work can span more than one day inside the 72 h deadline (D-07). Breaks aren't drawn.
+The Gantt shows elapsed hours from the moment you start (~11 h in total). Estimates are for planning only; quality comes first, and the work can span more than one day inside the 72 h deadline (D-07). Breaks aren't drawn.

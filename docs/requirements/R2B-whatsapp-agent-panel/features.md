@@ -6,7 +6,7 @@ MoSCoW against a **2-hour build estimate**. Anything not built moves to "1 more 
 
 | ID | Feature | Description | MoSCoW | Maps to |
 |---|---|---|---|---|
-| F2B.01 | App shell + design tokens | Dark theme with the exact brief hex values; Inter + mono for numbers; left nav showing 5 modules (only "Sales Agent" active); shared shell prompt with R2A and R2C | M | Brief design system |
+| F2B.01 | App shell + design tokens | Dark theme with the exact brief hex values; Inter + mono for numbers; left nav showing 5 modules (only "Sales Agent" active) | M | Brief design system |
 | F2B.02 | Computed autonomy badge | Persistent header badge "AI: X% of work \| Humans: 100% of closes", **computed** from mock event log; tooltip explains the definition and the AI-model vs software-rules split | M | R1 1b, D-05 |
 | F2B.03 | Inbox list | 8–10 conversations; state chip (AI blue / Flagged amber / Human green / Closed grey); brand tag; last message preview; filter "Needs human" | M | 1c UI |
 | F2B.04 | SLA countdown | Flagged items sorted by time remaining; turns red < 2 min | M | A22 |
@@ -24,11 +24,13 @@ MoSCoW against a **2-hour build estimate**. Anything not built moves to "1 more 
 | F2B.16 | Claim conflict demo | "Simulate second consultant" → toast "Already claimed by Priya" | S | AC2 |
 | F2B.17 | Empty / loading / error states | Empty queue copy, skeletons, failed send with Retry, failed takeover keeps the previous state | S | 1c §4 |
 | F2B.23 | Agent status strip | Active / Paused / Error with last successful send; "Pause agent" sends new messages to Needs a human | S | 1c §2A |
+| F2B.24 | Agent Switchboard | Module 4's four agents (Meta Ads, WhatsApp AI, Voice AI, Email) in the header; only WhatsApp AI is live, the other three are shown greyed as "not part of this prototype" | M | Brief, Module 4 (added 15 Oct, prompt 6) |
+| F2B.25 | Live tracking | Live counts of leads, messages today (with the AI share), active chats and chats needing a human, recomputed on every tick | M | Brief, Module 4 (added 15 Oct, prompt 6) |
 | F2B.18 | Metrics strip | Active chats, flagged, in SLA %, takeovers today, autonomy % | C | R1 |
 | F2B.19 | Stretch: live LLM reply | One edge-function call using the R3 prompt for AI replies; falls back to scripted | C | R3 Part B |
 | F2B.20 | Real WhatsApp / Supabase backend | — | W | 1 more day |
-| F2B.21 | Cross-prototype footer | Links to the Option A and Option C URLs; same shell as R2A and R2C | S | D-10 |
-| F2B.22 | Approved facts from R2C | The agent's quotable numbers (investment, fee, royalty, payback range) are copied from the R2C approved Model Card | S | A32 |
+| F2B.21 | ~~Cross-prototype footer~~ | Dropped: Task 2 is Option B only, so there are no A or C URLs (D-10). The footer states the scope and that data is mocked. | — | D-10 |
+| F2B.22 | Approved facts from R5 | The agent's quotable numbers (investment, fee, royalty, payback range) are replaced with figures approved from the R5 Sheet; illustrative until then | S | A32 |
 
 ## Write-up components (required by the brief)
 

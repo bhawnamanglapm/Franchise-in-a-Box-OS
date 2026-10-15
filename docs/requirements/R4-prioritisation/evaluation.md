@@ -32,8 +32,8 @@
 |---|---|
 | Dropping Onboarding looks like a contradiction with 1a | One explicit line: "3 weeks < 30 days. Onboarding runs manually for the 2 pilot brands." |
 | Cutting things the founder likes | Each cut cites what replaces it (a manual or existing tool) and the condition for bringing it back |
-| Looks contradictory: prototypes A and C build the donut, US benchmarks and AI insights that this ranking cuts | One explicit note: "The prototypes demo the module spec in the brief; this ranking decides production build order for 3 weeks." Each cut feature in a prototype is labelled v0 or illustrative. |
+| Looks contradictory: prototype B shows Module 4's full Agent Switchboard (Meta Ads, Voice, Email) that this ranking may defer | One explicit note: "The prototypes demo the module spec in the brief; this ranking decides production build order for 3 weeks." Each cut feature in a prototype is labelled v0 or illustrative. |
 
 ## Effort and priority
-- **Estimate:** 0.5 h · **Priority:** P1 · **Depends on:** R1 (1a) · **Feeds:** R3 (trigger scope), R2B (prototype B scope), R2A/R2C (scope note)
+- **Estimate:** 0.5 h · **Priority:** P1 · **Depends on:** R1 (1a) · **Feeds:** R3 (trigger scope), R2B (prototype B scope and scope note)
 - **Status:** Draft position only. Decision D-09 is open.

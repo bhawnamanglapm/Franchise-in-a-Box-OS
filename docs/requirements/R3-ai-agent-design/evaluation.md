@@ -33,5 +33,5 @@
 | Triggers drift from prototype B | One trigger table is the single source for R2B and R6A |
 
 ## Effort and priority
-- **Estimate:** 1 h · **Priority:** P0 · **Depends on:** R1 (1c states), R4 (agent scope) · **Feeds:** R2B, R6A; model choice also used by the R2A and R2C stretch goals
+- **Estimate:** 1 h · **Priority:** P0 · **Depends on:** R1 (1c states), R4 (agent scope) · **Feeds:** R2B (triggers, prompt, and the model for its live-LLM stretch goal), R6A
 - **Status:** Not started. D-08 is open.

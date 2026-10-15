@@ -21,7 +21,7 @@ Task 2 lists three options: A Onboarding Wizard · **B WhatsApp AI Agent Panel**
 **Option B**, built by **Claude Code** as a Vite + React + TypeScript + Tailwind app in `prototypes/r2b-whatsapp-agent-panel/`, deployed to Vercel (D-01, revised 15 Oct 2026). *Originally Lovable with GitHub sync; changed so the state machine and rules can be unit-tested and the 9-step script automated, and because Lovable couldn't be driven from the build session.*
 - **Why it is built first of the three:** it sits on the revenue path (franchisee funnel), it ties together R1 1c + R3 + R4 #1–2 + R6A, and it fits the candidate's lead-to-closure and handoff experience.
 - **Logic:** scripted AI replies + deterministic rules. The stretch goal is one live LLM reply using the R3 prompt, attempted only if time allows (A17).
-- **Link to the other prototypes:** the facts the agent quotes match the Model Card approved in R2C (A32); the footer links to the A and C URLs.
+- **Link to the rest of the submission:** the facts the agent quotes come from the R5 financial model (A32). Until R5 is built they are labelled "illustrative" in the UI. Task 2 is Option B only (D-10), so there are no other prototypes to link.
 
 ## Ambiguities and how we resolve them
 | Ambiguity | Resolution | Assumption |
@@ -37,7 +37,7 @@ Task 2 lists three options: A Onboarding Wizard · **B WhatsApp AI Agent Panel**
 | Generic light-theme UI | Medium | Tokens are set in the Tailwind config before any screen is built; check the hex values in the built CSS |
 | Scope creep past 2 h | High | Build Must features first (MoSCoW); unbuilt items move to the "1 more day" list |
 | Stretch LLM goal uses a different provider than R3's choice | Medium | Call the R3 default model, or state the mismatch in the write-up |
-| Agent quotes numbers that differ from the C dashboard | Medium | Mock facts are copied from the R2C approved Model Card (A32) |
+| Agent quotes numbers that differ from the R5 model | Medium | Facts live in one file, labelled illustrative until replaced by R5's approved figures (A32, T2B.18) |
 | Link breaks after submission | Low | Don't redeploy after submitting; keep the PDF screenshots as backup |
 
 ## Effort and priority

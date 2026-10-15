@@ -17,7 +17,7 @@
 - [ ] Every task opens with a TL;DR
 - [ ] Founder skim test passes
 - [ ] No contradictions between Tasks 1, 3, 4, 6 and prototype B
-- [ ] The R4 prototype-vs-production note explains why A and C contain features R4 cuts
+- [ ] The R4 prototype-vs-production note explains why prototype B shows features R4 cuts or defers
 - [ ] Prototype C's numbers match the model; B quotes only C's approved facts (A32)
 - [ ] No number without a source or an A-ID
 - [ ] No filler or hedging phrases

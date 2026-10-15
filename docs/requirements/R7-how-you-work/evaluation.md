@@ -32,4 +32,4 @@
 | Story details the candidate can't defend | Only facts the candidate provides; Claude asks questions rather than filling in |
 
 ## Effort and priority
-- **Estimate:** 0.5 h · **Priority:** P2 (est. 5% weight) · **Depends on:** R2A, R2B, R2C, R5 (proof links) · **Feeds:** R8
+- **Estimate:** 0.5 h · **Priority:** P2 (est. 5% weight) · **Depends on:** R2B, R5 (proof links) · **Feeds:** R8

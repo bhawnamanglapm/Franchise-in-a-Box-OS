@@ -7,7 +7,7 @@ Total estimate: **2.75 h** (Build block, first of the three prototypes, after th
 | # | Task | Output | Est. | Owner | Depends on |
 |---|---|---|---|---|---|
 | T2B.01 | Write the one-page build brief (screens, components, mock data, interactions, tokens) | Build brief | (Decide block) | Claude | R1 1c, R3 |
-| T2B.02 | Write the Lovable prompt sequence: scaffold + tokens → inbox → thread → rules → state machine → panel → states → polish. Prompt 1 is the shared shell used by R2A and R2C too. | Prompt pack | (Decide block) | Claude | T2B.01 |
+| T2B.02 | Write the Lovable prompt sequence: scaffold + tokens → inbox → thread → rules → state machine → panel → states → polish. (Superseded by D-01: built in Claude Code.) | Prompt pack | (Decide block) | Claude | T2B.01 |
 | T2B.03 | Create the Lovable project; connect GitHub; open `build-log-template.md` | Project + log | 5 m | You | — |
 | T2B.04 | Prompt 1: scaffold, design tokens, shell, nav, badge placeholder. **Check the hex values in the generated code.** | F2B.01 | 15 m | You | T2B.03 |
 | T2B.05 | Prompt 2: mock data (10 conversations, 2 brands, EN/HI/Hinglish) + inbox + chips + filter | F2B.03, F2B.06 | 20 m | You | T2B.04 |
@@ -23,7 +23,7 @@ Total estimate: **2.75 h** (Build block, first of the three prototypes, after th
 | T2B.15 | Fix any test blocker (Claude Code or Lovable); redeploy once | Green test | 10 m | You | T2B.14 |
 | T2B.16 | Write up: prompts, what AI got wrong, manual fixes, 1 more day (from the log only) | F2B.W2–W5 | 15 m | You + Claude | T2B.14 |
 | T2B.17 | Take 3 screenshots for the doc and PDF backup | F2B.W6 | 5 m | You | T2B.15 |
-| T2B.18 | After R2C ships: copy its approved Model Card facts into the mock facts; add footer links to A and C | F2B.21, F2B.22 | 10 m | You | R2C, R2A URLs |
+| T2B.18 | After R5 is done: replace the illustrative facts with R5's approved figures; redeploy | F2B.22 | 10 m | You | R5 Sheet |
 
 ## 9-step test script (draft)
 

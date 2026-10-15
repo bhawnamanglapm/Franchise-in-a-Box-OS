@@ -20,7 +20,7 @@ Submit as:
 |---|---|
 | Doc or PDF? | Both: the Google Doc as primary, the PDF as backup (A16) |
 | Should Task 2 and 5 write-ups also appear in the doc? | Yes, a short section with the links + TL;DR, so the doc is the single entry point. Task 2 gets three sub-sections (A, B, C), each with its own write-up. |
-| Prototypes A and C show features R4 cuts | Point to R4's prototype-vs-production note in the Task 2 and Task 4 sections |
+| Prototype B shows features R4 cuts or defers (switchboard tiles) | Point to R4's prototype-vs-production note in the Task 2 and Task 4 sections |
 | Deadline time | Submit as soon as R8 passes, inside 72 h; quality first (D-07) |
 
 ## Risks

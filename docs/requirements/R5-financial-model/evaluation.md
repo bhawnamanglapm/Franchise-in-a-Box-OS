@@ -37,5 +37,5 @@ Output: a Google Sheets / Excel link with a clean, founder-friendly structure.
 | Time overrun | Base case + sensitivity first; portfolio view is optional at 1.75 h |
 
 ## Effort and priority
-- **Estimate:** 2 h · **Priority:** P0 (est. 20% weight) · **Depends on:** A1–A4 · **Feeds:** R2C (inputs + formulas, A32), R8, live session
+- **Estimate:** 2 h · **Priority:** P0 (est. 20% weight) · **Depends on:** A1–A4 · **Feeds:** R2B (approved figures, A32), R8, live session
 - **Status:** Not started. Input research happens in Phase 6.

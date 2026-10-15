@@ -1,5 +1,7 @@
 # R2C: ROI Dashboard (Task 2, Option C): evaluation
 
+> **Not being built (D-10, revised 15 Oct 2026).** Task 2 says "Choose ONE", and we chose Option B ([R2B](../R2B-whatsapp-agent-panel/evaluation.md)). This folder is kept as the plan written before that decision. Nothing here is a deliverable, and none of its checklists count towards done.
+
 ## What the brief asks
 Task 2, **Option C: ROI Dashboard**. We build all three options as separate working prototypes (D-10); this folder covers Option C. The brief describes the module it prototypes (ROI Engine) as:
 - a **Franchise Model Card**

@@ -244,5 +244,5 @@ The Autonomy Rate (measure A) is only ever reported next to these five. The goal
 - **A35:** One consultant has 160 productive hours a month (8 h × 20 working days). This is an estimate.
 
 ## Hand-off
-- **R2A, R2B and R2C** each show the badge, computed from their own mock `ACTION_EVENT` log using the rule above, with the model-vs-rules split on hover.
+- **R2B** (the Task 2 prototype, D-10) shows the badge, computed from its own mock `ACTION_EVENT` log using the rule above, with the model-vs-rules split on hover.
 - **R8** puts the verdict and the capacity line in the executive summary.

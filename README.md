@@ -1,10 +1,10 @@
 # Franchise-in-a-Box OS: Scale100x.ai take-home
 
 Take-home assignment for the **AI Product Manager / AI Product Builder** role at Scale100x.ai.
-This repo is the working space for the submission: planning, requirement breakdowns, architecture and (later) the code for the three prototypes.
+This repo is the working space for the submission: planning, requirement breakdowns, architecture and the code for the Task 2 prototype (Option B).
 
-> **Status:** R1 (Task 1) output done in [`outputs/R1-product-thinking/`](outputs/R1-product-thinking/README.md). All three Task 2 prototypes are planned (D-10); build and model not started.
-> **Time:** ~15 h of focused work estimated. **Quality comes first, and estimates are for planning only, not cut-off points (D-07).** Steps run in the order below; submit as soon as R8 passes, inside the 72 h deadline.
+> **Status:** R1 (Task 1) output done in [`outputs/R1-product-thinking/`](outputs/R1-product-thinking/README.md). Task 2 is **Option B only** (D-10): the WhatsApp AI Agent Panel is built in [`prototypes/r2b-whatsapp-agent-panel/`](prototypes/r2b-whatsapp-agent-panel/); deploy, write-up and the R5 model are next.
+> **Time:** ~11 h of focused work estimated. **Quality comes first, and estimates are for planning only, not cut-off points (D-07).** Steps run in the order below; submit as soon as R8 passes, inside the 72 h deadline.
 
 ---
 
@@ -20,29 +20,24 @@ Scale100x.ai helps Indian retail and franchise brands (QSR, gyms, fashion, EV, t
 
 A persistent **"AI: 76% | Human: 24%"** metric is shown across the platform.
 
-The assignment asks for seven tasks, delivered as five links:
+The assignment asks for seven tasks, delivered as three links:
 
 | Artefact | Contains | Format |
 |---|---|---|
-| Written submission | Tasks 1, 3, 4, 6, 7 + the Task 2 write-up for each prototype | Google Doc (anyone-with-link view) + PDF backup |
-| Live prototype A | Task 2 Option A: Onboarding Wizard | Lovable build, public URL |
-| Live prototype B | Task 2 Option B: WhatsApp AI Agent Panel | Claude Code build on Vercel, public URL (D-01) |
-| Live prototype C | Task 2 Option C: ROI Dashboard | Lovable build, public URL |
+| Written submission | Tasks 1, 3, 4, 6, 7 + the Task 2 write-up | Google Doc (anyone-with-link view) + PDF backup |
+| Live prototype | Task 2 Option B: WhatsApp AI Agent Panel | Claude Code build on Vercel, public URL (D-01) |
 | Financial model | Task 5 (FreshBrew QSR) | Google Sheets |
 
-The original brief file says "Choose ONE" for Task 2; the version we're working from asks for all three. We build all three as separate working apps (D-10).
+Task 2 says "Choose ONE". We build **Option B, the WhatsApp AI Agent Panel** (D-10): it is the revenue path (lead to signed franchisee) and it exercises the 1c takeover spec. Options A and C were planned earlier; their folders stay in the repo, marked "not being built".
 
 The next round is a 60-minute live working session, so every decision here must be defensible and extendable live.
 
 ## 2. What we are creating
 
 - **A decision-led written submission** a founder can skim in 10 minutes: an executive summary up front, then each task opening with a 2–3 line TL;DR.
-- **Three working prototypes on one shared design shell:**
-  - **A. Onboarding Wizard:** a 4-step flow with validated brand details, real file checks, a revenue-split donut and an explainable AI Readiness Score computed from the inputs.
-  - **B. WhatsApp AI Agent Panel:** deterministic HITL triggers fire on real interactions, a real takeover state machine runs, and the AI/Human split is computed rather than hardcoded.
-  - **C. ROI Dashboard:** a Franchise Model Card, 3-year projections, sourced India + US benchmarks and rule-based insights, using the same formulas as the R5 model.
+- **One working prototype, Option B: WhatsApp AI Agent Panel.** Deterministic HITL triggers fire on real interactions, a real takeover state machine runs, and the AI/Human split is computed rather than hardcoded. It includes Module 4's Agent Switchboard and live counts of leads, messages and conversations.
 - **A founder-friendly FreshBrew model** with all inputs on one Assumptions tab, franchisee economics kept separate from Scale100x revenue, payback, and ₹6L/₹8L/₹10L monthly-revenue sensitivity.
-- **One connected system, not seven answers.** The 1c spec (takeover), Task 3 triggers and prompt, Task 4 ranking, prototype B and the 6A checkpoints all describe the same lead-to-close slice. Prototype A creates the brand record, C turns it into approved numbers, and B's agent quotes only those numbers.
+- **One connected system, not seven answers.** The 1c spec (takeover), Task 3 triggers and prompt, Task 4 ranking, prototype B and the 6A checkpoints all describe the same lead-to-close slice. B's agent quotes only figures approved from the R5 model (A32).
 
 ## 3. Value proposition
 
@@ -91,13 +86,13 @@ These are reference points to position the product, not researched claims. Verif
 |---|---|---|
 | Claude | Analysis, drafting, research synthesis, model logic | Yes |
 | Claude Code | Repo setup, docs, building prototype B (D-01), targeted fixes | Yes |
-| Lovable | Planned build and hosting for prototypes A and C (B moved to Claude Code, D-01) | Planned |
+| Lovable | Planned for prototypes A and C; not used, since Task 2 is B only (D-10) and B is built in Claude Code (D-01) | No |
 | Google Sheets | Financial model (R5), AI/Human split tab (R1) | Yes |
 | Google Docs | Written submission (assumed available, A16) | Assumed |
-| GitHub | Version control, Lovable sync | Yes (this repo) |
+| GitHub | Version control | Yes (this repo) |
 | Zapier / Make | **Designed, not built** in 6A. Stated honestly. | No |
 
-Product stack (from the brief): React + Tailwind + Supabase. WhatsApp via a BSP (business solution provider). Meta Lead Ads.
+Product stack (from the brief): React + Tailwind + Supabase. The prototype uses React + Tailwind with in-browser mock data instead of Supabase (A11). WhatsApp via a BSP (business solution provider). Meta Lead Ads.
 
 ## 8. Requirements
 
@@ -108,30 +103,24 @@ Each requirement is evaluated in its own folder under [`docs/requirements/`](doc
 | R1 | Product Thinking (Task 1) | 15% | P0 | 1 | [R1-product-thinking](docs/requirements/R1-product-thinking/evaluation.md) |
 | R4 | Prioritisation Under Constraint (Task 4) | 10% | P1 | 2 | [R4-prioritisation](docs/requirements/R4-prioritisation/evaluation.md) |
 | R3 | AI Agent Design (Task 3) | 15% | P0 | 3 | [R3-ai-agent-design](docs/requirements/R3-ai-agent-design/evaluation.md) |
-| R2B | Prototype B: WhatsApp AI Agent Panel (Task 2) | 20%† | P0 | 4 | [R2B-whatsapp-agent-panel](docs/requirements/R2B-whatsapp-agent-panel/evaluation.md) |
+| R2B | Prototype B: WhatsApp AI Agent Panel (Task 2) | 20% | P0 | 4 | [R2B-whatsapp-agent-panel](docs/requirements/R2B-whatsapp-agent-panel/evaluation.md) |
 | R5 | Financial Model (Task 5) | 20% | P0 | 5 | [R5-financial-model](docs/requirements/R5-financial-model/evaluation.md) |
-| R2C | Prototype C: ROI Dashboard (Task 2) | 20%† | P0 | 6 | [R2C-roi-dashboard](docs/requirements/R2C-roi-dashboard/evaluation.md) |
-| R2A | Prototype A: Onboarding Wizard (Task 2) | 20%† | P0 | 7 | [R2A-onboarding-wizard](docs/requirements/R2A-onboarding-wizard/evaluation.md) |
+| R2C | ~~Prototype C: ROI Dashboard~~ Not built (D-10) | — | — | — | [R2C-roi-dashboard](docs/requirements/R2C-roi-dashboard/evaluation.md) |
+| R2A | ~~Prototype A: Onboarding Wizard~~ Not built (D-10) | — | — | — | [R2A-onboarding-wizard](docs/requirements/R2A-onboarding-wizard/evaluation.md) |
 | R6 | Automation + Market Research (Task 6) | 15% | P1 | 8 | [R6-automation-research](docs/requirements/R6-automation-research/evaluation.md) |
 | R7 | How You Work (Task 7) | 5% | P2 | 9 | [R7-how-you-work](docs/requirements/R7-how-you-work/evaluation.md) |
 | R8 | Submission & Assembly (brief's submission rules) | Gate | P0 | 10 | [R8-submission-assembly](docs/requirements/R8-submission-assembly/evaluation.md) |
 
-*Weights are our estimate of reviewer emphasis, used to plan the work. The brief does not publish weights. †Task 2's estimated 20% is shared across R2A, R2B and R2C.
+*Weights are our estimate of reviewer emphasis, used to plan the work. The brief does not publish weights.
 
 **Why this order:** decisions flow forward only.
 - R1 sets priorities, and R4 must agree with them.
 - R3 defines the triggers and prompt that R2B runs.
-- R5 reuses the Phase 0 assumptions, and R2C reuses R5's formulas (A32).
-- R2C's approved numbers feed R2B's agent, and R2A's brand record feeds R2C.
+- R5 reuses the Phase 0 assumptions, and R5's approved figures replace R2B's illustrative facts (A32).
 - R6A reuses R3's checkpoints.
 - R7 cites how this assignment's ambiguities were handled.
 
-**Shared across R2A, R2B and R2C:**
-- the same design tokens and Prompt 1 shell
-- the same FreshBrew + fictional gym mock data (A26)
-- the same computed autonomy badge
-- a footer that links to the other two prototypes
-- a separate project and URL for each, synced to GitHub (B: Claude Code on Vercel; A and C: Lovable, as planned)
+**Prototype B at a glance:** the brief's design tokens, FreshBrew + fictional gym mock data (A26), the computed autonomy badge, and a Claude Code build on Vercel with one public URL.
 
 ## 9. Feature list (summary)
 
@@ -142,17 +131,15 @@ Full lists and MoSCoW tags are in each `features.md`.
 | R1 | 30-day module ranking · 37-action AI/Human map · 3-way split calculation · Autonomy Rate definition + instrumentation + audit · Takeover dev spec |
 | R4 | Top-4 ranked features · Month 2 / Cut lists · QSR lead-gen variation · consistency note vs R1 |
 | R3 | 8 measurable HITL triggers · 150–250 word WhatsApp system prompt (counted) · model choice matrix · golden-set validation test |
-| R2B | Design-system shell + computed autonomy badge · inbox with state chips + SLA · conversation view + 24 h window · trigger engine + "Why flagged" · takeover state machine · simulate-inbound box · return-to-AI + opt-out · empty/loading/error states · build log |
+| R2B | Design-system shell + computed autonomy badge · Agent Switchboard + live counts · inbox with state chips + SLA · conversation view + 24 h window · trigger engine + "Why flagged" · takeover state machine · simulate-inbound box · return-to-AI + opt-out · empty/loading/error states · build log |
 | R5 | Summary tab · Assumptions tab · Monthly P&L Y1 · Payback · Sensitivity ₹6L/8L/10L · Scale100x 3-year revenue (+ portfolio view) |
-| R2C | Shared shell · calculation engine equal to R5 · Franchise Model Card · editable assumptions + ₹6L/8L/10L toggle · 36-month chart with payback marker · sensitivity table · sourced India + US benchmarks · rule-based insights · build log |
-| R2A | Shared shell · 4-step stepper with validation · brand details · deck + P&L uploads with file checks · revenue-split donut (must total 100%) · explainable Readiness Score with RAG sub-scores · review & submit · sample data · build log |
 | R6 | 6A lead-flow design with steps, data, checkpoints, time-saved maths, risk · 6B sourced EV 2W servicing research with go/no-go |
 | R7 | Real tools with proof · calibrated self-ratings · process · one complex problem · ambiguity handling |
 | R8 | Exec summary · TL;DRs · consistency check · founder skim test · link and permission QA |
 
 ## 10. Architecture
 
-See **[`docs/architecture.md`](docs/architecture.md)** for the Mermaid diagrams (business funnels, target platform, lead-to-close sequence, takeover state machine, data model, architecture of the three prototypes, delivery plan) and **[`docs/architecture-components.csv`](docs/architecture-components.csv)** for a component sheet you can import into Google Sheets.
+See **[`docs/architecture.md`](docs/architecture.md)** for the Mermaid diagrams (business funnels, target platform, lead-to-close sequence, takeover state machine, data model, prototype architecture, delivery plan) and **[`docs/architecture-components.csv`](docs/architecture-components.csv)** for a component sheet you can import into Google Sheets.
 
 ```mermaid
 flowchart LR
@@ -181,18 +168,18 @@ Detailed, numbered tasks live in each requirement's `tasks.md`. Master view:
 | 6 | Build prototype B in Claude Code (D-01); log prompt → error → fix | R2B | 2 h | Build | Claude Code builds, you review |
 | 7 | Deploy B, run 9-step test, write Task 2 Option B section | R2B | 0.75 h | Build | You |
 | 8 | Build FreshBrew model in Sheets; run integrity checks | R5 | 2 h | Build | You + Claude |
-| 9 | Build prototype C on R5's formulas; check 3 numbers against the Sheet; deploy, test, write up; hand approved facts to B | R2C | 2.25 h | Build | You |
-| 10 | Build prototype A; deploy, test, write up | R2A | 2 h | Build | You |
-| 11 | Link-up: footer links across A/B/C; copy C's approved facts into B; redeploy B | R2B | 10 m | Build | You |
+| 9 | ~~Build prototype C~~ Dropped: Task 2 is B only (D-10) | R2C | — | — | — |
+| 10 | ~~Build prototype A~~ Dropped: Task 2 is B only (D-10) | R2A | — | — | — |
+| 11 | Swap B's illustrative facts for R5's approved figures; redeploy B | R2B | 10 m | Build | You |
 | 12 | 6A lead-flow design + diagram | R6 | 0.4 h | Finish | You + Claude |
 | 13 | 6B research: verify every number and source | R6 | 0.6 h | Finish | Claude drafts, you verify |
 | 14 | Task 7 answers with proof links | R7 | 0.5 h | Finish | You |
-| 15 | Assemble doc, exec summary, QA, incognito test of all 5 links, submit | R8 | 1 h | Finish | You |
+| 15 | Assemble doc, exec summary, QA, incognito test of all 3 links, submit | R8 | 1 h | Finish | You |
 | 16 | Live-session prep (after submission) | — | 0.5 h | Finish | You + Claude |
 
 **Blocks (take a 10-minute break between them):**
 - **Decide:** R1, R4, R3 (~3.5 h)
-- **Build:** R2B, R5, R2C, R2A, link-up (~9.2 h)
+- **Build:** R2B, R5, facts swap (~5 h)
 - **Finish:** R6, R7, R8 (~2.5 h)
 
 Estimates are for planning only. Quality comes first (D-07).
@@ -201,14 +188,14 @@ Estimates are for planning only. Quality comes first (D-07).
 
 The submission is done when **all** of the following are true:
 
-- [ ] Every deliverable in the brief is present: 1a, 1b, 1c, 2A, 2B, 2C, 3A, 3B, 3C, 4, 5, 6A, 6B, 7 (checked against the R8 completeness table).
-- [ ] Each prototype has its own write-up: live URL, exact prompts, what AI got wrong, manual fixes, 1 more day.
-- [ ] Each requirement's own `definition-of-done.md` is fully ticked (including R2A, R2B and R2C).
-- [ ] All 5 links open in an incognito window with view access: prototypes A, B and C, the model and the doc.
+- [ ] Every deliverable in the brief is present: 1a, 1b, 1c, 2 (Option B), 3A, 3B, 3C, 4, 5, 6A, 6B, 7 (checked against the R8 completeness table).
+- [ ] The Task 2 write-up has: live URL, exact prompts, what AI got wrong, manual fixes, 1 more day.
+- [ ] Each requirement's own `definition-of-done.md` is fully ticked (R2A and R2C excluded: not built, D-10).
+- [ ] All 3 links open in an incognito window with view access: prototype B, the model and the doc.
 - [ ] The system prompt is 150–250 words, and the count is shown.
 - [ ] No number appears without a source or a stated assumption ID.
 - [ ] R1, R3, R4, R6A and R2B tell one consistent story. Any change between R1 and R4 is explained.
-- [ ] The R2C numbers match the R5 Sheet, and R2B's agent quotes only C's approved facts (A32).
+- [ ] R2B's agent quotes only figures approved from the R5 Sheet, or labels them illustrative (A32).
 - [ ] The founder skim test passes: the main decisions can be read from headings and TL;DRs alone.
 - [ ] Task 7 contains only real tools and real experience. Nothing is invented.
 - [ ] Submitted as soon as R8 passes, inside the 72 h deadline.
@@ -225,9 +212,9 @@ docs/
   requirements/
     README.md                     ← evaluation matrix for R1–R8
     R1-product-thinking/          ← evaluation · features · tasks · phases · definition-of-done
-    R2A-onboarding-wizard/        ← + build-log-template.md
+    R2A-onboarding-wizard/        ← not being built (D-10)
     R2B-whatsapp-agent-panel/     ← + build-log-template.md
-    R2C-roi-dashboard/            ← + build-log-template.md
+    R2C-roi-dashboard/            ← not being built (D-10)
     R3-ai-agent-design/
     R4-prioritisation/
     R5-financial-model/
@@ -237,12 +224,13 @@ docs/
 outputs/                          ← finished deliverables, one folder per requirement
   README.md                       ← index and status
   R1-product-thinking/            ← 1a, 1b (+ action-map CSV), 1c
+  R2B-whatsapp-agent-panel/       ← Task 2 write-up, build log, screenshots
+prototypes/
+  r2b-whatsapp-agent-panel/       ← the Option B app (Vite + React + TS + Tailwind)
 ```
 
 ## 14. Open decisions
 
 See [`docs/assumptions-and-decisions.md`](docs/assumptions-and-decisions.md#decision-log). D-04, D-05 and D-06 were confirmed on 15 Oct 2026. Still open, decided inside their requirement: D-08 (default LLM, R3) and D-09 (Task 4 top 4, R4).
 
-Decided while building, not blocking:
-
-- **D-11:** what prototype A's revenue split splits. Working default: revenue by sales channel (dine-in / takeaway / delivery apps). Decided in the R2A build brief (T2A.01).
+D-10 was revised on 15 Oct 2026: Task 2 is Option B only. D-11 (prototype A's revenue split) is no longer needed.

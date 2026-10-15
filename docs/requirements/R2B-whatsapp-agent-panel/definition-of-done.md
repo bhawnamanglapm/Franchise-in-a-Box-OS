@@ -10,8 +10,7 @@
 - [ ] Mock data includes Hinglish and ₹ values, and no real company names except FreshBrew from the brief
 - [ ] Usable at 375 px width
 - [ ] All 9 test-script steps pass
-- [ ] Numbers the agent quotes match the R2C approved Model Card (A32)
-- [ ] Footer links to the Option A and Option C URLs work
+- [ ] Numbers the agent quotes match the figures approved from the R5 Sheet, or are labelled illustrative in the UI (A32)
 
 ## Write-up
 - [ ] Exact prompts listed in order (copied from the log, unedited)

@@ -7,4 +7,4 @@
 | **3. Decide** | Close the open calls | Draft exists | Confirm D-04, D-05, D-06 | Decision log shows "Confirmed" | Done |
 | **4. Evidence** | Make the numbers reproducible | Decisions confirmed | Build the `AI_Human_Split` Sheet tab; verify Meta facts | Sheet outputs match the doc; A23 verified | Done |
 | **5. Finalise** | Doc-ready text | Evidence complete | Tighten text; TL;DRs; label assumptions | Every number cites a source or an A-ID | Done |
-| **6. Hand off** | Feed downstream requirements | Final text | Pass the spec to R2B, the ranking to R4, the metric to R2A/R2B/R2C (badge) and R8 | R4 and R2B can start without questions | Done (R4 consistency checked when R4 is written) |
+| **6. Hand off** | Feed downstream requirements | Final text | Pass the spec to R2B, the ranking to R4, the metric to R2B (badge) and R8 | R4 and R2B can start without questions | Done (R4 consistency checked when R4 is written) |

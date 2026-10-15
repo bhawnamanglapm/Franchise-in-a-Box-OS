@@ -26,4 +26,4 @@
 - [ ] 3-line TL;DR in the written doc, with the link
 
 ## Hand-off
-- [ ] Base-case inputs and formulas handed to R2C; R2C's 3 spot-check values match this Sheet (A32)
+- [ ] Approved base-case figures handed to R2B (investment, fee, royalty, payback range), replacing its illustrative facts (A32)
