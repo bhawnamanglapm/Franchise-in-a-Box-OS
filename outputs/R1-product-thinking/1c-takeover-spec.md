@@ -2,9 +2,47 @@
 
 > **TL;DR.** The brief describes human takeover in one line: "Includes Human-in-the-Loop (HITL) takeover". That one line hides the hardest behaviour in the product: who owns a live WhatsApp conversation, what happens when two people grab it, and what happens when nobody does. This spec defines 7 states and 9 transitions, a 10-business-minute claim SLA (D-06), the WhatsApp 24-hour window, opt-out, 10 edge cases, 8 testable acceptance criteria, and the events it writes for the Autonomy Rate ([1b](1b-ai-human-split.md)). Prototype B (R2B) implements it.
 
-## Why this feature, not the AI Readiness Score
+## How we chose the feature and built the spec
 
-The Readiness Score is unclear too, but the uncertainty is in *what to measure*: a rubric that can be iterated on (prototype A shows one, A31). Takeover is unclear in *how it behaves*, and mistakes there are costly. A missed handover loses a ready-to-buy prospect, and a double reply from both AI and a human damages trust. It also sits on the revenue path (1a, rank 1), and it's where human work begins: 93% of the human hours left after AI (54.6 of 58.8 a month per brand) are in the CRM, starting with takeovers ([1b](1b-ai-human-split.md)). That makes it the feature that most needs a precise spec.
+**Step 1: List the features the brief describes in a line or less.** Each one hides at least one open question that a developer would have to guess at.
+
+**Step 2: Screen them with three questions.**
+- Does it ship in the day-30 slice ([1a](1a-prioritisation.md))?
+- What does it cost if a developer guesses wrong?
+- Is the unclear part *what to measure* or *how it behaves*?
+
+A measurement can be shipped as a v0 and tuned later. A behaviour has to be right on day one.
+
+| Feature (as the brief puts it) | What's unclear | In the day-30 slice? | Cost of a wrong guess | Unclear part |
+|---|---|---|---|---|
+| **HITL takeover** ("Includes Human-in-the-Loop (HITL) takeover") | Who owns the chat; what happens when two people grab it; what happens when nobody does; the 24-hour window; opt-out | **Yes**, rank 1 | **High**: a lost hot lead, or a double reply from AI and a human | **Behaviour** |
+| AI Readiness Score (RAG sub-scores) | What is scored, the weights, the thresholds | No (score deferred) | Medium: a rubric can be iterated (rule-based v0 in prototype A, A31) | Measurement |
+| AI insights (Opportunity / Risk / Benchmark) | What triggers an insight | No (deferred) | Medium: misleading advice; v0 is rule-based | Measurement |
+| Live call intelligence | What it captures and suggests, and when | No (deferred) | Medium | Behaviour |
+| Meta ads optimisation | What the AI may change without approval | No (deferred) | High (ad spend), but outside the 30-day scope | Behaviour |
+| Live tracking | Which numbers to show | Yes (basic counts) | Low: counts can be added later | Measurement |
+
+**Step 3: Pick the feature that is in the slice, expensive to get wrong, and unclear in behaviour.** Only takeover meets all three. The final call was between takeover and the Readiness Score (A18): *takeover is harder to build; the Readiness Score is harder to define.* The 1b action map confirms the choice. Takeover is where human work begins: 93% of the human hours left after AI (54.6 of 58.8 a month per brand) are in the CRM, starting with takeovers ([1b](1b-ai-human-split.md)).
+
+**Step 4: Write it in the order a developer needs it.**
+1. Users and stories
+2. States
+3. Transitions, each with a trigger, a guard and a system action
+4. UI by state
+5. Error, empty and loading states
+6. Validation
+7. Edge cases
+8. Acceptance tests with numbers
+9. Metrics after launch
+
+**Step 5: Check platform facts against the source.** The 24-hour window, error 131047 and the 4,096-character limit were checked against Meta's documentation (see the end of this spec). The SLA and business hours are product choices, labelled as such (D-06, A22).
+
+**Step 6: Check consistency with 1a and 1b.**
+- The holding message isn't a "meaningful reply" (1a §8).
+- The spec covers the AI-off fallback from 1a §6.
+- Each step writes an `ACTION_EVENT` with the 1b actor split (§10).
+
+**Step 7: Hand over to prototype B.** R2B builds the state machine, and its test script runs AC1, AC2, AC4, AC5 and AC7.
 
 ## 1. Users and stories
 
