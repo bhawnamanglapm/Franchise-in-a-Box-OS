@@ -4,3 +4,4 @@ test-results/
 playwright-report/
 .vercel/
 *.tsbuildinfo
+tests/e2e/.results/
