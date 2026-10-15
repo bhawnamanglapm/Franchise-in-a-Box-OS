@@ -34,4 +34,4 @@
 
 ## Effort and priority
 - **Estimate:** 1 h · **Priority:** P0 · **Depends on:** R1 (1c states), R4 (agent scope) · **Feeds:** R2B (triggers, prompt, and the model for its live-LLM stretch goal), R6A
-- **Status:** Not started. D-08 is open.
+- **Status:** Done (16 Oct 2026). D-08 confirmed (provisional on the golden set). Output: [`outputs/R3-ai-agent-design/task3-ai-agent-design.md`](../../../outputs/R3-ai-agent-design/task3-ai-agent-design.md).
