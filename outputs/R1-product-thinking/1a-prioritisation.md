@@ -1,6 +1,6 @@
 # 1a. Prioritisation: what ships in the first 30 days
 
-> **TL;DR.** First, ship the lead-to-close slice: the WhatsApp Sales Agent and a thin CRM, released together. Next comes a thin ROI Engine, so the agent has approved numbers to quote, then thin Onboarding. Collateral Studio waits. The order follows the money: Scale100x is paid when a franchisee signs (A1), and its 20+ existing brands (A21) mean the revenue path can start on day 1. The ranking is a hypothesis, not a fixed bet. Days 1–5 test it with discovery while the team does only work that every outcome needs, and a decision gate on day 5 says what changes if the evidence points elsewhere.
+> **TL;DR.** Ship the WhatsApp Sales Agent and a thin CRM together first, then a thin ROI Engine (so the agent has approved numbers to quote), then thin Onboarding; Collateral Studio waits. The order follows the money: Scale100x is paid when a franchisee signs (A1), and its 20+ existing brands (A21) let that start on day 1. A day-5 discovery gate can change the order if the evidence points elsewhere.
 
 ## 1. The lens
 

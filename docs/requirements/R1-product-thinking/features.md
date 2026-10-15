@@ -17,12 +17,12 @@ MoSCoW: **M** = Must, **S** = Should, **C** = Could, **W** = Won't (this submiss
 | F1.11 | Investor view: badge reframe + 3 outcome metrics | M | Depends on D-05 |
 | F1.12 | 1c: why Takeover beats Readiness Score (a 2-line challenge) | S | Shows judgment |
 | F1.13 | 1c: user stories, v1 scope | M | |
-| F1.14 | 1c: state table + transition table (trigger, guard, action) | M | |
+| F1.14 | 1c: state table + transition table (trigger, guard, action) | M | Guard is the "Only if" column |
 | F1.15 | 1c: UI behaviour (inbox, header, Why-flagged card, takeover panel, composer) | M | |
 | F1.16 | 1c: empty / loading / error states | M | |
 | F1.17 | 1c: validation rules | M | |
-| F1.18 | 1c: edge cases (7) | M | |
-| F1.19 | 1c: acceptance criteria (6, testable) + post-launch success metrics | M | |
+| F1.18 | 1c: edge cases (≥ 7) | M | Output has 10 |
+| F1.19 | 1c: acceptance criteria (≥ 6, testable) + post-launch success metrics | M | Output has 11 + pilot metrics |
 | F1.20 | 1c: Mermaid state diagram | C | Reused from `docs/architecture.md` |
-| F1.21 | Partner-distribution framing (one line, where it's genuinely relevant) | C | Don't force it |
+| F1.21 | Partner-distribution framing (one line, where it's genuinely relevant) | C | Not used in R1: no natural fit. Covered in R7 (F7.6). |
 | F1.22 | Full Readiness Score spec | W | Out of scope; mentioned only as the alternative |

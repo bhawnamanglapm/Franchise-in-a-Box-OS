@@ -20,15 +20,15 @@
 | Who the users are | Consultants, brand founders, prospects | A6 |
 | Which feature is "unclear" | Conversation Takeover. The brief says only "Includes HITL takeover". | A18 |
 
-## Position taken (draft complete, see Phase 2 in chat)
+## Position taken (final)
 - **1a:** (1) Sales Agent, thin, and (2) CRM, thin, ship as one lead-to-close slice → (3) thin ROI Engine (approved numbers for the agent) → (4) thin Onboarding → (5) Collateral Studio deferred. Existing brands let revenue work start on day 1.
 - **1b:** 76% is plausible for workload (68–87%) but not for value (68%), and a 20% human edit rate moves it 14 points. Redefine as an audited **Autonomy Rate**; show it with cost per signed franchisee and human hours per signed franchisee.
-- **1c:** Takeover spec with 7 states, 9 transitions, SLA, 24 h window, opt-out, and measurable acceptance criteria.
+- **1c:** Takeover spec in six plain sections: 7 states, 9 transitions (each with trigger, guard and action), agent status (Active / Paused / Error), SLA, 24 h window, opt-out, error handling, 10 edge cases, 11 acceptance tests, pilot metrics and a definition of done.
 
 ## Risks
 | Risk | Likelihood | Mitigation |
 |---|---|---|
-| Putting Onboarding at #4 reads as dismissing the founder's flow | Medium | Show the dependency trap: the onboarding-first path delays the first lead to about day 60 |
+| Putting Onboarding at #4 reads as dismissing the founder's flow | Medium | Show the dependency trap: the onboarding-first path puts the first lead outside the 30-day window (1a §5) |
 | Split inputs look invented | High | Label A19/A20 as estimates to calibrate. Publish the calculation tab. |
 | Badge reframe reads as contrarian | Medium | Offer the safe variant: keep the format, change only the definition (D-05) |
 
@@ -36,4 +36,4 @@
 - **Estimate:** 1.5 h (mostly done in Phase 2; remaining work is finalising and formatting)
 - **Priority:** P0. Every downstream requirement depends on it.
 - **Dependencies:** Phase 0 lens. **Feeds:** R4, R3, R2B (1c spec), R2A (1b onboarding actions).
-- **Status:** Output written to `outputs/R1-product-thinking/`. D-04, D-05, D-06 confirmed; A23 verified. Remaining: import the CSV into the Sheet tab (T1.04–T1.05).
+- **Status:** Done. Outputs are in `outputs/R1-product-thinking/` (1a, 1b, 1c, live Sheet, PDF, Google Doc). D-04, D-05, D-06 confirmed; A23 verified; Sheet tab live and matching the doc. Every item is traced in `outputs/R1-product-thinking/requirements-coverage.md`. Open: the R4 consistency check, once R4 is written.

@@ -9,7 +9,8 @@
 | [**Live Google Sheet**](https://docs.google.com/spreadsheets/d/1pl8JSEAvlPR1mexlfx0cwiFMPU-B4-QJFga4N31pl1o/edit?usp=sharing) | 1b | The workbook above, converted to a native Google Sheet. This is the link for reviewers. |
 | [1c-takeover-spec.md](1c-takeover-spec.md) | 1c | How the feature was chosen (6 candidates screened), then the Conversation Takeover spec in six plain sections: feature overview, UI behaviour (agent status, inbox, takeover), state transitions (7 conversation states, 9 transitions, agent Active/Paused/Error), error handling with 10 edge cases and validation, success criteria (11 acceptance tests + pilot metrics), and definition of done with a 2-brand controlled rollout; plus the events it writes for the Autonomy Rate |
 | [**Task 1 as a PDF (start here)**](Task-1-Product-Thinking.pdf) | 1a–1c | 25-page download for reviewers: a one-page plain-English summary (questions, answers, headline numbers, glossary), then 1a, 1b and 1c in full with the state diagram, and the assumptions appendix. Built from the .md files. |
-| [**Task 1 as one Google Doc**](https://docs.google.com/document/d/1s5GK_8r7KcDySFAq-IdDohlxQPPixiWQJI5wNtyaP_g/edit) | 1a–1c | 1a, 1b and 1c combined, plus an appendix of the assumptions and decisions they cite. Built from the three .md files on 15 Oct 2026; the .md files stay the source of truth. |
+| [requirements-coverage.md](requirements-coverage.md) | 1a–1c | Every item in the R1 requirement files (brief asks, features F1.1–F1.22, tasks, definition of done, hand-offs), with where it is answered |
+| [**Task 1 as one Google Doc**](https://docs.google.com/document/d/1oVwbVyPmijSpRmR4Wj66hQFQLzTLCQghKYBQDkpeFJQ/edit) | 1a–1c | 1a, 1b and 1c combined, plus an appendix of the assumptions and decisions they cite. Built from the three .md files on 15 Oct 2026; the .md files stay the source of truth. |
 
 ## Key numbers
 
@@ -37,9 +38,9 @@ All of these come from `ai-human-split.csv` and use estimates A19, A20, A34 and 
 | 1a: 5 modules ranked with a scored framework; dependency trap; numeric day-30 criteria; BSP critical path; roadmap with a decision gate; risks | Done |
 | 1b: 37 actions mapped; split 3 ways; explicit verdict; Autonomy Rate with events, unedited rule and audit; ≥ 2 outcome metrics; A19/A20 labelled | Done |
 | 1b: formulas live in a Google Sheet tab that matches the doc | Done: [live Sheet](https://docs.google.com/spreadsheets/d/1pl8JSEAvlPR1mexlfx0cwiFMPU-B4-QJFga4N31pl1o/edit?usp=sharing). The computed values in the Sheet were read back and match the doc (68 / 81 / 87.1 / 68%, 456.6 h, 58.8 h, 2.7 brands). |
-| 1c: stories, scope, states, transitions with guards, UI, error states, numeric validation, ≥ 6 edge cases, ≥ 6 testable ACs, metrics with targets, Meta facts verified | Done |
-| Each sub-task opens with a TL;DR; no unsourced numbers | Done. Targets are labelled as proposals, and estimates cite A-IDs. |
-| Consistent with R4 and R2B | R2B F2B.09 updated to the 7-state machine; R4 is checked when it's written next |
+| 1c: stories, scope, states, transitions with trigger + guard ("Only if") + action, UI, error states, numeric validation, ≥ 6 edge cases (10), ≥ 6 testable ACs (11), metrics with targets, Meta facts verified | Done |
+| Each sub-task opens with a 2–3 line TL;DR; no unsourced numbers | Done. Targets are labelled as proposals, and estimates cite A-IDs. |
+| Consistent with R4 and R2B | R2B: features, test script and DoD updated to the current 1c (agent status, queued-reply cancel, 9-step script covering AC1, AC2, AC4, AC5, AC7, AC9, AC10). R4: checked when it's written next. |
 
 ## Hand-offs
 - **R4:** the 1a ranking is its consistency baseline.

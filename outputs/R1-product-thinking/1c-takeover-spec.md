@@ -1,6 +1,6 @@
 # 1c. Developer-ready spec: Conversation Takeover (Human-in-the-Loop)
 
-> **TL;DR.** The brief covers human takeover in one line: "Includes Human-in-the-Loop (HITL) takeover". Behind that line sit the hardest questions in the product. Who is allowed to reply in a live WhatsApp chat? What happens when two people click at once? What if nobody picks it up? What if the AI was just about to send something? This spec answers them in plain terms: what the screen shows, how a conversation moves between the AI and a person, what happens when something fails, and how we know it works. Testable numbers: a 10-business-minute pick-up time (D-06), 11 pass/fail tests and pilot metrics. The steps it records also feed the Autonomy Rate ([1b](1b-ai-human-split.md)).
+> **TL;DR.** The brief gives human takeover one line ("Includes HITL takeover"). This spec makes it buildable without questions: what the screen shows, how a conversation moves between the AI and a person, what happens when something fails, and 11 pass/fail tests, with a 10-business-minute pick-up time (D-06). Its two hard rules: once a person takes over, the AI sends nothing more, and nobody messages a prospect who said stop.
 
 ## How we chose this feature
 
@@ -107,28 +107,30 @@ The status strip shows "Enabled" and "Last successful send" side by side, so "on
 
 **How a conversation moves**
 
-| # | Current state | Trigger | Next state | Expected behaviour |
-|---|---|---|---|---|
-| T1 | AI handling | A prospect message matches at least one takeover rule (Task 3) | Needs a human | The flag lists every rule that fired and why. The AI sends **one** holding message and nothing else. The 10-business-minute clock starts. On-duty consultants are notified. |
-| T2 | AI handling | A consultant clicks **Take over** (no flag needed) | Human handling | The conversation is assigned to them; the AI goes silent; **any AI reply already queued is cancelled**; a note "AI paused" appears in the thread. |
-| T3 | Needs a human | A consultant clicks **Claim** | Human handling | First click wins. The clock stops and the claim time is recorded. Any queued AI reply is cancelled. |
-| T4 | Needs a human | 10 business minutes pass with no claim | Escalated | The brand's manager gets an in-app and email alert; the conversation goes to the top of their queue. |
-| T5 | Escalated | The manager assigns a consultant or claims it | Human handling | Assigned; the time it spent escalated is recorded. |
-| T6 | Human handling | The consultant clicks **Return to AI** | AI handling | Only allowed with a reason, every legal or money flag marked resolved, and an empty message box. The AI replies again from the next prospect message. |
-| T7 | Human handling | The prospect's last message has gone unanswered for 30 business minutes | Needs a human | Re-flagged as "No human reply" with a new clock. The original consultant gets the first 2 minutes to claim it back, then anyone can. |
-| T8 | Human handling | The consultant marks the deal **Won** or **Lost** | Won / Lost | The deal record closes and the message box locks. Lost needs a reason. |
-| T9 | Any open state | The prospect sends "STOP", "unsubscribe", "band karo" or "message mat karo" (any capitals; the whole message) | Opted out | One confirmation is sent, the only message allowed. All sending is blocked, templates included. Consent is recorded as withdrawn. Any clock is cancelled. |
+"Only if" is the check the system makes before the change. If the check fails, nothing changes and the person sees why.
+
+| # | Current state | Trigger | Only if | Next state | Expected behaviour |
+|---|---|---|---|---|---|
+| T1 | AI handling | A prospect message matches at least one takeover rule (Task 3) | The agent is Active for this brand (if not, edge case 9 applies) | Needs a human | The flag lists every rule that fired and why. The AI sends **one** holding message and nothing else. The 10-business-minute clock starts. On-duty consultants are notified. |
+| T2 | AI handling | A consultant clicks **Take over** (no flag needed) | They work on this brand, and the conversation hasn't changed since they looked | Human handling | The conversation is assigned to them; the AI goes silent; **any AI reply already queued is cancelled**; a note "AI paused" appears in the thread. |
+| T3 | Needs a human | A consultant clicks **Claim** | They work on this brand, and nobody claimed it first | Human handling | First click wins. The clock stops and the claim time is recorded. Any queued AI reply is cancelled. |
+| T4 | Needs a human | 10 business minutes pass | Still unclaimed (only business hours count) | Escalated | The brand's manager gets an in-app and email alert; the conversation goes to the top of their queue. |
+| T5 | Escalated | The manager assigns a consultant or claims it | The person acting is this brand's manager, and the assignee works on this brand | Human handling | Assigned; the time it spent escalated is recorded. |
+| T6 | Human handling | The consultant clicks **Return to AI** | A reason is chosen, every legal or money flag is marked resolved, and the message box is empty | AI handling | The reason is logged. The AI replies again from the next prospect message. |
+| T7 | Human handling | 30 business minutes pass after a prospect message | No consultant reply since that message | Needs a human | Re-flagged as "No human reply" with a new clock. The original consultant gets the first 2 minutes to claim it back, then anyone can. |
+| T8 | Human handling | The consultant marks the deal **Won** or **Lost** | For Lost, a loss reason is chosen | Won / Lost | The deal record closes and the message box locks. |
+| T9 | Any open state | The prospect sends "STOP", "unsubscribe", "band karo" or "message mat karo" | The whole message is the keyword (any capitals, spaces trimmed) | Opted out | One confirmation is sent, the only message allowed. All sending is blocked, templates included. Consent is recorded as withdrawn. Any clock is cancelled. |
 
 Behind every change the system adds 1 to the conversation's version number (`state_version`) and writes a log row: who, from, to, why, when. Every button sends the version it saw; if someone else changed the conversation first, the server refuses (HTTP 409) and nothing changes. This is how "first click wins" and "no double replies" are enforced.
 
 **Agent status changes** (separate from the conversation states above)
 
-| Current | Trigger | Next | Expected behaviour |
-|---|---|---|---|
-| Active | A manager clicks **Pause agent** | Paused | No AI messages for this brand; new prospect messages go to "Needs a human" (edge case 9) |
-| Paused | A manager clicks **Resume** | Active | The AI handles new messages; conversations already with a person stay with them |
-| Active | Sends keep failing (proposed: 3 in a row), or the WhatsApp provider reports the connection is down | Error | Red status; the manager is alerted; new prospect messages go to "Needs a human" so no lead waits on a broken AI |
-| Error | A send or health check succeeds | Active | Status turns green; the outage start and end times are logged |
+| Current | Trigger | Only if | Next | Expected behaviour |
+|---|---|---|---|---|
+| Active | A manager clicks **Pause agent** | The person is this brand's manager | Paused | No AI messages for this brand; new prospect messages go to "Needs a human" (edge case 9) |
+| Paused | A manager clicks **Resume** | The person is this brand's manager, and WhatsApp access is approved | Active | The AI handles new messages; conversations already with a person stay with them |
+| Active | Sends keep failing (proposed: 3 in a row), or the WhatsApp provider reports the connection is down | Automatic | Error | Red status; the manager is alerted; new prospect messages go to "Needs a human" so no lead waits on a broken AI |
+| Error | A send or health check succeeds | Automatic | Active | Status turns green; the outage start and end times are logged |
 
 **Business hours:** 09:00–21:00 IST, every day, in the first version. This can be changed per brand and is our product choice (A22, D-06). A flag raised outside those hours starts its clock at 09:00.
 
@@ -193,7 +195,7 @@ stateDiagram-v2
 | Field or action | Rule |
 |---|---|
 | Message text | 1–4,096 characters after trimming; blank messages are rejected. 4,096 is WhatsApp's limit ([Meta text messages](https://developers.facebook.com/docs/whatsapp/api/messages/text/)). |
-| Any button that changes the state | Must carry the version the user saw; if it's out of date the server refuses (HTTP 409) |
+| Any button that changes the state | Must carry the version number (`state_version`) the user saw; if it's out of date the server refuses (HTTP 409) |
 | Take over / Claim | Must carry a request ID, so a repeated click is treated as the same request |
 | Return to AI | A reason is required: *Question answered* / *Not ready, keep nurturing* / *Wrong flag* / *Other* (5–200 characters). Every legal or money flag must be marked resolved first. |
 | Mark Lost | A loss reason from a fixed list |

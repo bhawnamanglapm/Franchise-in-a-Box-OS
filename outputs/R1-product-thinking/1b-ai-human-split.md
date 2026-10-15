@@ -1,13 +1,6 @@
 # 1b. AI vs Human split: is 76% real?
 
-> **TL;DR.** We mapped all 37 actions across the five modules. Depending on how you count, automation does **68% to 87%** of the work, so "76%" is plausible as a measure of workload. Three things make it misleading as stated:
-> - **Not all of it is AI.** Of the 87% of time that's automated, AI models do 54% and ordinary software rules (templates, schedules, formulas, logging) do 34%.
-> - **It ignores value.** Humans own every one of the highest-value decisions.
-> - **It isn't stable.** It swings 14 points depending on how often humans edit the AI's drafts.
->
-> The action map makes 76% plausible but doesn't prove it. Our fix is an audited **Autonomy Rate**, computed from logged events and validated in a pilot against a baseline. It's shown as "AI: X% of work | Humans: 100% of closes" (D-05), with the model-vs-rules split on hover, and always paired with outcome metrics.
->
-> Beyond the split, each workflow is judged end to end (§7): owner, trigger, inputs, rules, failure path and outcome. Success means a business outcome, not just a task that ran.
+> **TL;DR.** Across all 37 actions, automation does **68–87%** of the work depending on how you count, so "76%" is plausible for workload. But AI models do only 54% of the time (ordinary software does another 34%), humans own every top-value decision, and the figure swings 14 points with how often people edit the AI. So we replace the fixed label with an audited **Autonomy Rate**, shown as "AI: X% of work | Humans: 100% of closes" (D-05) next to outcome metrics.
 
 ## 1. Action map
 
