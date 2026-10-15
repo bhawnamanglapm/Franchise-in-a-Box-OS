@@ -1,0 +1,621 @@
+{
+  "name": "Lead flow 2 · WhatsApp qualification & assignment",
+  "nodes": [
+    {
+      "id": "26b214ba-4809-4aed-9dc0-94dcce7618bf",
+      "name": "Note 2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -400
+      ],
+      "parameters": {
+        "content": "## 2 · WhatsApp replies\nInbound message → find the contact → **Decide next step** (state machine) → save to HubSpot → send the next question, or hand off: pick consultant → owner + task → alert consultant → thank prospect.\n\n**Exercises:** N3 re-ask then hand off · N4 Click-to-WhatsApp unknown sender.",
+        "width": 520,
+        "height": 260
+      }
+    },
+    {
+      "id": "57a13e3a-17de-4b67-b057-b3a711648ac2",
+      "name": "WhatsApp webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "7344601e-9bd1-4886-88c8-d46f633b8692",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "webhooks/whatsapp",
+        "responseMode": "onReceived",
+        "options": {}
+      }
+    },
+    {
+      "id": "d44f389e-4461-4f64-9390-c00697b6a7d3",
+      "name": "Config",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "jsCode": "// ✏️ Edit these. For the practice lab they point at the fake APIs (npm run mocks).\n// For real use: graph.facebook.com / api.hubapi.com, and move tokens into n8n Credentials.\nreturn [{ json: {\n  graphUrl: 'http://localhost:4010/meta/v21.0',\n  waUrl: 'http://localhost:4010/whatsapp/v21.0',\n  hubspotUrl: 'http://localhost:4010/hubspot',\n  pageToken: 'test-page-token',\n  waToken: 'test-wa-token',\n  waPhoneNumberId: '100000000000001',\n  hubspotToken: 'test-hubspot-token',\n  brand: 'FreshBrew',\n  minBudgetLakh: 25,\n  consultants: [\n    { email: 'neha@example.com', name: 'Neha', phone: '919800000001', cities: ['mumbai', 'pune'], available: true },\n    { email: 'priya@example.com', name: 'Priya', phone: '919800000002', cities: ['delhi', 'gurugram', 'noida'], available: true },\n    { email: 'arjun@example.com', name: 'Arjun', phone: '919800000003', cities: ['bengaluru', 'bangalore', 'chennai'], available: true },\n  ],\n} }]"
+      }
+    },
+    {
+      "id": "34d92df7-3aac-4e54-b2a3-27a3215e41d6",
+      "name": "Extract messages",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "jsCode": "// Ignore delivery statuses; emit one item per inbound message.\nconst body = $('WhatsApp webhook').first().json.body;\nconst out = [];\nfor (const e of body.entry ?? []) for (const ch of e.changes ?? []) for (const m of ch.value?.messages ?? [])\n  out.push({ json: { id: m.id, from: m.from, text: m.text?.body ?? m.button?.text ?? m.interactive?.button_reply?.title ?? '',\n    buttonId: m.interactive?.button_reply?.id ?? m.button?.payload ?? null, referral: m.referral ?? null } });\nreturn out;"
+      }
+    },
+    {
+      "id": "7780e488-23db-4f17-bc26-7fe542c89b3a",
+      "name": "HubSpot: find contact",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Config\"].json.hubspotUrl }}/crm/v3/objects/contacts/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.hubspotToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ filterGroups: [{ filters: [{ propertyName: 'phone', operator: 'EQ', value: $json.from }] }], properties: ['firstname','city','fib_qual_step','fib_wa_opt_out','fib_budget_lakh','fib_timeline_months','fib_lead_score','fib_last_wa_message_id'], limit: 1 }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "628dc22f-aeef-4647-983f-8eb598f59cea",
+      "name": "Decide next step",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// The qualification state machine. State lives on the HubSpot contact (fib_qual_step),\n// so this node only decides: which properties to save and what to send next.\nconst cfg = $('Config').first().json;\nconst m = $('Extract messages').item.json;\nconst c = $json.results?.[0];\nconst p = c?.properties ?? {};\nconst now = new Date().toISOString();\nconst btn = m.buttonId;\nconst text = (m.text ?? '').trim();\nconst low = ' ' + text.toLowerCase().replace(/[^\\p{L}\\p{M}\\p{N}\\s]/gu, ' ').replace(/\\s+/g, ' ') + ' ';\nconst any = (ws) => ws.some(w => low.includes(' ' + w + ' '));\nconst budgets = [{ id: 'budget_lt25', title: 'Under ₹25L', lakh: 15 }, { id: 'budget_25_40', title: '₹25–40L', lakh: 30 }, { id: 'budget_40p', title: '₹40L+', lakh: 45 }];\nconst times = [{ id: 'time_0_3', title: '0–3 months', months: 3 }, { id: 'time_3_6', title: '3–6 months', months: 6 }, { id: 'time_later', title: 'Later', months: 12 }];\nconst buttons = (body, opts) => ({ type: 'interactive', interactive: { type: 'button', body: { text: body },\n  action: { buttons: opts.map(o => ({ type: 'reply', reply: { id: o.id, title: o.title } })) } } });\nconst say = (body) => ({ type: 'text', text: { body } });\nconst r = (action, props, message) => ({ json: { action, contactId: c?.id, phone: m.from, props: { fib_last_inbound_at: now, fib_last_wa_message_id: m.id, ...props }, message, contact: { ...p, ...props } } });\n\nif (!c) return r('unknown_sender', {}, null); // exercise N4: create the contact (Click-to-WhatsApp)\nif (p.fib_last_wa_message_id === m.id) return r('duplicate', {}, null);\nif (any(['stop', 'unsubscribe', 'band karo', 'message mat karo']) && text.split(/\\s+/).length <= 3)\n  return r('send', { fib_wa_opt_out: 'true', fib_qual_step: 'opted_out' }, say(`You won't get any more messages from ${cfg.brand}. Reply START if you change your mind.`));\nif (p.fib_wa_opt_out === 'true') return r('ignore', {}, null);\nif (any(['call me', 'talk to a person', 'human', 'call karo', 'baat karni hai', 'speak to']))\n  return r('handoff', { fib_lead_score: p.fib_lead_score || 'unscored' }, null);\n\nconst step = p.fib_qual_step;\nif (step === 'awaiting_optin_reply' || step === 'new') {\n  if (btn === 'welcome_no' || /^(no|not now|nahi)/i.test(text)) return r('send', { fib_qual_step: 'declined', hs_lead_status: 'BAD_TIMING' }, say('No problem. Message us here any time.'));\n  return r('send', { fib_qual_step: 'awaiting_budget', fib_last_outbound_at: now }, buttons('Great! What budget are you planning for the investment?', budgets));\n}\nif (step === 'awaiting_budget') {\n  const b = budgets.find(o => o.id === btn);\n  if (!b) return r('send', {}, buttons('Sorry, please pick one of the options below.', budgets)); // exercise N3: re-ask once, then hand off\n  if (b.lakh < cfg.minBudgetLakh) return r('send', { fib_budget_lakh: String(b.lakh), fib_qual_step: 'unqualified', hs_lead_status: 'UNQUALIFIED', fib_lead_score: 'unqualified' },\n    say(`Thank you for sharing. A ${cfg.brand} outlet needs a larger budget, so it may not be the right fit today.`));\n  return r('send', { fib_budget_lakh: String(b.lakh), fib_qual_step: 'awaiting_timeline', fib_last_outbound_at: now }, buttons('When would you like to open your outlet?', times));\n}\nif (step === 'awaiting_timeline') {\n  const t = times.find(o => o.id === btn);\n  if (!t) return r('send', {}, buttons('Sorry, please pick one of the options below.', times));\n  const budget = Number(p.fib_budget_lakh);\n  const score = budget < cfg.minBudgetLakh ? 'unqualified' : t.months <= 3 ? 'hot' : t.months <= 6 ? 'warm' : 'cold';\n  return r('handoff', { fib_timeline_months: String(t.months), fib_lead_score: score }, null);\n}\nreturn r('log', {}, null); // a consultant owns the chat now"
+      }
+    },
+    {
+      "id": "eccb7b3a-e6ac-4aa5-b1af-57322e384396",
+      "name": "Known contact?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "a07013ee-ba73-456c-bb09-2db74ed7d9cd",
+              "leftValue": "={{ !!$json.contactId && $json.action !== 'duplicate' }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "0d958810-80b8-4b9e-9832-04364126905e",
+      "name": "HubSpot: save state",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1440,
+        0
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $node[\"Config\"].json.hubspotUrl }}/crm/v3/objects/contacts/{{ $json.contactId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.hubspotToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ properties: $json.props }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "ab6e75d5-bcc8-479e-9013-ce2cd9b98d8a",
+      "name": "Route",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        1680,
+        0
+      ],
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $node[\"Decide next step\"].json.action }}",
+                    "rightValue": "send",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "send"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $node[\"Decide next step\"].json.action }}",
+                    "rightValue": "handoff",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "handoff"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "74c1d883-15a5-4274-8469-ab961d9798e8",
+      "name": "WhatsApp: send reply",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1920,
+        -200
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Config\"].json.waUrl }}/{{ $node[\"Config\"].json.waPhoneNumberId }}/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.waToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ messaging_product: 'whatsapp', to: $node[\"Decide next step\"].json.phone, ...$node[\"Decide next step\"].json.message }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "436c9eea-7a3a-4b88-acac-fc01c7cd9ba3",
+      "name": "HubSpot: owners",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1920,
+        200
+      ],
+      "parameters": {
+        "url": "={{ $node[\"Config\"].json.hubspotUrl }}/crm/v3/owners",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.hubspotToken }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "6c423d1a-dad7-4b4f-a0ab-bba28e8d8bc9",
+      "name": "HubSpot: open leads",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2160,
+        200
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Config\"].json.hubspotUrl }}/crm/v3/objects/contacts/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.hubspotToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ filterGroups: [{ filters: [{ propertyName: 'hs_lead_status', operator: 'IN', values: ['OPEN', 'IN_PROGRESS'] }] }], properties: ['hubspot_owner_id'], limit: 200 }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "460e656e-197d-4458-a44b-044c0932ac2e",
+      "name": "Pick consultant",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2400,
+        200
+      ],
+      "parameters": {
+        "jsCode": "// City match first, then fewest open leads. Same rule as src/rules.mjs pickConsultant().\nconst cfg = $('Config').first().json;\nconst lead = $('Decide next step').item.json;\nconst owners = $('HubSpot: owners').first().json.results;\nconst open = $('HubSpot: open leads').first().json.results;\nconst idByEmail = Object.fromEntries(owners.map(o => [o.email, o.id]));\nconst count = (email) => open.filter(x => x.properties.hubspot_owner_id === idByEmail[email]).length;\nconst city = (lead.contact.city || '').toLowerCase();\nconst free = cfg.consultants.filter(k => k.available);\nconst local = free.filter(k => k.cities.includes(city));\nconst pick = [...(local.length ? local : free)].sort((a, b) => count(a.email) - count(b.email))[0];\nconst score = lead.contact.fib_lead_score || 'unscored';\nconst dueMin = { hot: 15, warm: 120, cold: 1440 }[score] ?? 60;\nconst summary = `City: ${lead.contact.city || '—'} · Budget: ₹${lead.contact.fib_budget_lakh || '?'}L · Timeline: ${lead.contact.fib_timeline_months || '?'} months · Score: ${score}`;\nreturn [{ json: { ...lead, consultant: pick, ownerId: idByEmail[pick.email], score, summary,\n  due: new Date(Date.now() + dueMin * 60000).toISOString() } }];"
+      }
+    },
+    {
+      "id": "4082d4a9-934a-435d-9bf2-40c929dbe878",
+      "name": "HubSpot: assign owner",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2640,
+        200
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $node[\"Config\"].json.hubspotUrl }}/crm/v3/objects/contacts/{{ $json.contactId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.hubspotToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ properties: { hubspot_owner_id: $json.ownerId, hs_lead_status: 'OPEN', fib_qual_step: 'handed_off', lifecyclestage: ['hot','warm'].includes($json.score) ? 'salesqualifiedlead' : 'marketingqualifiedlead' } }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "6c948366-6e95-4166-8072-c6d7cb6dddb6",
+      "name": "HubSpot: create task",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2880,
+        200
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Config\"].json.hubspotUrl }}/crm/v3/objects/tasks",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.hubspotToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ properties: { hs_timestamp: $node[\"Pick consultant\"].json.due, hs_task_subject: '[' + $node[\"Pick consultant\"].json.score.toUpperCase() + '] Contact ' + ($node[\"Pick consultant\"].json.contact.firstname || 'new lead'), hs_task_body: $node[\"Pick consultant\"].json.summary, hs_task_status: 'NOT_STARTED', hs_task_priority: 'HIGH', hubspot_owner_id: $node[\"Pick consultant\"].json.ownerId }, associations: [{ to: { id: $node[\"Pick consultant\"].json.contactId }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 204 }] }] }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "f308f9df-9a54-475f-a3f1-04bdc9cc1e5a",
+      "name": "WhatsApp: alert consultant",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3120,
+        200
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Config\"].json.waUrl }}/{{ $node[\"Config\"].json.waPhoneNumberId }}/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.waToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ messaging_product: 'whatsapp', to: $node[\"Pick consultant\"].json.consultant.phone, type: 'template', template: { name: 'consultant_new_lead', language: { code: 'en' }, components: [{ type: 'body', parameters: [$node[\"Pick consultant\"].json.consultant.name, $node[\"Pick consultant\"].json.contact.firstname || 'New lead', $node[\"Pick consultant\"].json.score, $node[\"Pick consultant\"].json.summary].map(t => ({ type: 'text', text: String(t) })) }] } }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "70b7c373-28c0-4d12-891f-1446579a20e7",
+      "name": "WhatsApp: thank prospect",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3360,
+        200
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Config\"].json.waUrl }}/{{ $node[\"Config\"].json.waPhoneNumberId }}/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.waToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ messaging_product: 'whatsapp', to: $node[\"Pick consultant\"].json.phone, type: 'text', text: { body: 'Thank you! ' + $node[\"Pick consultant\"].json.consultant.name + ' from our franchise team will contact you shortly.' } }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    }
+  ],
+  "connections": {
+    "WhatsApp webhook": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Extract messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract messages": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: find contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HubSpot: find contact": {
+      "main": [
+        [
+          {
+            "node": "Decide next step",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Decide next step": {
+      "main": [
+        [
+          {
+            "node": "Known contact?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Known contact?": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: save state",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HubSpot: save state": {
+      "main": [
+        [
+          {
+            "node": "Route",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp: send reply",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HubSpot: owners",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HubSpot: owners": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: open leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HubSpot: open leads": {
+      "main": [
+        [
+          {
+            "node": "Pick consultant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pick consultant": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: assign owner",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HubSpot: assign owner": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: create task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HubSpot: create task": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp: alert consultant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp: alert consultant": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp: thank prospect",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

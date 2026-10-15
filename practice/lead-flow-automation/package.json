@@ -1,0 +1,13 @@
+{
+  "name": "lead-flow-automation-practice",
+  "private": true,
+  "type": "module",
+  "description": "Practice lab: Meta Ads → WhatsApp → HubSpot → Consultant, with fake APIs. No dependencies.",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "mocks": "node mocks/server.mjs",
+    "flow": "node src/server.mjs",
+    "demo": "node scripts/demo.mjs",
+    "test": "node --test --test-concurrency=1 tests/*.test.mjs"
+  }
+}
