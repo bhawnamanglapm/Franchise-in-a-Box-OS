@@ -4,7 +4,7 @@
 
 ## The lens
 
-Scale100x earns a setup fee and retainer from brands, and a success fee when a franchisee signs (A1). The brand-side modules (Onboarding, ROI, Collateral) **earn the right to sell**. The franchisee-side modules (Sales Agent, CRM) **produce the signed agreements**, and that is also where most of the AI leverage sits: about 73% of all manual work per brand is in the Sales Agent module ([1b](1b-ai-human-split.md)). So every module is ranked by one question: *does it get more qualified franchisees to a signed agreement, faster, across many brands at once?*
+Scale100x's stated goal is to help brands open **100+ offline outlets a year**. Every one of those outlets is a signed franchisee. Scale100x earns a setup fee and retainer from brands, and a success fee when a franchisee signs (A1). The brand-side modules (Onboarding, ROI, Collateral) **earn the right to sell**. The franchisee-side modules (Sales Agent, CRM) **produce the signed agreements**, and that is also where most of the AI leverage sits: about 73% of all manual work per brand is in the Sales Agent module ([1b](1b-ai-human-split.md)). So every module is ranked by one question: *does it get more qualified franchisees to a signed agreement, faster, across many brands at once?*
 
 ## Ranking (decision D-04, confirmed)
 
@@ -12,7 +12,7 @@ Team: 2 full-stack engineers, 1 designer and a PM, using AI tools on React + Sup
 
 | Rank | Module | 30-day scope (what ships) | Why now | Left out until later |
 |---|---|---|---|---|
-| **1** | AI Sales & Marketing Agent (thin) | WhatsApp AI Agent only: Lead Ads webhook → consent → template greeting → qualification → answers from approved facts → HITL flag and takeover | Leads stop going cold because the reply arrives in minutes; this is where 73% of the work is | Voice and Email agents, Meta Ads optimisation, the full switchboard |
+| **1** | AI Sales & Marketing Agent (thin) | WhatsApp AI Agent only: Lead Ads webhook → consent → template greeting → qualification → answers from approved facts → HITL flag and takeover; basic live tracking (counts of leads, messages and conversations per brand) | Leads stop going cold because the reply arrives in minutes; this is where 73% of the work is | Voice and Email agents, Meta Ads optimisation, the full switchboard, live-tracking dashboards beyond basic counts |
 | **1** | HITL Sales CRM (thin), shipped as one slice with #1 | Inbox, takeover panel, unified timeline, deal stage up to Won / Lost | Without a human closing path the agent produces chats, not signed agreements | Live call intelligence, forecasting |
 | **3** | ROI Engine (thin) | Franchise Model Card + 3-year ROI, approved by a consultant and published as the agent's **approved facts** | Prospects' first serious question is about returns. The agent may only quote numbers a human has approved (A32). | Benchmarks, AI insights |
 | **4** | Brand Onboarding (thin) | Brand details form plus file upload; a consultant enters data for the 2 pilot brands | Needed to add brand #3 onwards, but the pilot brands are already onboarded | AI Readiness Score, revenue-split donut |

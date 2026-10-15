@@ -69,6 +69,14 @@ Two findings matter most:
 | **A live number at launch** | **Only if measured** | It's 76.5% at day 30 and 87% at full build, so it changes as modules ship |
 | **A hardcoded label** | **No** | A 20% edit rate moves it 14 points. A fixed number would be wrong most of the time, and an investor can't audit it. |
 
+### Testing the brief's own claims
+
+| The brief says… | What the action map shows | Holds? |
+|---|---|---|
+| "AI-driven automation (70–80%)" | 68–87% depending on the method; 76.5% for the day-30 slice | **Yes, for workload.** The claimed range sits inside ours. |
+| "Human intervention only for high-value actions" | 6 of the 7 human-only actions have value weight 4–5. The exception is uploading the deck and P&L (row 2, weight 1), which only the founder can do because only they hold the files. Humans also approve 5 AI drafts, and 2 of those are low-value (brand details form, deal stage, both weight 2). | **Almost.** The upload can shrink (pull files from a shared drive) but not disappear. The 2 low-value approvals should become AI-only once the audit shows the drafts are accurate. |
+| "AI: 76% \| Human: 24%" | Human share is 13% of the time, 32% of the value and 32% of the actions (strict count), so "24%" doesn't match any single measure. And 93% of the remaining human hours (54.6 of 58.8) are in the CRM: takeovers, discovery calls and closing. | **No.** "Human: 24%" presents people as overhead to squeeze, when their hours are where the revenue event happens. That's why the badge becomes "Humans: 100% of closes" (D-05). |
+
 ## 4. What this means commercially: consultant capacity
 
 Without AI, one brand needs about **457 hours of work a month**. With AI, about **59 human hours** remain, almost all of them in CRM: takeovers, discovery calls and closing. At 160 productive hours per consultant per month (A35):

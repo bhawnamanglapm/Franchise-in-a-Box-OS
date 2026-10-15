@@ -1,6 +1,6 @@
 # 1c. Developer-ready spec: Conversation Takeover (HITL)
 
-> **TL;DR.** The brief describes human takeover in four words: "Includes HITL takeover". That one line hides the hardest behaviour in the product: who owns a live WhatsApp conversation, what happens when two people grab it, and what happens when nobody does. This spec defines 7 states and 9 transitions, a 10-business-minute claim SLA (D-06), the WhatsApp 24-hour window, opt-out, 8 edge cases and 8 testable acceptance criteria. Prototype B (R2B) implements it.
+> **TL;DR.** The brief describes human takeover in one line: "Includes Human-in-the-Loop (HITL) takeover". That one line hides the hardest behaviour in the product: who owns a live WhatsApp conversation, what happens when two people grab it, and what happens when nobody does. This spec defines 7 states and 9 transitions, a 10-business-minute claim SLA (D-06), the WhatsApp 24-hour window, opt-out, 8 edge cases and 8 testable acceptance criteria. Prototype B (R2B) implements it.
 
 ## Why this feature, not the AI Readiness Score
 
@@ -32,7 +32,7 @@ The Readiness Score is unclear too, but the uncertainty is in *what to measure*:
 | `CLOSED_LOST` | Nobody (terminal) | Deal lost. |
 | `OPTED_OUT` | Nobody, including templates (terminal) | The prospect sent STOP. |
 
-## 3. Transitions
+## 3. State transitions
 
 Every transition increments `conversation.state_version` and writes a `STATE_EVENT` row (who, from, to, reason, ts).
 
@@ -74,7 +74,7 @@ stateDiagram-v2
   OPTED_OUT --> [*]
 ```
 
-## 4. UI behaviour
+## 4. UI behavior
 
 **Inbox (left column)**
 - Each row shows: prospect name or number, brand tag, last message preview, and a state chip:
@@ -117,7 +117,7 @@ stateDiagram-v2
 **Thread**
 - Shows prospect, AI and human bubbles, plus system events inline: "Flagged: high intent", "Claimed by Priya", "Returned to AI: question answered".
 
-## 5. Empty, loading and error states
+## 5. Error handling: empty, loading and error states
 
 | Situation | What the user sees | System behaviour |
 |---|---|---|
@@ -152,7 +152,7 @@ stateDiagram-v2
 7. **The window expires while the consultant is typing.** The draft is kept, Send switches to "Send as template", and nothing is sent as free text.
 8. **The assignee is deactivated.** Their HUMAN_ACTIVE conversations re-flag immediately with reason "Assignee unavailable".
 
-## 8. Acceptance criteria (testable)
+## 8. Success criteria: acceptance tests
 
 | # | Given / when | Then (measurable) |
 |---|---|---|
@@ -167,7 +167,7 @@ stateDiagram-v2
 
 Prototype B's test script covers AC1, AC2, AC4, AC5 and AC7 directly. AC3 and AC8 use a shortened timer in the demo, and AC6 is simulated.
 
-## 9. Success metrics after launch
+## 9. Success criteria: metrics after launch
 
 | Metric | Target (proposed, to be calibrated in the pilot) | Source |
 |---|---|---|
