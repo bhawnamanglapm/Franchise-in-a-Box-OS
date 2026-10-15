@@ -26,5 +26,5 @@
 
 ## Overall
 - [ ] Each sub-task opens with a 2–3 line TL;DR
-- [ ] Consistent with R4 (or the difference is explained) and with R2 (the prototype implements this spec)
+- [ ] Consistent with R4 (or the difference is explained) and with R2B (prototype B implements this spec)
 - [ ] No unsourced numbers

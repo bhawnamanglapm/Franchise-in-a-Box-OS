@@ -19,4 +19,4 @@
 
 ## Overall
 - [ ] TL;DR present
-- [ ] The trigger table is identical to the R2 rule engine and the R6A checkpoints
+- [ ] The trigger table is identical to the R2B rule engine and the R6A checkpoints

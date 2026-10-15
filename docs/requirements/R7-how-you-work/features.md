@@ -2,7 +2,7 @@
 
 | ID | Component | Content source | MoSCoW |
 |---|---|---|---|
-| F7.1 | Tools table: tool · what I built with it · proof link | Claude (this submission's analysis), Claude Code (repo + fixes), Lovable (prototype URL), Google Sheets (R5 model) | M |
+| F7.1 | Tools table: tool · what I built with it · proof link | Claude (this submission's analysis), Claude Code (repo + fixes), Lovable (3 prototype URLs), Google Sheets (R5 model) | M |
 | F7.2 | Self-rating per skill (1–5) with one proof each; at least one honest gap | Candidate | M |
 | F7.3 | Idea → execution process (5 steps), illustrated with this assignment's timeline | This repo's phases | M |
 | F7.4 | Complex problem: situation, constraint, decision, result (numbers), what I'd do differently | Candidate (PCMS or portal adoption) | M |

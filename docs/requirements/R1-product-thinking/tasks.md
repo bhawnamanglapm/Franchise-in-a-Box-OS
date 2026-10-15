@@ -1,6 +1,6 @@
 # R1: Product Thinking: detailed tasks
 
-Total estimate: **1.5 h** (block A). Order = execution order.
+Total estimate: **1.5 h** (Decide block). Order = execution order.
 
 | # | Task | Output | Est. | Owner | Depends on |
 |---|---|---|---|---|---|
@@ -16,6 +16,7 @@ Total estimate: **1.5 h** (block A). Order = execution order.
 | T1.10 | Add 2–3 line TL;DRs to 1a, 1b and 1c; cut filler | Doc-ready section | 5 m | You | T1.02–T1.08 |
 
 ## Hand-offs
-- The 1c spec goes to **R2** as the build spec, and its acceptance criteria become the R2 test script.
+- The 1c spec goes to **R2B** as the build spec, and its acceptance criteria become the R2B test script.
 - The 1a ranking goes to **R4** as the consistency baseline.
-- The Autonomy Rate definition goes to **R2** (the computed badge) and to **R8** (exec summary).
+- The Autonomy Rate definition goes to **R2A, R2B and R2C** (the shared computed badge) and to **R8** (exec summary).
+- The 1b onboarding actions go to **R2A** (which fields AI extracts and which a human confirms).

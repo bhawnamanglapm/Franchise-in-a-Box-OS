@@ -24,3 +24,6 @@
 - [ ] Inputs in blue, calculations in black; units on every row
 - [ ] Shared as "anyone with the link can view"; opens in incognito
 - [ ] 3-line TL;DR in the written doc, with the link
+
+## Hand-off
+- [ ] Base-case inputs and formulas handed to R2C; R2C's 3 spot-check values match this Sheet (A32)

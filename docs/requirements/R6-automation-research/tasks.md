@@ -1,6 +1,6 @@
 # R6: Automation + Research: detailed tasks
 
-Total estimate: **1 h** (block C).
+Total estimate: **1 h** (Finish block).
 
 ## Part A (0.4 h)
 

@@ -11,6 +11,7 @@
 | F4.5 | Consistency note vs 1a | M |
 | F4.6 | QSR lead-gen variation: before/after table showing what moves and why | M |
 | F4.7 | Scoring rubric (revenue impact × time to value ÷ effort) shown in a compact table | S |
+| F4.8 | Prototype-vs-production note: prototypes A and C demo the brief's module spec (donut, benchmarks, AI insights, Readiness Score); this ranking is the production build order. One line per cut feature that appears in a prototype. | M |
 
 ## B. Product feature inventory (the input to ranking)
 
@@ -42,6 +43,7 @@ Draft placement. Final in Phase 3.
 | 22 | Collateral | Pitch deck generator | **Cut** (revisit at 10+ brands per quarter) | Brands already have decks |
 | 23 | Collateral | Sales brochure generator | **Cut** | Low impact on conversion |
 | 24 | Platform | Hardcoded "AI: 76%" badge | **Cut → replaced** by the computed Autonomy Rate | Vanity number (R1) |
+| 25 | ROI Engine | India benchmark comparisons | Month 2 | Useful to prospects once sourced data exists for each category (A33); US benchmarks stay cut |
 
 ## C. QSR lead-gen variation (draft)
 

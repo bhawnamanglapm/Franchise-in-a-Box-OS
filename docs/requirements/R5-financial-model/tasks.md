@@ -1,6 +1,6 @@
 # R5: Financial Model: detailed tasks
 
-Total estimate: **2 h** (block B, after R2).
+Total estimate: **2 h** (Build block, after R2B).
 
 | # | Task | Output | Est. | Owner | Depends on |
 |---|---|---|---|---|---|
@@ -15,6 +15,7 @@ Total estimate: **2 h** (block B, after R2).
 | T5.09 | Build Summary: KPIs, mini sensitivity, cumulative cash chart | F5.1, F5.10 | 10 m | You | T5.05–T5.08 |
 | T5.10 | Integrity pass: run the DoD checklist; spot-check 3 calculations by hand | Checks tab green | 7 m | You + Claude | All |
 | T5.11 | Share as anyone-with-link view; test in incognito; write a 3-line TL;DR for the doc | Link + TL;DR | 3 m | You | T5.10 |
+| T5.12 | Hand off to R2C: export the base-case inputs and the key formulas below; record the Sheet version used (A32) | R2C input + formula sheet | 5 m | You + Claude | T5.10 |
 
 ## Key formulas (plain language)
 - **Monthly revenue (Mn)** = steady-state revenue (selected scenario) × ramp % (Mn)

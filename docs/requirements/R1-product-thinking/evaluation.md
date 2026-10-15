@@ -35,5 +35,5 @@
 ## Effort and priority
 - **Estimate:** 1.5 h (mostly done in Phase 2; remaining work is finalising and formatting)
 - **Priority:** P0. Every downstream requirement depends on it.
-- **Dependencies:** Phase 0 lens. **Feeds:** R4, R3, R2.
+- **Dependencies:** Phase 0 lens. **Feeds:** R4, R3, R2B (1c spec), R2A (1b onboarding actions).
 - **Status:** Draft complete. Awaiting D-04, D-05, D-06.

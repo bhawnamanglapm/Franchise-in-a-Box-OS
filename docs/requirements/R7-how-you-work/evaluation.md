@@ -22,7 +22,7 @@
 |---|---|
 | What counts as "proof" | Links to this submission's artefacts (prototype, model, repo) + public links the candidate supplies (LinkedIn, PMgirlz). Gaps marked for the candidate to fill. |
 | Which complex problem | Choose between PCMS 0→1 and portal adoption 2% → 45% in Phase 8, using the "two follow-ups" test |
-| Ambiguity example | Use this assignment: A1–A29 and how each was resolved |
+| Ambiguity example | Use this assignment: A1–A33 and how each was resolved |
 
 ## Risks
 | Risk | Mitigation |
@@ -32,4 +32,4 @@
 | Story details the candidate can't defend | Only facts the candidate provides; Claude asks questions rather than filling in |
 
 ## Effort and priority
-- **Estimate:** 0.5 h · **Priority:** P2 (est. 5% weight) · **Depends on:** R2, R5 (proof links) · **Feeds:** R8
+- **Estimate:** 0.5 h · **Priority:** P2 (est. 5% weight) · **Depends on:** R2A, R2B, R2C, R5 (proof links) · **Feeds:** R8
