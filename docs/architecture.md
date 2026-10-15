@@ -1,10 +1,10 @@
 # Architecture sheet: Franchise-in-a-Box OS
 
-One page to understand how the business, the platform, the prototype and the submission fit together.
+One page to understand how the business, the platform, the three prototypes and the submission fit together.
 The component register is in [`architecture-components.csv`](architecture-components.csv), which can be imported into Google Sheets.
 Every diagram below is also saved as a PNG in [`diagrams/`](diagrams/), ready to paste into the Google Doc.
 
-**Legend:** solid arrow = data or control flow · dotted arrow = supplies facts/config · **[P]** = built in the Task 2 prototype · **[M]** = mocked in the prototype.
+**Legend:** solid arrow = data or control flow · dotted arrow = supplies facts/config · **[P]** = built in a Task 2 prototype · **[M]** = mocked in the prototypes.
 
 ---
 
@@ -110,7 +110,7 @@ sequenceDiagram
   C->>C: Deal stage → Won / Lost
 ```
 
-## 4. Takeover state machine (Task 1c, built in Task 2)
+## 4. Takeover state machine (Task 1c, built in prototype B)
 
 ```mermaid
 stateDiagram-v2
@@ -201,28 +201,53 @@ erDiagram
 
 `ACTION_EVENT` feeds the Autonomy Rate (Task 1b). `state_version` provides the optimistic lock for claims.
 
-## 6. Prototype architecture (Task 2: what's real vs mocked)
+## 6. Prototype architecture (Task 2: three apps, what's real vs mocked)
 
 ```mermaid
-flowchart LR
-  subgraph App["Lovable React app (deployed)"]
-    MOCK["Mock data: 10 conversations, 2 brands [M]"]
-    SIM["Simulate inbound box [P]"]
-    ENG["Trigger engine: pure functions from Task 3 [P]"]
-    SM["State machine reducer: from 1c [P]"]
-    INBOX["Inbox + thread + Why-flagged [P]"]
-    BADGE2["Computed autonomy badge [P]"]
+flowchart TB
+  subgraph SH["Shared across A, B, C"]
+    TOK["Design tokens + Prompt 1 shell [P]"]
+    MD["Mock data: FreshBrew + fictional gym [M]"]
+    BG["Computed autonomy badge [P]"]
   end
-  LLM2["Optional: one live LLM reply via edge fn (stretch)"]
-  WA["Real WhatsApp / Meta / Supabase [M]"]
-  SIM --> ENG
-  MOCK --> ENG
-  ENG --> SM
-  SM --> INBOX
-  SM --> BADGE2
-  SM -. "stretch" .-> LLM2
-  WA -. "not connected" .-> App
+  subgraph PA["A. Onboarding Wizard (own URL)"]
+    A1["4-step stepper + validation [P]"]
+    A2["File checks; CSV parsed, PDF/XLSX extraction mocked [P/M]"]
+    A3["Revenue-split donut, totals 100% [P]"]
+    A4["Readiness Score: rule-based v0 [P]"]
+  end
+  subgraph PC["C. ROI Dashboard (own URL)"]
+    C1["computeModel = R5 formulas [P]"]
+    C2["Model Card + 36-month chart + sensitivity [P]"]
+    C3["Benchmarks India + US, sourced only [P]"]
+    C4["Insights: rule-based v0 [P]"]
+    C5["Approve + export facts [P]"]
+  end
+  subgraph PB["B. WhatsApp AI Agent Panel (own URL)"]
+    B1["Simulate inbound box [P]"]
+    B2["Trigger engine from Task 3 [P]"]
+    B3["State machine reducer from 1c [P]"]
+    B4["Inbox + thread + Why-flagged [P]"]
+  end
+  R5S["R5 Google Sheet"]
+  LLM2["Optional live LLM via edge fn (stretch, one per app)"]
+  EXT["Real WhatsApp / Meta / Supabase storage + auth [M]"]
+  A1 --> A2 --> A3 --> A4
+  A4 -. "brand record JSON" .-> C1
+  R5S -. "inputs + formulas (A32)" .-> C1
+  C1 --> C2
+  C1 --> C4
+  C2 --> C5
+  C5 -. "approved facts JSON" .-> B2
+  B1 --> B2 --> B3 --> B4
+  SH -.-> PA
+  SH -.-> PB
+  SH -.-> PC
+  PB -. "stretch" .-> LLM2
+  EXT -. "not connected" .-> PB
 ```
+
+Each prototype is a separate Lovable project with its own URL and GitHub sync. Logic runs in the browser. The JSON hand-offs are file exports and imports, not a shared backend (A11). One number set flows through all three: R5 → C → B (A32).
 
 ## 7. Delivery plan (requirements → artefacts)
 
@@ -231,43 +256,54 @@ flowchart LR
   L["Phase 0 lens"] --> R1["R1 Task 1"]
   R1 --> R4["R4 Task 4"]
   R4 --> R3["R3 Task 3"]
-  R3 --> R2["R2 Prototype"]
+  R3 --> R2B["R2B Prototype B"]
   L --> R5["R5 Model"]
+  R5 --> R2C["R2C Prototype C"]
+  R2C -. "approved facts" .-> R2B
+  R1 --> R2A["R2A Prototype A"]
   R3 --> R6["R6 Task 6"]
-  R2 --> R7["R7 Task 7"]
+  R2A --> R7["R7 Task 7"]
+  R2B --> R7
+  R2C --> R7
   R5 --> R7
   R1 --> DOC["Google Doc / PDF"]
   R3 --> DOC
   R4 --> DOC
   R6 --> DOC
   R7 --> DOC
-  R2 --> URL["Live URL"]
+  R2A --> URLA["URL A"]
+  R2B --> URLB["URL B"]
+  R2C --> URLC["URL C"]
   R5 --> SHEET["Google Sheet"]
-  DOC --> SUB["Submit today"]
-  URL --> SUB
+  DOC --> SUB["Submit: 5 links, inside 72 h"]
+  URLA --> SUB
+  URLB --> SUB
+  URLC --> SUB
   SHEET --> SUB
 ```
 
 ```mermaid
 gantt
-  title One-day sprint (relative hours, no fixed clock)
+  title Sprint plan (relative hours, estimates only)
   dateFormat HH:mm
   axisFormat %H:%M
   todayMarker off
-  section Block A: decide
-  R1 Product thinking      :r1, 00:00, 90m
-  R4 Prioritisation        :r4, after r1, 30m
-  R3 Agent design          :r3, after r4, 60m
-  R2 Build brief + prompts :rb, after r3, 30m
-  section Block B: build
-  R2 Build (freeze 2 h)    :r2, after rb, 120m
-  R2 Ship + write-up       :r2s, after r2, 45m
-  R5 Model (part 1)        :r5, after r2s, 75m
-  section Block C: finish
-  R5 Model (part 2)        :r5b, after r5, 45m
-  R6 Automation + research :r6, after r5b, 60m
-  R7 How I work            :r7, after r6, 30m
-  R8 Assemble + submit     :r8, after r7, 60m
+  section Decide
+  R1 Product thinking        :r1, 00:00, 90m
+  R4 Prioritisation          :r4, after r1, 30m
+  R3 Agent design            :r3, after r4, 60m
+  R2B Build brief + prompts  :rb, after r3, 30m
+  section Build
+  R2B Build                  :r2, after rb, 120m
+  R2B Ship + write-up        :r2s, after r2, 45m
+  R5 Model                   :r5, after r2s, 120m
+  R2C ROI Dashboard          :r2c, after r5, 135m
+  R2A Onboarding Wizard      :r2a, after r2c, 120m
+  Link-up A/B/C              :lk, after r2a, 10m
+  section Finish
+  R6 Automation + research   :r6, after lk, 60m
+  R7 How I work              :r7, after r6, 30m
+  R8 Assemble + submit       :r8, after r7, 60m
 ```
 
-The Gantt shows elapsed hours from the moment you start. There are no fixed clock times (D-07); breaks aren't drawn.
+The Gantt shows elapsed hours from the moment you start (~15 h in total). Estimates are for planning only; quality comes first, and the work can span more than one day inside the 72 h deadline (D-07). Breaks aren't drawn.
