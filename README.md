@@ -188,6 +188,7 @@ README.md                         ← you are here
 docs/
   architecture.md                 ← Mermaid architecture sheet
   architecture-components.csv     ← component sheet (import to Sheets)
+  diagrams/                       ← PNG export of every Mermaid diagram
   assumptions-and-decisions.md    ← A1–A23 register + decision log
   requirements/
     README.md                     ← evaluation matrix for R1–R8

@@ -2,6 +2,7 @@
 
 One page to understand how the business, the platform, the prototype and the submission fit together.
 The component register is in [`architecture-components.csv`](architecture-components.csv), which can be imported into Google Sheets.
+Every diagram below is also saved as a PNG in [`diagrams/`](diagrams/), ready to paste into the Google Doc.
 
 **Legend:** solid arrow = data or control flow · dotted arrow = supplies facts/config · **[P]** = built in the Task 2 prototype · **[M]** = mocked in the prototype.
 
