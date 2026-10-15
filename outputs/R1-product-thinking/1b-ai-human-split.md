@@ -6,6 +6,8 @@
 > - **It isn't stable.** It swings 14 points depending on how often humans edit the AI's drafts.
 >
 > The action map makes 76% plausible but doesn't prove it. Our fix is an audited **Autonomy Rate**, computed from logged events and validated in a pilot against a baseline. It's shown as "AI: X% of work | Humans: 100% of closes" (D-05), with the model-vs-rules split on hover, and always paired with outcome metrics.
+>
+> Beyond the split, each workflow is judged end to end (§7): owner, trigger, inputs, rules, failure path and outcome. Success means a business outcome, not just a task that ran.
 
 ## 1. Action map
 
@@ -191,6 +193,58 @@ X is the live Autonomy Rate. Hovering over it shows the definition, the split be
 - messages sent without consent
 
 Any breach pauses the badge ("under review").
+
+## 7. Beyond AI vs human: is the whole workflow dependable?
+
+Labelling each task AI or human is only the first cut. The OS is only useful to franchise teams if the **whole workflow** around each task works, including the parts that aren't AI at all.
+
+### What gets evaluated for each workflow
+
+| Dimension | What we check | Where this plan already covers it |
+|---|---|---|
+| Deterministic automation | Which steps are fixed rules rather than AI | The engine column (§1); rules do 33.5% of the time (§2) |
+| Data quality | Inputs are complete and correct: lead details, brand facts, P&L | Dedupe by phone number ([1a §4](1a-prioritisation.md#4-ranking-decision-d-04-confirmed)); the agent quotes only approved facts (A32) |
+| System integrations | Each outside dependency, and what happens when it's down | WhatsApp access and templates ([1a §6](1a-prioritisation.md#6-day-1-critical-path-whatsapp-access)); send failures ([1c §5](1c-takeover-spec.md#5-error-handling-empty-loading-and-error-states)) |
+| Human approvals | Who approves what, and how fast | The AI→H owner code; the 10-business-minute claim SLA (D-06) |
+| Exception handling | A defined failure path for every step | 1c's error states and 10 edge cases |
+| Security | Who can see and act on each brand's data | Row-level security per brand ([1c §6](1c-takeover-spec.md#6-validation-rules)) |
+| Auditability | Every action can be traced afterwards | `ACTION_EVENT`, `STATE_EVENT` and the weekly audit (§5) |
+| User adoption | Consultants actually use it | The takeover panel replaces their WhatsApp phone ([1a §10](1a-prioritisation.md#10-risks-and-mitigations)); flags claimed within the SLA |
+| Scalability | It holds as brands and leads grow | Brands per consultant (§4); sensitivity to volume (§2) |
+| Operating cost | Ad, AI and human cost per result | Cost per signed franchisee (§5, investor view) |
+
+### Every workflow gets the same six-part definition
+
+**Owner · trigger · required inputs · execution rules · failure path · measurable outcome.** Example, using the first workflow in the day-30 slice:
+
+| Part | New lead → first reply |
+|---|---|
+| Owner | The brand's sales manager |
+| Trigger | A Lead Ads form is submitted |
+| Required inputs | Phone number, consent, the brand's approved facts, an approved greeting template |
+| Execution rules | Dedupe by phone number → check consent → send the template greeting → qualify → answer only from approved facts → flag to a human when a HITL rule fires |
+| Failure path | Send fails: retry up to 3 times, then flag "Delivery problem". WhatsApp not yet approved: consultants reply through the CRM. Flag unclaimed: escalate to the manager at 10 business minutes. |
+| Measurable outcome | Median time to first **meaningful** reply ≤ 5 minutes; ≥ 70% of leads reach a qualification outcome ([1a §8](1a-prioritisation.md#8-day-30-success-criteria)) |
+
+### A task that ran is not an outcome
+
+| The task ran… | …but that doesn't prove | So we measure instead |
+|---|---|---|
+| An automated acknowledgement was sent to a new lead | The lead got a meaningful answer or moved toward signing | Time to first meaningful reply; qualification outcome reached; discovery call booked |
+| A financial projection was generated | Its assumptions are right, or the deal is commercially viable | A consultant approved the Model Card before the agent may quote it (A32); 0 wrong money answers in the audit |
+| A takeover flag was raised | A human actually responded | Flag claimed within the SLA; time from flag to the consultant's first reply |
+
+### Five lenses for judging automation
+
+| Lens | Question | Measure |
+|---|---|---|
+| **Successful task completion** | Did the step finish correctly, not just run? | B. Success rate on eligible work (§5) |
+| **Human effort saved** | Did people actually get time back? | C. Human time saved, against the pilot baseline (§5) |
+| **Quality** | Was the output right? | Wrong-answer and missed-escalation rates from the weekly audit |
+| **Reliability** | Does it keep working, including when something fails? | Delivery failures; flags claimed within the SLA |
+| **Business impact** | Did it move franchisees toward signing? | Speed to lead; discovery calls booked; human hours and cost per signed franchisee |
+
+The Autonomy Rate (measure A) is only ever reported next to these five. The goal is an OS that franchise teams can depend on, not just one that's highly automated.
 
 ## New assumptions introduced here
 - **A34:** One-off brand set-up actions (onboarding, model, collateral) are spread over a 6-month engagement, which is a frequency of 1/6 per month.
