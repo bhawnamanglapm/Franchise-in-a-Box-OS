@@ -1,6 +1,6 @@
 # R2B output: WhatsApp AI Agent Panel (Task 2, Option B)
 
-**Status: in progress.** Task 2 is Option B only (D-10). The engine (46 passing unit tests) and the full UI, including the Agent Switchboard and live counts, are built and deployed. **Live URL: https://fiab-r2b-whatsapp-agent-panel.vercel.app** (no login). Screenshots at desktop and 375 px, including the live site, are in [screenshots/](screenshots/). Next: the Playwright 9-step test (local and live) and the write-up. The Task 2B write-up will be added here.
+**Status: in progress.** Task 2 is Option B only (D-10). The engine (52 passing unit tests) and the full UI, including the Agent Switchboard and live counts, are built and deployed. **Live URL: https://fiab-r2b-whatsapp-agent-panel.vercel.app** (no login). Screenshots at desktop and 375 px, including the live site, are in [screenshots/](screenshots/). Next: the Playwright 9-step test (local and live) and the write-up. The Task 2B write-up will be added here.
 
 | File | Checks requirement file | What it contains |
 |---|---|---|

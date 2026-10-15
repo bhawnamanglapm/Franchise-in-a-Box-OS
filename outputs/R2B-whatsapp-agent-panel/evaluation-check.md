@@ -18,7 +18,7 @@ Checks [`evaluation.md`](../../docs/requirements/R2B-whatsapp-agent-panel/evalua
 |---|---|---|
 | The URL works | Not started | Fresh-browser test on desktop + 375 px after deploy |
 | Matches the design system | Done | All 5 tokens in the built CSS; dark theme seen in the screenshots |
-| A real working flow, not a static mock | Built | Simulate a message → flagged with reasons → claim → badge recomputes, seen in screenshots. 46 unit tests. Playwright run still to prove all 9 steps |
+| A real working flow, not a static mock | Built | Simulate a message → flagged with reasons → claim → badge recomputes, seen in screenshots. 52 unit tests. Playwright run still to prove all 9 steps |
 | Specific, technical "what AI got wrong" | On track | 12 real entries with component, symptom and cause. None invented |
 | Product judgment beyond the brief | Built | Hinglish data, 24 h window, claim conflict, opt-out, computed badge, agent Error detection, repeat-click de-dup. Several not yet screenshotted |
 | Covers Module 4 as the brief describes it | Built | Agent Switchboard (WhatsApp live; Meta Ads, Voice, Email greyed) and live counts of leads, messages and conversations (F2B.24, F2B.25) |

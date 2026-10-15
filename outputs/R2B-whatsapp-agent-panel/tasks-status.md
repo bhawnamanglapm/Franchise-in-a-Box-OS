@@ -17,7 +17,7 @@ With Claude Code building (D-01 revised), "Prompt N" tasks became build steps do
 | T2B.07 | Trigger engine + "Why flagged" card | Claude | Done | Engine with 23 tests; card shows rule, label and actual value ([desktop-flagged.png](screenshots/desktop-flagged.png)) |
 | T2B.08 | State machine + buttons + composer rules | Claude | Done | Tests AC1–AC11; Claim / Return / Won / Lost buttons and the locked composer on screen ([desktop-claimed.png](screenshots/desktop-claimed.png)) |
 | T2B.09 | Simulate box + computed badge + SLA countdown | Claude | Done | Side column on desktop, bottom sheet at 375 px ([m375-simulate.png](screenshots/m375-simulate.png)); badge recomputes; "6:00 to claim" chips |
-| T2B.10 | Takeover panel, 24 h window, opt-out, empty/error states | Claude | Done, one gap | All built. **Gap:** `summarise()` (the lead summary) has no unit test. Opt-out, template picker and error states are not yet in a screenshot |
+| T2B.10 | Takeover panel, 24 h window, opt-out, empty/error states | Claude | Done, one gap | All built. **Gap:** the suggested reply now has 6 unit tests (fix #14), but the summary's budget, timeline and score fields have no direct test. Opt-out, template picker and error states are not yet in a screenshot |
 | — | *New:* Agent Switchboard + live tracking (F2B.24, F2B.25) | Claude | Done | Added after the brief check (prompt 6, da0463c) |
 | T2B.11 | Log unbuilt items into "1 more day" | Claude | Not started | Table in build-log.md is still empty. Candidates listed in [features-status.md](features-status.md) W5 |
 | T2B.12 | Stretch: live LLM reply | — | Skipped for now | Needs R3's model (D-08) |

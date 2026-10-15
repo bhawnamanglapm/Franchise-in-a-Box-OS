@@ -49,7 +49,11 @@ export function WhyFlagged({ c }: { c: Conversation }) {
 export function TakeoverPanel({ c }: { c: Conversation }) {
   const { w, ui } = useApp()
   if (!['FLAGGED', 'ESCALATED', 'HUMAN_ACTIVE'].includes(c.state)) return null
-  const s = summarise(w.messages[c.id], BRANDS[c.brandId], c.prospect.city, c.prospect.name)
+  // The reply is signed by whoever would send it: the owner, the manager once escalated, else the viewer.
+  const senderId = c.state === 'HUMAN_ACTIVE' && c.assignee ? c.assignee
+    : c.state === 'ESCALATED' ? MANAGER_OF[c.brandId] : ui.viewer
+  const s = summarise(w.messages[c.id], BRANDS[c.brandId], c.prospect.city, c.prospect.name,
+    { sender: USERS[senderId]?.name, flags: c.flags })
   const mine = c.state === 'HUMAN_ACTIVE' && c.assignee === ui.viewer
   const rows: [string, string][] = [
     ['Budget', s.budget], ['City', s.city], ['Timeline', s.timeline], ['Objections', s.objections], ['Last question', s.lastQuestion],

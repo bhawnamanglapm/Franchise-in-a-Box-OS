@@ -1,6 +1,6 @@
 # R2B features status
 
-Checks every feature in [`features.md`](../../docs/requirements/R2B-whatsapp-agent-panel/features.md) against what is built. Updated as the build goes. **Last checked: 15 Oct 2026, after the UI build and the B-only change (46 unit tests passing; commits 8b30977, 5c2b7a4, da0463c).**
+Checks every feature in [`features.md`](../../docs/requirements/R2B-whatsapp-agent-panel/features.md) against what is built. Updated as the build goes. **Last checked: 15 Oct 2026, after the UI build and the B-only change (46 unit tests passing; commits 8b30977, 5c2b7a4, da0463c). Updated after the suggested-reply fix: 52 tests.**
 
 **Status key:** **Built** = on screen; the logic is unit-tested where noted · **Seen** = also visible in the [screenshots](screenshots/) · **Partial** = some of it built · **Not started** · **Blocked** = waits on another requirement · **Dropped** / **Won't** = out of scope by decision. Nothing is marked **Done** until the 9-step Playwright run passes through the real UI.
 
@@ -22,7 +22,7 @@ Checks every feature in [`features.md`](../../docs/requirements/R2B-whatsapp-age
 | F2B.10 | Take over / Claim / Return buttons | M | Built, Seen | Claim, Return to AI, Won, Lost seen. Return dialog lists what blocks it (no reason, open compliance flag, unsent draft); not yet screenshotted |
 | F2B.11 | Composer rules | M | Built, Seen | Locked unless you own the chat; "AI paused" banner; "204 / 4,096" counter; Send disabled over the limit (AC5) |
 | F2B.12 | Simulate inbound message box | M | Built, Seen | Side column on desktop, bottom sheet on phones; 8 example messages; outage / fail-next / second-consultant toggles; Reset |
-| F2B.13 | Takeover panel | S | Built, Seen | Lead summary (budget, city, timeline, objections, last question), score bar, suggested reply + "Use reply". **`summarise()` has no unit test yet** |
+| F2B.13 | Takeover panel | S | Built, Seen | Lead summary (budget, city, timeline, objections, last question), score bar, suggested reply + "Use reply". Suggested reply fixed after live testing (build log #14): signed by the real sender, written for the rule that fired, gender-neutral Hindi; 6 unit tests. **Budget, timeline and score fields still have no direct test** |
 | F2B.14 | 24 h window indicator | S | Built, Seen | "Reply window 23h 55m left" in the chat header (seen). Template picker after 24 h is built (test AC6) but not yet screenshotted |
 | F2B.15 | Opt-out | S | Built | STOP / band karo / बंद करो → OPTED_OUT, composer locked in red; START opts back in (test AC7). Not yet screenshotted |
 | F2B.16 | Claim conflict demo | S | Built | "Second consultant" toggle in Simulate → Priya claims first → toast "Already claimed by Priya" (test AC2). Not yet screenshotted |
@@ -44,5 +44,5 @@ Checks every feature in [`features.md`](../../docs/requirements/R2B-whatsapp-age
 | F2B.W2 | Exact prompts used, in order | M | Partial | 7 prompts logged verbatim in [build-log.md](build-log.md) |
 | F2B.W3 | What AI got wrong | M | Partial | 12 entries in the build log (component, symptom, cause) |
 | F2B.W4 | What I fixed manually | M | Partial | Each entry has its fix plus "Caught by" and "Fixed by", so the write-up can say honestly who did what |
-| F2B.W5 | 1 more day improvements | M | Not started | Candidates so far: live LLM (F2B.19), Devanagari seed chat, `summarise()` tests, timer-cleared tests, metrics strip gaps, R5 facts |
+| F2B.W5 | 1 more day improvements | M | Not started | Candidates so far: live LLM (F2B.19), Devanagari seed chat, tests for the summary's budget/timeline/score fields, timer-cleared tests, metrics strip gaps, R5 facts |
 | F2B.W6 | 3 screenshots + optional Loom | C | Partial | 6 screenshots in [screenshots/](screenshots/); 3 to be picked for the write-up |
