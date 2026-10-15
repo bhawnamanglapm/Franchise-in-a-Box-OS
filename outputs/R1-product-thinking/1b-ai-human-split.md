@@ -204,10 +204,10 @@ Labelling each task AI or human is only the first cut. The OS is only useful to 
 |---|---|---|
 | Deterministic automation | Which steps are fixed rules rather than AI | The engine column (§1); rules do 33.5% of the time (§2) |
 | Data quality | Inputs are complete and correct: lead details, brand facts, P&L | Dedupe by phone number ([1a §4](1a-prioritisation.md#4-ranking-decision-d-04-confirmed)); the agent quotes only approved facts (A32) |
-| System integrations | Each outside dependency, and what happens when it's down | WhatsApp access and templates ([1a §6](1a-prioritisation.md#6-day-1-critical-path-whatsapp-access)); send failures ([1c §5](1c-takeover-spec.md#5-error-handling-empty-loading-and-error-states)) |
+| System integrations | Each outside dependency, and what happens when it's down | WhatsApp access and templates ([1a §6](1a-prioritisation.md#6-day-1-critical-path-whatsapp-access)); send failures and the agent's Error status ([1c §4](1c-takeover-spec.md#4-error-handling)) |
 | Human approvals | Who approves what, and how fast | The AI→H owner code; the 10-business-minute claim SLA (D-06) |
-| Exception handling | A defined failure path for every step | 1c's error states and 10 edge cases |
-| Security | Who can see and act on each brand's data | Row-level security per brand ([1c §6](1c-takeover-spec.md#6-validation-rules)) |
+| Exception handling | A defined failure path for every step | 1c's error handling (including failed and repeated takeovers) and 10 edge cases |
+| Security | Who can see and act on each brand's data | Row-level security per brand ([1c §4](1c-takeover-spec.md#validation-rules)) |
 | Auditability | Every action can be traced afterwards | `ACTION_EVENT`, `STATE_EVENT` and the weekly audit (§5) |
 | User adoption | Consultants actually use it | The takeover panel replaces their WhatsApp phone ([1a §10](1a-prioritisation.md#10-risks-and-mitigations)); flags claimed within the SLA |
 | Scalability | It holds as brands and leads grow | Brands per consultant (§4); sensitivity to volume (§2) |
@@ -241,7 +241,7 @@ Labelling each task AI or human is only the first cut. The OS is only useful to 
 | **Successful task completion** | Did the step finish correctly, not just run? | B. Success rate on eligible work (§5) |
 | **Human effort saved** | Did people actually get time back? | C. Human time saved, against the pilot baseline (§5) |
 | **Quality** | Was the output right? | Wrong-answer and missed-escalation rates from the weekly audit |
-| **Reliability** | Does it keep working, including when something fails? | Delivery failures; flags claimed within the SLA |
+| **Reliability** | Does it keep working, including when something fails? | Delivery failures and agent uptime; flags claimed within the SLA; 0 AI messages after a takeover ([1c §5](1c-takeover-spec.md#pilot-metrics-after-launch)) |
 | **Business impact** | Did it move franchisees toward signing? | Speed to lead; discovery calls booked; human hours and cost per signed franchisee |
 
 The Autonomy Rate (measure A) is only ever reported next to these five. The goal is an OS that franchise teams can depend on, not just one that's highly automated.

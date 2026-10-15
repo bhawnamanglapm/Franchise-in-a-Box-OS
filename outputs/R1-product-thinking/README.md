@@ -7,8 +7,8 @@
 | [ai-human-split.csv](ai-human-split.csv) | 1b | All 37 actions with owner, frequency, minutes, AI share, value weight and engine (model / rules / human). Import it as the Sheet tab `AI_Human_Split`; the formulas are in 1b §2. |
 | [ai-human-split.xlsx](ai-human-split.xlsx) | 1b | The same 37 rows with the formulas already built in: the 4 split measures, hours, brands per consultant, and a per-module summary. Yellow cells are editable estimates; blue cells recalculate. |
 | [**Live Google Sheet**](https://docs.google.com/spreadsheets/d/1pl8JSEAvlPR1mexlfx0cwiFMPU-B4-QJFga4N31pl1o/edit?usp=sharing) | 1b | The workbook above, converted to a native Google Sheet. This is the link for reviewers. |
-| [1c-takeover-spec.md](1c-takeover-spec.md) | 1c | How the feature was chosen (6 candidates screened), then the Conversation Takeover spec: 7 states, 9 transitions, UI, empty/loading/error states, validation, 10 edge cases, 8 acceptance criteria, metrics, and the events it writes for the Autonomy Rate |
-| [**Task 1 as a PDF (start here)**](Task-1-Product-Thinking.pdf) | 1a–1c | 24-page download for reviewers: a one-page plain-English summary (questions, answers, headline numbers, glossary), then 1a, 1b and 1c in full with the state diagram, and the assumptions appendix. Built from the .md files. |
+| [1c-takeover-spec.md](1c-takeover-spec.md) | 1c | How the feature was chosen (6 candidates screened), then the Conversation Takeover spec in six plain sections: feature overview, UI behaviour (agent status, inbox, takeover), state transitions (7 conversation states, 9 transitions, agent Active/Paused/Error), error handling with 10 edge cases and validation, success criteria (11 acceptance tests + pilot metrics), and definition of done with a 2-brand controlled rollout; plus the events it writes for the Autonomy Rate |
+| [**Task 1 as a PDF (start here)**](Task-1-Product-Thinking.pdf) | 1a–1c | 25-page download for reviewers: a one-page plain-English summary (questions, answers, headline numbers, glossary), then 1a, 1b and 1c in full with the state diagram, and the assumptions appendix. Built from the .md files. |
 | [**Task 1 as one Google Doc**](https://docs.google.com/document/d/18ThKEZmmZ-7fAyAi9UFVFgm0G9DyfJg3Lt2Ze_lIjME/edit) | 1a–1c | 1a, 1b and 1c combined, plus an appendix of the assumptions and decisions they cite. Built from the three .md files on 15 Oct 2026; the .md files stay the source of truth. |
 
 ## Key numbers
@@ -43,6 +43,6 @@ All of these come from `ai-human-split.csv` and use estimates A19, A20, A34 and 
 
 ## Hand-offs
 - **R4:** the 1a ranking is its consistency baseline.
-- **R2B:** the 1c spec is the build spec. AC1, AC2, AC4, AC5 and AC7 go into its test script.
+- **R2B:** the 1c spec is the build spec. AC1, AC2, AC4, AC5, AC7, AC9 and AC10 go into its test script.
 - **R2A, R2B, R2C:** the badge uses the Autonomy Rate rule from 1b §5.
 - **R8:** the 76% verdict and the capacity line go into the executive summary.
