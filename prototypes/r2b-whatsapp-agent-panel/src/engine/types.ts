@@ -24,7 +24,7 @@ export interface Brand {
   id: string
   name: string
   category: string
-  /** A2 threshold: the brand's full franchise investment, in ₹ lakh (illustrative until R2C approves it). */
+  /** A2 threshold: the brand's full franchise investment, in ₹ lakh (illustrative until the R5 model sets it). */
   fullInvestmentLakh: number
 }
 

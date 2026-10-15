@@ -65,18 +65,36 @@ export function Header() {
   )
 }
 
+// Module 4's Agent Switchboard from the brief. Only the WhatsApp AI Agent is in this prototype (Task 2, Option B).
+const AGENTS = [
+  { id: 'whatsapp', label: 'WhatsApp AI', live: true },
+  { id: 'meta', label: 'Meta Ads', live: false },
+  { id: 'voice', label: 'Voice AI', live: false },
+  { id: 'email', label: 'Email', live: false },
+]
+
 function AgentStrip() {
   const { w, ui } = useApp()
   return (
-    <div className="flex flex-wrap gap-1.5 border-t border-line px-3 py-1.5 sm:gap-2 sm:px-4 sm:py-2" data-testid="agent-strip">
+    <div className="flex flex-wrap items-center gap-1.5 border-t border-line px-3 py-1.5 sm:gap-2 sm:px-4 sm:py-2" data-testid="agent-strip">
+      <div className="flex w-full items-center gap-1 lg:w-auto" role="group" aria-label="Agent switchboard" data-testid="switchboard">
+        <span className="mr-1 text-[11px] uppercase tracking-wide text-muted">Agents</span>
+        {AGENTS.map((g) => (
+          <span key={g.id} data-testid={`switch-${g.id}`} aria-disabled={!g.live}
+            title={g.live ? 'Shown below, per brand' : `${g.label} agent: not part of this prototype`}
+            className={`whitespace-nowrap rounded-md border px-2 py-0.5 text-[11px] ${g.live ? 'border-accent/60 bg-accent/15 text-ink' : 'cursor-not-allowed border-line text-muted/60'}`}>
+            {g.label}
+          </span>
+        ))}
+      </div>
       {Object.entries(w.agents).map(([brandId, a]) => {
         const isManager = MANAGER_OF[brandId] === ui.viewer
         const dot = a.status === 'ACTIVE' ? 'bg-success' : a.status === 'PAUSED' ? 'bg-alert' : 'bg-danger animate-pulse'
         return (
           <div key={brandId} data-testid={`agent-${brandId}`} data-status={a.status}
-            className="flex min-w-0 flex-1 basis-auto items-center sm:basis-72 gap-2 rounded-md border border-line bg-card px-2.5 py-1 text-xs sm:py-1.5">
+            className="flex min-w-0 flex-1 basis-auto items-center gap-2 sm:basis-64 rounded-md border border-line bg-card px-2.5 py-1 text-xs sm:py-1.5">
             <span className={`h-2 w-2 shrink-0 rounded-full ${dot}`} />
-            <span className="whitespace-nowrap font-medium">{BRANDS[brandId].name}<span className="hidden sm:inline"> agent</span>:</span>
+            <span className="whitespace-nowrap font-medium">{BRANDS[brandId].name}:</span>
             <span className={a.status === 'ERROR' ? 'text-[#FF8A8A]' : a.status === 'PAUSED' ? 'text-alert' : 'text-success'}>
               {a.status === 'ACTIVE' ? 'Active' : a.status === 'PAUSED' ? 'Paused' : 'Error'}
             </span>

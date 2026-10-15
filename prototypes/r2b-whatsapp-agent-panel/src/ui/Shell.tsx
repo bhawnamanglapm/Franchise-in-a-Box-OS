@@ -47,12 +47,10 @@ export function Footer() {
   return (
     <footer className="border-t border-line px-3 py-1.5 text-[11px] text-muted sm:px-4 sm:py-2">
       <p className="truncate sm:hidden" title={FACTS_STATUS}>
-        Prototype B · <span className="text-alert/90">Brand facts illustrative</span> · Mock data, nothing sent
+        Option B prototype · <span className="text-alert/90">Brand facts illustrative</span> · Mock data, nothing sent
       </p>
       <div className="hidden flex-wrap items-center gap-x-4 gap-y-1 sm:flex">
-        <span>Prototype B of 3 · Franchise-in-a-Box OS</span>
-        <span>A: Onboarding Wizard <em>(coming soon)</em></span>
-        <span>C: ROI Dashboard <em>(coming soon)</em></span>
+        <span>Franchise-in-a-Box OS · Task 2, Option B: WhatsApp AI Agent Panel</span>
         <span className="text-alert/90">Brand facts: {FACTS_STATUS}</span>
         <span className="ml-auto">Mock data runs in your browser. Nothing is sent to WhatsApp.</span>
       </div>

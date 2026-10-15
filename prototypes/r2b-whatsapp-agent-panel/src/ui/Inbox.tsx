@@ -1,6 +1,6 @@
 import { USERS } from '../data/brands'
-import { fmtAgo, fmtCountdown, MIN } from '../engine/clock'
-import { claimTimeLeft } from '../engine/machine'
+import { HOUR, fmtAgo, fmtCountdown, MIN } from '../engine/clock'
+import { OPEN_STATES, claimTimeLeft } from '../engine/machine'
 import type { Conversation, World } from '../engine/types'
 import { setUI, useApp, type Filter } from '../store'
 import { BrandTag, StateChip } from './bits'
@@ -37,6 +37,7 @@ export function Inbox() {
 
   return (
     <section className="flex h-full min-h-0 flex-col border-r border-line" aria-label="Conversations">
+      <LiveStats />
       <div className="flex items-center gap-1 border-b border-line px-3 py-2" role="tablist">
         {FILTERS.map((f) => (
           <button key={f.id} role="tab" aria-selected={ui.filter === f.id} data-testid={`filter-${f.id}`}
@@ -55,6 +56,33 @@ export function Inbox() {
             : shown.map((c) => <Row key={c.id} c={c} />)}
       </ul>
     </section>
+  )
+}
+
+const IST = 5.5 * HOUR
+const dayOf = (t: number) => Math.floor((t + IST) / (24 * HOUR))
+
+/** Live tracking of leads, messages and conversations (brief, Module 4). Recomputed from the same world on every tick. */
+function LiveStats() {
+  const { w } = useApp()
+  const convs = Object.values(w.conversations)
+  const today = dayOf(w.now)
+  const msgs = Object.values(w.messages).flat().filter((m) => m.sender !== 'system' && dayOf(m.ts) === today)
+  const stats = [
+    { id: 'leads', label: 'Leads', value: convs.length },
+    { id: 'messages', label: 'Messages today', value: msgs.length, sub: `${msgs.filter((m) => m.sender === 'ai').length} by AI` },
+    { id: 'active', label: 'Active chats', value: convs.filter((c) => OPEN_STATES.includes(c.state)).length },
+    { id: 'needs-human', label: 'Needs human', value: convs.filter(needsHuman).length, alert: true },
+  ]
+  return (
+    <div className="grid grid-cols-4 border-b border-line" data-testid="live-stats" aria-label="Live tracking">
+      {stats.map((s) => (
+        <div key={s.id} className="border-r border-line px-2 py-2 last:border-r-0" data-testid={`stat-${s.id}`}>
+          <div className={`num text-base font-semibold leading-none ${s.alert && s.value ? 'text-alert' : ''}`}>{s.value}</div>
+          <div className="mt-1 text-[10px] uppercase leading-tight tracking-wide text-muted" title={s.sub ? `${s.label} · ${s.sub}` : s.label}>{s.label}</div>
+        </div>
+      ))}
+    </div>
   )
 }
 

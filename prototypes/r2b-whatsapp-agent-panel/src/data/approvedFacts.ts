@@ -1,8 +1,8 @@
 // The only numbers the agent may quote (A32).
 //
-// ILLUSTRATIVE PLACEHOLDERS. The brief gives no FreshBrew figures and the ROI Dashboard (R2C) that
-// approves the real Model Card isn't built yet. Every value here is shown in the UI as "illustrative"
-// and gets replaced by R2C's approved Model Card export (task T2B.18). Nothing here is a sourced fact.
+// ILLUSTRATIVE PLACEHOLDERS. The brief gives no FreshBrew figures and the financial model (R5) isn't
+// built yet. Every value here is shown in the UI as "illustrative" and gets replaced by the approved
+// figures from the R5 Sheet (task T2B.18). Nothing here is a sourced fact.
 
 export interface Fact {
   topic: string
@@ -13,7 +13,7 @@ export interface Fact {
   hi: string
 }
 
-export const FACTS_STATUS = 'Illustrative: replaced by the approved Model Card (R2C)'
+export const FACTS_STATUS = 'Illustrative: replaced by the approved figures from the financial model (R5)'
 
 export const APPROVED_FACTS: Record<string, Fact[]> = {
   freshbrew: [
