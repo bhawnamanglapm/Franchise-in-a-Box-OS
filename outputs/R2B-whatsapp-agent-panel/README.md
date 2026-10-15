@@ -1,6 +1,6 @@
 # R2B output: WhatsApp AI Agent Panel (Task 2, Option B)
 
-**Status: in progress.** The engine is built and has 46 passing unit tests. The UI, deploy and write-up are next. The live URL and the Task 2B write-up will be added here.
+**Status: in progress.** The engine (46 passing unit tests) and the full UI are built and run locally; screenshots at desktop and 375 px are in [screenshots/](screenshots/). Next: the Playwright 9-step test, the Vercel deploy and the write-up. The live URL and the Task 2B write-up will be added here.
 
 | File | Checks requirement file | What it contains |
 |---|---|---|
@@ -12,6 +12,6 @@
 | [definition-of-done-check.md](definition-of-done-check.md) | `definition-of-done.md` | Every checklist item, ticked only with evidence |
 | [evaluation-check.md](evaluation-check.md) | `evaluation.md` | The 5 submission items, reviewer bars, the changed decision, ambiguities and risk status |
 
-**Code:** [`prototypes/r2b-whatsapp-agent-panel/`](../../prototypes/r2b-whatsapp-agent-panel/). Run `npm install`, then `npm run test` for the unit tests.
+**Code:** [`prototypes/r2b-whatsapp-agent-panel/`](../../prototypes/r2b-whatsapp-agent-panel/). Run `npm install`, then `npm run dev` to open the panel, or `npm run test` for the unit tests.
 
 **Requirement files:** [`docs/requirements/R2B-whatsapp-agent-panel/`](../../docs/requirements/R2B-whatsapp-agent-panel/)
