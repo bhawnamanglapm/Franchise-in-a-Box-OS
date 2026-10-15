@@ -54,7 +54,7 @@ All assumptions are stated openly in the submission. IDs are cited wherever an a
 | D-06 | Takeover SLA of 10 business minutes, 09:00–21:00 IST | Confirmed | 15 Oct 2026 |
 | D-07 | Quality first: time estimates are for planning only, not cut-off points. Submit when R8 passes, inside the 72 h deadline. | Confirmed | Today |
 | D-08 | Default LLM for the WhatsApp agent | Open, decided in R3 | — |
-| D-09 | Final Task 4 top 4 | Open, decided in R4 | — |
+| D-09 | Final Task 4 top 4: (1) WhatsApp AI Agent, (2) HITL takeover + timeline, (3) Model Card + 3-year ROI, (4) deal tracking and closure. QSR lead-gen variation: qualified-lead tracking by source (#2) and a thin Meta Ads Agent (#4) move in; Model Card + ROI and deal tracking move to Month 2; ad creatives stay Month 2 (consistent with 1a). See `outputs/R4-prioritisation/task4-prioritisation.md`. | Confirmed | 16 Oct 2026 |
 | D-10 | Task 2 builds **Option B only** (WhatsApp AI Agent Panel), as the brief says "Choose ONE". **Revised 15 Oct 2026:** previously all three options. R2A and R2C stay in the repo as unbuilt plans, marked "not being built"; nothing was deleted. | Confirmed (revised) | 15 Oct 2026 |
 | D-12 | Prototype B is built before R3 is final. Its trigger engine uses the R3 **draft** rules F3.A1–A9 exactly as drafted. When R3 is written, its trigger table is the single source and the engine is re-synced to it. | Confirmed | 15 Oct 2026 |
 | D-11 | Prototype A's revenue split = revenue by sales channel (A30) | Not needed: R2A is not being built (D-10) | 15 Oct 2026 |

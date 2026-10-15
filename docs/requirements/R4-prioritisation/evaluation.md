@@ -36,4 +36,4 @@
 
 ## Effort and priority
 - **Estimate:** 0.5 h · **Priority:** P1 · **Depends on:** R1 (1a) · **Feeds:** R3 (trigger scope), R2B (prototype B scope and scope note)
-- **Status:** Draft position only. Decision D-09 is open.
+- **Status:** Done (16 Oct 2026). D-09 confirmed. Output: [`outputs/R4-prioritisation/task4-prioritisation.md`](../../../outputs/R4-prioritisation/task4-prioritisation.md). The QSR variation changed from this draft: qualified-lead tracking by source took the slot drafted for ad creatives, because 1a defers creatives to designers using current tools.

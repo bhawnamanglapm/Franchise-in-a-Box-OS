@@ -3,7 +3,7 @@
 Take-home assignment for the **AI Product Manager / AI Product Builder** role at Scale100x.ai.
 This repo is the working space for the submission: planning, requirement breakdowns, architecture and the code for the Task 2 prototype (Option B).
 
-> **Status:** R1 (Task 1) output done in [`outputs/R1-product-thinking/`](outputs/R1-product-thinking/README.md). Task 2 is **Option B only** (D-10): the WhatsApp AI Agent Panel is built in [`prototypes/r2b-whatsapp-agent-panel/`](prototypes/r2b-whatsapp-agent-panel/) and live at **https://fiab-r2b-whatsapp-agent-panel.vercel.app**; the 9-step browser test, write-up and the R5 model are next.
+> **Status:** R1 (Task 1) output done in [`outputs/R1-product-thinking/`](outputs/R1-product-thinking/README.md). R4 (Task 4) done in [`outputs/R4-prioritisation/`](outputs/R4-prioritisation/task4-prioritisation.md). Task 2 is **Option B only** (D-10): the WhatsApp AI Agent Panel is built in [`prototypes/r2b-whatsapp-agent-panel/`](prototypes/r2b-whatsapp-agent-panel/) and live at **https://fiab-r2b-whatsapp-agent-panel.vercel.app**; the 9-step browser test, write-up and the R5 model are next.
 > **Time:** ~11 h of focused work estimated. **Quality comes first, and estimates are for planning only, not cut-off points (D-07).** Steps run in the order below; submit as soon as R8 passes, inside the 72 h deadline.
 
 ---
@@ -231,6 +231,6 @@ prototypes/
 
 ## 14. Open decisions
 
-See [`docs/assumptions-and-decisions.md`](docs/assumptions-and-decisions.md#decision-log). D-04, D-05 and D-06 were confirmed on 15 Oct 2026. Still open, decided inside their requirement: D-08 (default LLM, R3) and D-09 (Task 4 top 4, R4).
+See [`docs/assumptions-and-decisions.md`](docs/assumptions-and-decisions.md#decision-log). D-04, D-05 and D-06 were confirmed on 15 Oct 2026. D-09 (Task 4 top 4) was confirmed on 16 Oct 2026. Still open, decided inside its requirement: D-08 (default LLM, R3).
 
 D-10 was revised on 15 Oct 2026: Task 2 is Option B only. D-11 (prototype A's revenue split) is no longer needed.

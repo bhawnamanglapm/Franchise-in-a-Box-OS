@@ -47,6 +47,8 @@ Draft placement. Final in Phase 3.
 
 ## C. QSR lead-gen variation (draft)
 
+> **Superseded.** The final table is in [`outputs/R4-prioritisation/task4-prioritisation.md`](../../../outputs/R4-prioritisation/task4-prioritisation.md) §5: qualified-lead tracking by source replaces ad creatives in the top 4.
+
 | Feature | Base rank | QSR lead-gen rank | Why |
 |---|---|---|---|
 | Meta Ads Agent (capture + CPL optimisation) | Month 2 | **Top 4** | The partner pays for lead volume and quality |
