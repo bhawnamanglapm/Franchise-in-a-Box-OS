@@ -3,7 +3,7 @@
 Take-home assignment for the **AI Product Manager / AI Product Builder** role at Scale100x.ai.
 This repo is the working space for the submission: planning, requirement breakdowns, architecture and the code for the Task 2 prototype (Option B).
 
-> **Status:** R1 (Task 1) output done in [`outputs/R1-product-thinking/`](outputs/R1-product-thinking/README.md). R4 (Task 4) done in [`outputs/R4-prioritisation/`](outputs/R4-prioritisation/task4-prioritisation.md). R3 (Task 3) done in [`outputs/R3-ai-agent-design/`](outputs/R3-ai-agent-design/task3-ai-agent-design.md). Task 2 is **Option B only** (D-10): the WhatsApp AI Agent Panel is built in [`prototypes/r2b-whatsapp-agent-panel/`](prototypes/r2b-whatsapp-agent-panel/) and live at **https://fiab-r2b-whatsapp-agent-panel.vercel.app**; the 9-step browser test, write-up and the R5 model are next.
+> **Status:** R1 (Task 1) output done in [`outputs/R1-product-thinking/`](outputs/R1-product-thinking/README.md). R4 (Task 4) done in [`outputs/R4-prioritisation/`](outputs/R4-prioritisation/task4-prioritisation.md). R3 (Task 3) done in [`outputs/R3-ai-agent-design/`](outputs/R3-ai-agent-design/task3-ai-agent-design.md). Task 2 is **Option B only** (D-10): the WhatsApp AI Agent Panel is built in [`prototypes/r2b-whatsapp-agent-panel/`](prototypes/r2b-whatsapp-agent-panel/) and live at **https://fiab-r2b-whatsapp-agent-panel.vercel.app**. All 9 test steps pass in Playwright (desktop + 375 px, local + live), and the [Task 2B write-up](outputs/R2B-whatsapp-agent-panel/README.md) is drafted. Next: the R5 model, then swap its figures into B.
 > **Time:** ~11 h of focused work estimated. **Quality comes first, and estimates are for planning only, not cut-off points (D-07).** Steps run in the order below; submit as soon as R8 passes, inside the 72 h deadline.
 
 ---
@@ -189,7 +189,7 @@ Estimates are for planning only. Quality comes first (D-07).
 The submission is done when **all** of the following are true:
 
 - [ ] Every deliverable in the brief is present: 1a, 1b, 1c, 2 (Option B), 3A, 3B, 3C, 4, 5, 6A, 6B, 7 (checked against the R8 completeness table).
-- [ ] The Task 2 write-up has: live URL, exact prompts, what AI got wrong, manual fixes, 1 more day.
+- [x] The Task 2 write-up has: live URL, exact prompts, what AI got wrong, manual fixes, 1 more day.
 - [ ] Each requirement's own `definition-of-done.md` is fully ticked (R2A and R2C excluded: not built, D-10).
 - [ ] All 3 links open in an incognito window with view access: prototype B, the model and the doc.
 - [ ] The system prompt is 150–250 words, and the count is shown.

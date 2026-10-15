@@ -27,6 +27,7 @@ Matches [`build-log-template.md`](../../docs/requirements/R2B-whatsapp-agent-pan
 | 11 | 18:1x | Claude Code | "link to test" | The live URL plus a 9-step manual test script | — |
 | 12 | 18:1x | Claude Code | (a screenshot of Vikram Singh's escalated chat, viewed as Neha, with no text) | Checked the screenshot. Escalation rules were correct; the clipped "Pause" was a browser-extension icon on top of the page (measured: no overflow at 1280, 1366 or 1440 px). Found a real bug in the suggested reply (#14) and asked before fixing | 14 |
 | 13 | 18:2x | Claude Code | "fix and deploy" | Rewrote the suggested reply, added 6 unit tests (52 total), redeployed twice to the same project and checked the replies on the live site | 14 |
+| 14 | 16 Oct, 02:xx | Claude Code | "ok" (to: "Next in the plan is step 7: finishing the Task 2 write-up … Shall I start it?") | Playwright config + the 9-step spec. Passed first run at 1440 px and 375 px, locally and against the live URL. Then the Task 2B write-up in [README.md](README.md), this log's "1 more day" table and the status files | 15 |
 
 ## What the AI got wrong, and what was fixed
 
@@ -48,6 +49,7 @@ Matches [`build-log-template.md`](../../docs/requirements/R2B-whatsapp-agent-pan
 | 12 | Brand-facts label (`approvedFacts.ts`) | Footer still said facts would be "replaced by the approved Model Card (R2C)" after R2C was dropped | The label was written when C was meant to supply B's facts (A32, before the revision) | Label and code comments now point to the R5 financial model; A32 revised | Claude Code, reviewing its own desktop screenshot | Claude Code | 1 rerun |
 | 13 | Deploy | The Vercel connector refused to list or create projects: "403 forbidden … scope pehchan-the-traveller". The Vercel CLI on this machine was not logged in | The connector's token had no access to the account's team scope. This was a tooling problem, not a code bug | Switched to the Vercel CLI: you approved a device login in the browser, then the built files were deployed under a new project name | Claude Code (the deploy call failed) | You approved the login; Claude Code deployed | ~5 min |
 | 14 | Suggested reply (`agent.ts` `summarise()`) | On Vikram Singh's escalated chat the suggested reply said "main Neha" although only Ravi could take it; thanked him for a question he never asked ("Last question: None"); and offered to explain "agreement aur next steps" when he had asked for a call. Every chat got the same text | The reply was one hard-coded sentence with only the name and brand swapped in. `summarise()` had no unit test, so nothing checked the reply against the chat | The reply is now built from the chat: signed by whoever would send it (assignee, the manager once escalated, else the viewer); the thanks line only appears if a question was asked; the body answers the most urgent rule that fired (complaint, legal, repeat, asked for a person, intent, deal value, low confidence, out of scope); Hindi avoids verbs that mark the sender's gender. 6 unit tests. First live check showed "question" twice in the legal reply; reworded and redeployed | You, testing the live URL (screenshot) | Claude Code | 2 redeploys |
+| 15 | e2e spec (`nine-step.spec.ts`) | The first run wrote its screenshots as `desktop-flagged.png` etc., overwriting the tracked screenshot of the same name from the UI build | The spec's file names were chosen without checking what was already in `screenshots/` | Spec now writes `e2e-<project>-<step>.png`; the new files were renamed and the original restored from git. No app code changed | Claude Code (`git status` showed a modified screenshot) | Claude Code | 1 min |
 
 ## Things to watch for (from the template)
 
@@ -56,12 +58,22 @@ Matches [`build-log-template.md`](../../docs/requirements/R2B-whatsapp-agent-pan
 | Design tokens replaced with Tailwind defaults | **Checked in the built CSS.** `#0A0A0F` (hex + `rgb(10 10 15)`), `#111118` as `rgb(17 17 24)`, `#2563EB`, `#10B981`, `#F59E0B` all present. Tailwind writes most colours as `rgb()`, so a plain hex grep misses `#111118`; grep both forms |
 | State held in several components and drifting apart | Avoided by design: one pure reducer (`machine.ts`) holds all state |
 | Trigger rules hardcoded per conversation | Avoided: rules run on every inbound message; the seed itself is replayed through them (entry 1 is proof) |
-| AI still "replies" in HUMAN_ACTIVE | Unit test "9-step test, step 3" passes; to be checked in Playwright |
-| Hindi or Devanagari text breaking layout or fonts | Hinglish renders in the screenshots. A Devanagari example ("Hindi" chip in Simulate) exists; not yet screenshotted |
+| AI still "replies" in HUMAN_ACTIVE | **Checked in the real UI.** Playwright step 3 sends a prospect message after Claim, waits 2.6 s and finds 0 new AI messages (desktop + 375 px, local + live) |
+| Hindi or Devanagari text breaking layout or fonts | Hinglish renders in the screenshots. A Devanagari example ("Hindi" chip in Simulate) exists; not yet screenshotted (on the "1 more day" list) |
 | Timers (SLA, 24 h) not cleared on state change | In code: Claim clears the SLA clock (`flaggedAt`) and hand-back clears the no-reply clock (`awaitingSince`). AC3 and AC8 test that the clocks fire; **no test yet proves they are cleared** |
-| Mobile layout overflow | Checked at 375 px: page scroll width = 375 (no sideways scroll). Vertical space was the real problem (entry 6) |
+| Mobile layout overflow | Checked at 375 px: page scroll width = 375 (no sideways scroll), also asserted in Playwright step 5. Vertical space was the real problem (entry 6) |
 
 ## Unbuilt items → "1 more day"
 
-| Item | Linked 1c acceptance criterion | Est. |
-|---|---|---|
+Estimates are my own judgement for one person with Claude Code, not measured. Total ≈ 8 h.
+
+| # | Item | Linked 1c acceptance criterion | Est. |
+|---|---|---|---|
+| 1 | Live LLM reply (F2B.19): Sonnet 5.5 with the R3 system prompt for non-flagged messages, the scripted reply as fallback; key held server-side in a Vercel function, never in the client | AC1 (flag in ≤ 2 s must still hold with a model call in the path); AC9 (the cancel must also stop an in-flight model call) | 3 h |
+| 2 | Playwright for the timed criteria through the UI, at 60× demo speed: escalation at 10 business minutes, 24 h template picker, re-flag after 30 min with no human reply, outage → Error | AC3, AC6, AC8, AC11 (today proven by unit tests only) | 2 h |
+| 3 | Tests that Claim clears the SLA clock and Return clears the no-reply clock (today the code does it, but only the firing is tested) | AC3, AC8 | 1 h |
+| 4 | Metrics strip: "in SLA %" and "takeovers today" (F2B.18) | AC3 (makes SLA misses visible to the manager) | 1 h |
+| 5 | A Devanagari Hindi chat in the seed, plus a screenshot of "बंद करो" opting out | AC7 ("STOP" or "band karo" in any open state) | 0.5 h |
+| 6 | Unit tests for the lead summary's budget, timeline and score | AC1 (the card a consultant sees when the flag fires) | 0.5 h |
+
+Beyond one day: a shared backend (Supabase, with the `state_version` check in the database) so two real browsers can race a claim. Today the second consultant is simulated in one browser (AC2, AC10).
