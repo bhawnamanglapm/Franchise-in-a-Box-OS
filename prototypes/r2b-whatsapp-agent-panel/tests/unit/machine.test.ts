@@ -56,6 +56,19 @@ describe('AC2: two consultants claim the same flag', () => {
   })
 })
 
+describe('9-step test, step 3: the AI does not reply while a person handles the chat', () => {
+  it('after a claim, new prospect messages queue nothing and send nothing from the AI', () => {
+    let w = fresh()
+    w = must(w, { type: 'claim', convId: 'c5', by: 'neha', seenVersion: ver(w, 'c5'), requestId: 'c' })
+    const before = aiMsgs(w, 'c5').length
+    w = must(w, { type: 'inbound', convId: 'c5', text: 'Aur royalty kitni hai?' })
+    expect(w.queue).toEqual([])
+    w = advance(w, MIN)
+    expect(aiMsgs(w, 'c5').length).toBe(before)
+    expect(w.conversations.c5.state).toBe('HUMAN_ACTIVE')
+  })
+})
+
 describe('AC3: an unclaimed flag escalates at 10 business minutes', () => {
   it('escalates at 10 minutes, not before', () => {
     let w = fresh() // c5 was flagged at 13:56
