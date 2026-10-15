@@ -3,7 +3,7 @@
 Take-home assignment for the **AI Product Manager / AI Product Builder** role at Scale100x.ai.
 This repo is the working space for the submission: planning, requirement breakdowns, architecture and the code for the Task 2 prototype (Option B).
 
-> **Status:** R1 (Task 1) output done in [`outputs/R1-product-thinking/`](outputs/R1-product-thinking/README.md). Task 2 is **Option B only** (D-10): the WhatsApp AI Agent Panel is built in [`prototypes/r2b-whatsapp-agent-panel/`](prototypes/r2b-whatsapp-agent-panel/); deploy, write-up and the R5 model are next.
+> **Status:** R1 (Task 1) output done in [`outputs/R1-product-thinking/`](outputs/R1-product-thinking/README.md). Task 2 is **Option B only** (D-10): the WhatsApp AI Agent Panel is built in [`prototypes/r2b-whatsapp-agent-panel/`](prototypes/r2b-whatsapp-agent-panel/) and live at **https://fiab-r2b-whatsapp-agent-panel.vercel.app**; the 9-step browser test, write-up and the R5 model are next.
 > **Time:** ~11 h of focused work estimated. **Quality comes first, and estimates are for planning only, not cut-off points (D-07).** Steps run in the order below; submit as soon as R8 passes, inside the 72 h deadline.
 
 ---

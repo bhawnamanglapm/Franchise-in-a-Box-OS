@@ -40,7 +40,7 @@ Checks every feature in [`features.md`](../../docs/requirements/R2B-whatsapp-age
 
 | ID | Component | MoSCoW | Status | Evidence / what's missing |
 |---|---|---|---|---|
-| F2B.W1 | Live URL | M | Not started | Deploy comes after the 9-step Playwright run |
+| F2B.W1 | Live URL | M | Done | https://fiab-r2b-whatsapp-agent-panel.vercel.app, a new Vercel project (existing projects untouched); page and assets return 200 with no login; [live screenshots](screenshots/live-desktop.png). The 9-step Playwright run on it is not done yet |
 | F2B.W2 | Exact prompts used, in order | M | Partial | 7 prompts logged verbatim in [build-log.md](build-log.md) |
 | F2B.W3 | What AI got wrong | M | Partial | 12 entries in the build log (component, symptom, cause) |
 | F2B.W4 | What I fixed manually | M | Partial | Each entry has its fix plus "Caught by" and "Fixed by", so the write-up can say honestly who did what |

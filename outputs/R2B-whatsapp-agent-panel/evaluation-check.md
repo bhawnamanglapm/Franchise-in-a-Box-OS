@@ -6,7 +6,7 @@ Checks [`evaluation.md`](../../docs/requirements/R2B-whatsapp-agent-panel/evalua
 
 | # | Item | Status | Where |
 |---|---|---|---|
-| 1 | Live URL | Not started | Deploy after the Playwright 9-step run |
+| 1 | Live URL | Done | https://fiab-r2b-whatsapp-agent-panel.vercel.app is public (no login) and checked at 1440 px and 375 px. The 9-step Playwright run against it is still to do |
 | 2 | Exact prompts used | In progress | [build-log.md](build-log.md): 7 prompts, verbatim |
 | 3 | What AI got wrong | In progress | build-log.md: 12 entries |
 | 4 | What you fixed manually | In progress | build-log.md: 12 fixes, each with "Caught by" and "Fixed by" so the write-up is honest about who did what |

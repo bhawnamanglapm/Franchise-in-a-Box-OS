@@ -6,7 +6,7 @@
 - **Tools:** Claude Code (Claude Opus 5.5) builds and tests the app; the human gives the prompts and reviews it. Deployed to Vercel.
 - **Why not Lovable:** decision D-01 was revised on 15 Oct 2026. The person building chose "Claude Code builds" so the state machine and trigger engine could be unit-tested and the 9-step script automated.
 - **Start time:** 2026-10-15 15:47 IST
-- **Deployed URL:** (filled in at deploy)
+- **Deployed URL:** https://fiab-r2b-whatsapp-agent-panel.vercel.app (deployed 2026-10-15 18:0x IST; a new Vercel project of its own, separate from the account's existing projects; opens with no login)
 
 ## Prompt log (exact prompts, verbatim)
 
@@ -21,6 +21,9 @@ Matches [`build-log-template.md`](../../docs/requirements/R2B-whatsapp-agent-pan
 | 5 | 16:2x | Claude Code | "are all steps built or just steps written - i want actual prototype now" | Honest answer: only the engine was built, with no screen. Then built the whole UI: store, header + badge + agent strip, nav, inbox, thread, conversation header with dialogs, Why-flagged card, lead summary, composer, simulate panel, toasts, footer, 375 px layout. Screenshots at desktop and 375 px in [screenshots/](screenshots/) | 5, 6, 7, 8 |
 | 6 | 16:50 | Claude Code | "Check if its correct-" followed by the full assignment brief, pasted | Compared the build with the brief. Found: Task 2 says "Choose ONE" but the plan built all three options (D-10); Module 4's Agent Switchboard and live tracking of leads, messages and conversations were missing; "what you fixed manually" needed to say who caught and fixed each issue. Asked one question: B only, or all three? | 9, 10 |
 | 7 | 16:52 | Claude Code | "r2b" | Task 2 = Option B only. D-10 revised; A and C marked "not being built" (folders kept). Added the Agent Switchboard and live counts; removed the A/C footer text; facts now point to R5; docs and diagrams updated; this log gained the "Caught by" and "Fixed by" columns | 11, 12 |
+| 8 | 18:0x | Claude Code | "link of the build", then the five submission items pasted, then choice "Yes, use it (Recommended)" (the Vercel account to deploy under) | Said there was no live URL yet, only localhost; rebuilt `dist` and scanned it for keys | — |
+| 9 | 18:0x | Claude Code | "it shld not affect previous project on versel" | Deployed as a brand-new project, `fiab-r2b-whatsapp-agent-panel`, after listing the account's 2 existing projects to confirm no name clash. The built `dist` was deployed from a separate folder, so no existing project was linked or redeployed | 13 |
+| 10 | 18:0x | Claude Code | "try now" (after approving the Vercel login in the browser) | Deploy done; checked the live URL with no login (page, JS, CSS and favicon all 200) and screenshotted it at 1440 px and 375 px | — |
 
 ## What the AI got wrong, and what was fixed
 
@@ -40,6 +43,7 @@ Matches [`build-log-template.md`](../../docs/requirements/R2B-whatsapp-agent-pan
 | 10 | Feature coverage (header, inbox) | Module 4 in the brief lists an Agent Switchboard (Meta Ads, WhatsApp, Voice, Email agents) and live tracking of leads, messages and conversations. Neither was on screen | The build brief was written from the R2B feature list, which didn't include them. The brief's module description was not re-read before building | Added a switchboard row (WhatsApp AI live; the other three shown but greyed, "not part of this prototype") and a live-counts row (leads, messages today with the AI share, active chats, needs human), recomputed on every tick. Logged as F2B.24 and F2B.25 | You asked "Check if its correct"; Claude Code's comparison with the brief found it | Claude Code | 1 build + 1 screenshot rerun |
 | 11 | Live counts (`Inbox.tsx`) | At desktop width the stat labels were cut off: "MESSAGE…", "ACTIVE C…", "NEEDS HU…" | Labels were set to truncate in a 320 px column split four ways | Labels wrap onto two lines instead of truncating | Claude Code, reviewing its own desktop screenshot | Claude Code | 1 rerun |
 | 12 | Brand-facts label (`approvedFacts.ts`) | Footer still said facts would be "replaced by the approved Model Card (R2C)" after R2C was dropped | The label was written when C was meant to supply B's facts (A32, before the revision) | Label and code comments now point to the R5 financial model; A32 revised | Claude Code, reviewing its own desktop screenshot | Claude Code | 1 rerun |
+| 13 | Deploy | The Vercel connector refused to list or create projects: "403 forbidden … scope pehchan-the-traveller". The Vercel CLI on this machine was not logged in | The connector's token had no access to the account's team scope. This was a tooling problem, not a code bug | Switched to the Vercel CLI: you approved a device login in the browser, then the built files were deployed under a new project name | Claude Code (the deploy call failed) | You approved the login; Claude Code deployed | ~5 min |
 
 ## Things to watch for (from the template)
 
