@@ -21,4 +21,4 @@
 ## Access
 - [ ] Doc, prototype and model open in incognito
 - [ ] PDF exported with working links
-- [ ] Submitted ≥ 12 h before the deadline; timestamp recorded
+- [ ] Submitted today; timestamp recorded

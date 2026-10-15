@@ -46,6 +46,6 @@ All assumptions are stated openly in the submission. IDs are cited wherever an a
 | D-04 | 30-day order: Sales Agent + CRM slice → thin ROI → thin Onboarding → Collateral deferred | **Proposed, awaiting confirmation** | — |
 | D-05 | Badge reframed as "AI: 76% of work \| Humans: 100% of closes", computed live | **Proposed, awaiting confirmation** | — |
 | D-06 | Takeover SLA of 10 business minutes, 09:00–21:00 IST | **Proposed, awaiting confirmation** | — |
-| D-07 | 72-hour clock start time (sets the submit time) | **Open, needs input** | — |
+| D-07 | No fixed timeline: complete everything today in one sprint and submit when R8 passes | Confirmed | Today |
 | D-08 | Default LLM for the WhatsApp agent | Open, decided in R3 | — |
 | D-09 | Final Task 4 top 4 | Open, decided in R4 | — |

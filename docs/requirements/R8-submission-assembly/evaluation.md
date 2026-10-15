@@ -20,13 +20,13 @@ Submit as:
 |---|---|
 | Doc or PDF? | Both: the Google Doc as primary, the PDF as backup (A16) |
 | Should Task 2 and 5 write-ups also appear in the doc? | Yes, a short section with the links + TL;DR, so the doc is the single entry point |
-| Deadline time | Depends on when the clock started (D-07 open) |
+| Deadline time | Not a constraint: finished and submitted today (D-07) |
 
 ## Risks
 | Risk | Mitigation |
 |---|---|
 | Permission errors ("request access") | Incognito test of every link |
-| Late or rushed submission | Submit ≥ 12 h early |
+| Rushed or fatigued final hour | QA (R8) is a hard gate; take a break before assembly |
 | Contradictions between tasks | Consistency checklist |
 
 ## Effort and priority

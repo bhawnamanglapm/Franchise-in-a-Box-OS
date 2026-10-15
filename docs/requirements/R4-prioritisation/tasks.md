@@ -1,6 +1,6 @@
 # R4: Prioritisation: detailed tasks
 
-Total estimate: **0.5 h** (Day 1, after R1).
+Total estimate: **0.5 h** (block A, after R1).
 
 | # | Task | Output | Est. | Owner | Depends on |
 |---|---|---|---|---|---|

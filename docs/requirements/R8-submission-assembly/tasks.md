@@ -1,6 +1,6 @@
 # R8: Submission & Assembly: detailed tasks
 
-Total estimate: **1 h** (Day 3) + 0.5 h live prep after submitting.
+Total estimate: **1 h** (block C) + 0.5 h live prep after submitting.
 
 | # | Task | Output | Est. | Owner | Depends on |
 |---|---|---|---|---|---|

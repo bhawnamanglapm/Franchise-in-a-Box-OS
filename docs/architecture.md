@@ -242,30 +242,31 @@ flowchart LR
   R7 --> DOC
   R2 --> URL["Live URL"]
   R5 --> SHEET["Google Sheet"]
-  DOC --> SUB["Submit ≥ 12 h early"]
+  DOC --> SUB["Submit today"]
   URL --> SUB
   SHEET --> SUB
 ```
 
 ```mermaid
 gantt
-  title 3-day plan (~4 h per day)
+  title One-day sprint (relative hours, no fixed clock)
   dateFormat HH:mm
   axisFormat %H:%M
-  section Day 1
+  todayMarker off
+  section Block A: decide
   R1 Product thinking      :r1, 00:00, 90m
   R4 Prioritisation        :r4, after r1, 30m
   R3 Agent design          :r3, after r4, 60m
   R2 Build brief + prompts :rb, after r3, 30m
-  section Day 2
-  R2 Build (freeze 2 h)    :r2, 00:00, 120m
+  section Block B: build
+  R2 Build (freeze 2 h)    :r2, after rb, 120m
   R2 Ship + write-up       :r2s, after r2, 45m
   R5 Model (part 1)        :r5, after r2s, 75m
-  section Day 3
-  R5 Model (part 2)        :r5b, 00:00, 45m
+  section Block C: finish
+  R5 Model (part 2)        :r5b, after r5, 45m
   R6 Automation + research :r6, after r5b, 60m
   R7 How I work            :r7, after r6, 30m
   R8 Assemble + submit     :r8, after r7, 60m
 ```
 
-The Gantt uses relative hours within each day. Absolute dates are set once D-07 (the clock start) is known.
+The Gantt shows elapsed hours from the moment you start. There are no fixed clock times (D-07); breaks aren't drawn.

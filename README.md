@@ -4,7 +4,7 @@ Take-home assignment for the **AI Product Manager / AI Product Builder** role at
 This repo is the working space for the submission: planning, requirement breakdowns, architecture and (later) the prototype code.
 
 > **Status:** Planning complete through Phase 2 (Task 1 drafted). Build and model not started.
-> **Time budget:** ~10.25 h of focused work across 3 days (~4 h/day), submit with ~12 h buffer before the 72 h deadline.
+> **Time budget:** ~10.25 h of focused work, done as **one continuous sprint today** with no fixed clock times. Steps run in the order below; submit as soon as R8 passes (well inside the 72 h deadline).
 
 ---
 
@@ -147,21 +147,23 @@ flowchart LR
 
 Detailed, numbered tasks live in each requirement's `tasks.md`. Master view:
 
-| # | Task | Req | Est. | Day | Owner |
+| # | Task | Req | Est. | Block | Owner |
 |---|---|---|---|---|---|
-| 1 | Confirm Phase 2 decisions (D-04, D-05, D-06) | R1 | 5 m | 1 | You |
-| 2 | Finalise 1a ranking, 1b table + split tab, 1c spec | R1 | 1.5 h | 1 | You + Claude |
-| 3 | Rank top 4 features, Month 2 / Cut, QSR variation | R4 | 0.5 h | 1 | You + Claude |
-| 4 | Write HITL triggers, system prompt (word-count), model choice, eval | R3 | 1 h | 1 | You + Claude |
-| 5 | Write build brief + Lovable prompt sequence | R2 | (in 4) | 1 | Claude |
-| 6 | Build prototype in Lovable; log prompt → error → fix | R2 | 2 h | 2 | You |
-| 7 | Deploy, run 5-point test, write Task 2 section | R2 | 0.75 h | 2 | You |
-| 8 | Build FreshBrew model in Sheets; run integrity checks | R5 | 2 h | 2–3 | You + Claude |
-| 9 | 6A lead-flow design + diagram | R6 | 0.4 h | 3 | You + Claude |
-| 10 | 6B research: verify every number and source | R6 | 0.6 h | 3 | Claude drafts, you verify |
-| 11 | Task 7 answers with proof links | R7 | 0.5 h | 3 | You |
-| 12 | Assemble doc, exec summary, QA, incognito link test, submit | R8 | 1 h | 3 | You |
-| 13 | Live-session prep (after submission) | — | 0.5 h | 3 | You + Claude |
+| 1 | Confirm Phase 2 decisions (D-04, D-05, D-06) | R1 | 5 m | A | You |
+| 2 | Finalise 1a ranking, 1b table + split tab, 1c spec | R1 | 1.5 h | A | You + Claude |
+| 3 | Rank top 4 features, Month 2 / Cut, QSR variation | R4 | 0.5 h | A | You + Claude |
+| 4 | Write HITL triggers, system prompt (word-count), model choice, eval | R3 | 1 h | A | You + Claude |
+| 5 | Write build brief + Lovable prompt sequence | R2 | (in 4) | A | Claude |
+| 6 | Build prototype in Lovable; log prompt → error → fix | R2 | 2 h | B | You |
+| 7 | Deploy, run 5-point test, write Task 2 section | R2 | 0.75 h | B | You |
+| 8 | Build FreshBrew model in Sheets; run integrity checks | R5 | 2 h | B–C | You + Claude |
+| 9 | 6A lead-flow design + diagram | R6 | 0.4 h | C | You + Claude |
+| 10 | 6B research: verify every number and source | R6 | 0.6 h | C | Claude drafts, you verify |
+| 11 | Task 7 answers with proof links | R7 | 0.5 h | C | You |
+| 12 | Assemble doc, exec summary, QA, incognito link test, submit | R8 | 1 h | C | You |
+| 13 | Live-session prep (after submission) | — | 0.5 h | C | You + Claude |
+
+**Blocks (one day, take a 10-minute break between them):** A = decide (R1, R4, R3, ~3.5 h) · B = build (R2 prototype, R5 model, ~4.75 h) · C = finish (R6, R7, R8, ~2 h).
 
 **Freeze rules:** stop adding prototype features at 2 h of building · finish the model's base case and sensitivity before polishing it · any 6B number not sourced within 5 minutes becomes a stated assumption.
 
@@ -177,7 +179,7 @@ The submission is done when **all** of the following are true:
 - [ ] R1, R3, R4, R6A and R2 tell one consistent story. Any change between R1 and R4 is explained.
 - [ ] The founder skim test passes: the main decisions can be read from headings and TL;DRs alone.
 - [ ] Task 7 contains only real tools and real experience. Nothing is invented.
-- [ ] Submitted at least 12 hours before the 72-hour deadline.
+- [ ] Submitted the same day, as soon as R8 passes.
 
 ## 13. Repo map
 
@@ -206,4 +208,3 @@ See [`docs/assumptions-and-decisions.md`](docs/assumptions-and-decisions.md#deci
 - **D-04:** 30-day order, with Sales Agent + CRM as one slice first and Collateral Studio deferred.
 - **D-05:** reframe the badge as "AI: 76% of work | Humans: 100% of closes".
 - **D-06:** takeover SLA of 10 business minutes, business hours 09:00–21:00 IST.
-- **D-07:** the time the 72-hour clock started, to fix the submit time.

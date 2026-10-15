@@ -1,6 +1,6 @@
 # R5: Financial Model: detailed tasks
 
-Total estimate: **2 h** (Day 2 after R2, finishing Day 3 if needed).
+Total estimate: **2 h** (block B, after R2).
 
 | # | Task | Output | Est. | Owner | Depends on |
 |---|---|---|---|---|---|

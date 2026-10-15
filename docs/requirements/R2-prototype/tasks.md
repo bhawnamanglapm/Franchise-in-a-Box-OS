@@ -1,11 +1,11 @@
 # R2: Prototype: detailed tasks
 
-Total estimate: **2.75 h** (Day 2, while fresh). The 2 h build freeze applies to T2.04–T2.11.
+Total estimate: **2.75 h** (block B, first thing after the decisions are locked). The 2 h build freeze applies to T2.04–T2.11.
 
 | # | Task | Output | Est. | Owner | Depends on |
 |---|---|---|---|---|---|
-| T2.01 | Write the one-page build brief (screens, components, mock data, interactions, tokens) | Build brief | (Day 1) | Claude | R1 1c, R3 |
-| T2.02 | Write the Lovable prompt sequence: scaffold + tokens → inbox → thread → rules → state machine → panel → states → polish | Prompt pack | (Day 1) | Claude | T2.01 |
+| T2.01 | Write the one-page build brief (screens, components, mock data, interactions, tokens) | Build brief | (block A) | Claude | R1 1c, R3 |
+| T2.02 | Write the Lovable prompt sequence: scaffold + tokens → inbox → thread → rules → state machine → panel → states → polish | Prompt pack | (block A) | Claude | T2.01 |
 | T2.03 | Create the Lovable project; connect GitHub; open `build-log-template.md` | Project + log | 5 m | You | — |
 | T2.04 | Prompt 1: scaffold, design tokens, shell, nav, badge placeholder. **Check the hex values in the generated code.** | F2.01 | 15 m | You | T2.03 |
 | T2.05 | Prompt 2: mock data (10 conversations, 2 brands, EN/HI/Hinglish) + inbox + chips + filter | F2.03, F2.06 | 20 m | You | T2.04 |

@@ -1,6 +1,6 @@
 # R3: AI Agent Design: detailed tasks
 
-Total estimate: **1 h** (Day 1, after R4).
+Total estimate: **1 h** (block A, after R4).
 
 | # | Task | Output | Est. | Owner | Depends on |
 |---|---|---|---|---|---|

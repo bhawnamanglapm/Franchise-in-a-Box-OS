@@ -1,6 +1,6 @@
 # R1: Product Thinking: detailed tasks
 
-Total estimate: **1.5 h** (Day 1). Order = execution order.
+Total estimate: **1.5 h** (block A). Order = execution order.
 
 | # | Task | Output | Est. | Owner | Depends on |
 |---|---|---|---|---|---|

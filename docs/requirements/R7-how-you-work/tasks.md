@@ -1,6 +1,6 @@
 # R7: How You Work: detailed tasks
 
-Total estimate: **0.5 h** (Day 3).
+Total estimate: **0.5 h** (block C).
 
 | # | Task | Output | Est. | Owner | Depends on |
 |---|---|---|---|---|---|
