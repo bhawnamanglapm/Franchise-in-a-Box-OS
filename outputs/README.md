@@ -4,7 +4,7 @@ Finished deliverables, one folder per requirement. The plans behind them live in
 
 | Order | Requirement | Folder | Status |
 |---|---|---|---|
-| 1 | R1 Product Thinking (Task 1) | [R1-product-thinking](R1-product-thinking/README.md) | Written; Sheet tab still to import |
+| 1 | R1 Product Thinking (Task 1) | [R1-product-thinking](R1-product-thinking/README.md) | Done |
 | 2 | R4 Prioritisation (Task 4) | — | Next |
 | 3 | R3 AI Agent Design (Task 3) | — | Not started |
 | 4 | R2B WhatsApp AI Agent Panel (Task 2B) | — | Not started |

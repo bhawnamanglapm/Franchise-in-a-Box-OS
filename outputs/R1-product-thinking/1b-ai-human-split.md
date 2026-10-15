@@ -4,7 +4,7 @@
 
 ## 1. Action map
 
-All 37 user-facing actions are listed in [`ai-human-split.csv`](ai-human-split.csv), which imports straight into the Sheet tab `AI_Human_Split`. [`ai-human-split.xlsx`](ai-human-split.xlsx) is the same data with every formula below already built in. Each action has an owner:
+All 37 user-facing actions are listed in [`ai-human-split.csv`](ai-human-split.csv), which imports straight into the Sheet tab `AI_Human_Split`. [`ai-human-split.xlsx`](ai-human-split.xlsx) is the same data with every formula below already built in, and it's live as a [Google Sheet](https://docs.google.com/spreadsheets/d/1pl8JSEAvlPR1mexlfx0cwiFMPU-B4-QJFga4N31pl1o/edit?usp=sharing). Each action has an owner:
 
 - **AI:** done end to end by AI.
 - **AI→H:** AI drafts, a human approves.
