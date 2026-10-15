@@ -8,7 +8,7 @@ Total estimate: **1.5 h** (Decide block). Order = execution order.
 | T1.02 | Finalise the 1a ranking table; tighten each "why now" to one line | F1.1 | 10 m | You + Claude | T1.01 |
 | T1.03 | Write the dependency-trap paragraph and day-30 success criteria | F1.2, F1.3, F1.4 | 10 m | You + Claude | T1.02 |
 | T1.04 | Create Sheet tab `AI_Human_Split`: 37 rows × (module, action, owner, freq/month, manual minutes, AI share of minutes, value weight) | F1.5, F1.6 | 20 m | You | — |
-| T1.05 | Add formulas: count (generous and strict), time-weighted, value-weighted. Confirm the outputs: 76 / 68 / 79 / 56%. | F1.6 | 10 m | You | T1.04 |
+| T1.05 | Add formulas: count (generous and strict), time-weighted, value-weighted. Confirm the outputs: 68 / 81 / 87 / 68% (strict / generous / time / value). | F1.6 | 10 m | You | T1.04 |
 | T1.06 | Write the 76% verdict and the capacity insight, citing A19/A20 | F1.7, F1.8 | 5 m | You + Claude | T1.05 |
 | T1.07 | Write the Autonomy Rate definition, event schema, audit and investor view | F1.9–F1.11 | 10 m | You + Claude | T1.01 |
 | T1.08 | Finalise the 1c spec: stories, states, transitions, UI, states, validation, edges, AC, metrics | F1.12–F1.19 | 15 m | You + Claude | T1.01 |

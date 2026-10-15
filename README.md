@@ -3,7 +3,7 @@
 Take-home assignment for the **AI Product Manager / AI Product Builder** role at Scale100x.ai.
 This repo is the working space for the submission: planning, requirement breakdowns, architecture and (later) the code for the three prototypes.
 
-> **Status:** Planning complete through Phase 2 (Task 1 drafted). All three Task 2 prototypes are planned (D-10); build and model not started.
+> **Status:** R1 (Task 1) output done in [`outputs/R1-product-thinking/`](outputs/R1-product-thinking/README.md). All three Task 2 prototypes are planned (D-10); build and model not started.
 > **Time:** ~15 h of focused work estimated. **Quality comes first, and estimates are for planning only, not cut-off points (D-07).** Steps run in the order below; submit as soon as R8 passes, inside the 72 h deadline.
 
 ---
@@ -56,7 +56,7 @@ The next round is a 60-minute live working session, so every decision here must 
 | Problem in the brief | How the submission resolves it |
 |---|---|
 | Five modules, no stated priority | Rank by revenue path and dependency. Ship the lead-to-close slice first (R1, R4). |
-| "76% AI" is undefined and reads as a vanity number | Compute it three ways (count 76%, time 79%, value 56%) and redefine it as an audited **Autonomy Rate** (R1). |
+| "76% AI" is undefined and reads as a vanity number | Compute it three ways (count 68–81%, time 87%, value 68%; 76.5% for the day-30 slice) and redefine it as an audited **Autonomy Rate** (R1). |
 | "HITL takeover" is one line with no behaviour defined | A developer-ready state machine: 7 states, 9 transitions, SLA, 24 h WhatsApp window, opt-out (R1, R2B). |
 | FreshBrew has no inputs; ₹6L/8L/10L is ambiguous | Sourced assumption ranges; stated interpretation as **monthly gross sales per outlet** (R5). |
 | Scale100x's own revenue model is not public | Stated as an editable assumption: setup fee + retainer + success fee per franchisee (R5). |
@@ -221,7 +221,7 @@ docs/
   architecture.md                 ← Mermaid architecture sheet
   architecture-components.csv     ← component sheet (import to Sheets)
   diagrams/                       ← PNG export of every Mermaid diagram
-  assumptions-and-decisions.md    ← A1–A33 register + decision log
+  assumptions-and-decisions.md    ← A1–A35 register + decision log
   requirements/
     README.md                     ← evaluation matrix for R1–R8
     R1-product-thinking/          ← evaluation · features · tasks · phases · definition-of-done
@@ -234,15 +234,14 @@ docs/
     R6-automation-research/
     R7-how-you-work/
     R8-submission-assembly/
+outputs/                          ← finished deliverables, one folder per requirement
+  README.md                       ← index and status
+  R1-product-thinking/            ← 1a, 1b (+ action-map CSV), 1c
 ```
 
-## 14. Open decisions (blocking)
+## 14. Open decisions
 
-See [`docs/assumptions-and-decisions.md`](docs/assumptions-and-decisions.md#decision-log). Currently awaiting confirmation:
-
-- **D-04:** 30-day order, with Sales Agent + CRM as one slice first and Collateral Studio deferred.
-- **D-05:** reframe the badge as "AI: 76% of work | Humans: 100% of closes".
-- **D-06:** takeover SLA of 10 business minutes, business hours 09:00–21:00 IST.
+See [`docs/assumptions-and-decisions.md`](docs/assumptions-and-decisions.md#decision-log). D-04, D-05 and D-06 were confirmed on 15 Oct 2026. Still open, decided inside their requirement: D-08 (default LLM, R3) and D-09 (Task 4 top 4, R4).
 
 Decided while building, not blocking:
 

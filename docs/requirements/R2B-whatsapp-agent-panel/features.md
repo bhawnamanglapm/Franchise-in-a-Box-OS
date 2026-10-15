@@ -14,7 +14,7 @@ MoSCoW against a **2-hour build estimate**. Anything not built moves to "1 more 
 | F2B.06 | Realistic mock data | EN / Hindi / Hinglish messages; investment ranges in ₹ lakh; Tier 1/2 cities; 2 brands | M | A26 |
 | F2B.07 | Trigger engine | Deterministic rules from R3 (keywords, investment threshold, repeat counter, sentiment keywords) run on each inbound message | M | R3 Part A |
 | F2B.08 | "Why flagged" card | Lists the rule names and the values that fired | M | 1c |
-| F2B.09 | Takeover state machine | States AI_ACTIVE → FLAGGED → HUMAN_ACTIVE → RETURNED / CLOSED / OPTED_OUT, with guards | M | 1c transitions |
+| F2B.09 | Takeover state machine | The 7 states and 9 transitions of the 1c spec (AI_ACTIVE, FLAGGED, ESCALATED, HUMAN_ACTIVE, CLOSED_WON, CLOSED_LOST, OPTED_OUT), with guards; Return to AI goes back to AI_ACTIVE | M | 1c transitions |
 | F2B.10 | Take over / Claim / Return to AI buttons | Return requires a reason (dropdown); compliance flags require "Resolved" | M | T2, T3, T6 |
 | F2B.11 | Composer rules | Disabled in AI_ACTIVE; "AI paused" banner in HUMAN_ACTIVE | M | 1c composer |
 | F2B.12 | Simulate inbound message box | Reviewer types a prospect message; rules evaluate; state updates live | M | Proves "working" |

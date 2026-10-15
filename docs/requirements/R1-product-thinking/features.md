@@ -11,7 +11,7 @@ MoSCoW: **M** = Must, **S** = Should, **C** = Could, **W** = Won't (this submiss
 | F1.5 | Action map: 37 actions × owner (AI / AI→H / H) | M | The doc shows a grouped table; the full table goes in an appendix or Sheet tab |
 | F1.6 | Three-way split calculation (count, time, value) with inputs visible | M | Reproducible Sheet tab |
 | F1.7 | Verdict on 76% (workload yes; value no; live at launch no; hardcoded no) | M | |
-| F1.8 | Consultant capacity insight (about 68 h per brand per month → about 2.5 brands per consultant) | S | Commercial translation |
+| F1.8 | Consultant capacity insight (about 59 h per brand per month → about 2.7 brands per consultant, vs 0.35 without AI; A35) | S | Commercial translation |
 | F1.9 | Autonomy Rate definition, event schema, unedited-approval rule | M | |
 | F1.10 | Audit design: weekly 50-conversation QA sample; missed-escalation and wrong-answer rates | M | |
 | F1.11 | Investor view: badge reframe + 3 outcome metrics | M | Depends on D-05 |

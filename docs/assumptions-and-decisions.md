@@ -27,8 +27,8 @@ All assumptions are stated openly in the submission. IDs are cited wherever an a
 | A19 | Volumes | Per brand per month: 500 leads, about 150 voice calls, 60 takeovers, 20 discovery calls, 3 signed | Illustrative and internally consistent, **not sourced** | R1 |
 | A20 | Weights | Standard minutes and 1–5 value weights per action are candidate estimates, to be calibrated in the pilot | Estimate | R1 |
 | A21 | Pilot | 30-day release goes to 2 existing brands | Scale100x already has 20+ onboarded brands | R1, R4 |
-| A22 | SLA | Flag must be claimed within 10 business minutes; business hours 09:00–21:00 IST | Product choice, not research (pending D-06) | R1, R2B, R3 |
-| A23 | WhatsApp rules | 24-hour customer-service window and a 4,096-character text limit. Error code 131047 to be verified against current Meta docs. | Meta platform rules | R1, R2B |
+| A22 | SLA | Flag must be claimed within 10 business minutes; business hours 09:00–21:00 IST | Product choice, not research (D-06, confirmed) | R1, R2B, R3 |
+| A23 | WhatsApp rules | 24-hour customer-service window; a free-form send after it fails with error 131047 (send a template instead); 4,096-character text limit. | **Verified** 15 Oct 2026 against Meta's Cloud API error-code page and text-message docs (sources in `outputs/R1-product-thinking/1c-takeover-spec.md`) | R1, R2B |
 | A24 | QSR variation | "Focused on lead generation" means the partner judges Scale100x on qualified leads delivered, not on closures | Interpretation of the brief | R4 |
 | A25 | Confidence | Low confidence = model/classifier confidence below threshold OR no matching approved fact found | Design choice | R3 |
 | A26 | Mock data | FreshBrew (from the brief) + one fictional gym brand; no real company names | Avoid implying real clients | R2A, R2B, R2C |
@@ -39,6 +39,8 @@ All assumptions are stated openly in the submission. IDs are cited wherever an a
 | A31 | Readiness Score | Rule-based v0 rubric: 5 weighted sub-scores (unit economics, proof of concept, documentation, channel concentration, franchise terms), each Red/Amber/Green with the rule and threshold shown. Thresholds are design choices, to be calibrated on real outcomes. | The brief doesn't define the score | R2A |
 | A32 | Single source of numbers | Prototype C uses the R5 Sheet's base-case inputs and formulas, so the same inputs give the same outputs. Prototype B's agent quotes only C's approved Model Card facts. | Avoids three different FreshBrew numbers | R2B, R2C, R5 |
 | A33 | Benchmarks | India + US benchmarks are shown only with a source and date; anything unsourced is labelled "illustrative" or left out | No benchmark data in the brief; no invented numbers | R2C, R4 |
+| A34 | Set-up amortisation | One-off brand set-up actions (onboarding, model, collateral) are spread over a 6-month engagement: frequency 1/6 per month in the action map | Estimate; makes per-brand-per-month hours comparable | R1 |
+| A35 | Consultant capacity | One consultant has 160 productive hours a month (8 h × 20 working days) | Estimate | R1 |
 
 ## Decision log
 
@@ -47,9 +49,9 @@ All assumptions are stated openly in the submission. IDs are cited wherever an a
 | D-01 | Prototype B (WhatsApp AI Agent Panel) is built in Lovable with GitHub sync; scripted replies plus a stretch LLM goal. Originally "Task 2 = Option B"; scope widened by D-10. | Confirmed | Day 0 |
 | D-02 | Task 5 = FreshBrew main view plus portfolio scenario | Confirmed | Day 0 |
 | D-03 | Task 6B framed as Scale100x's go/no-go decision on the category | Confirmed | Day 0 |
-| D-04 | 30-day order: Sales Agent + CRM slice → thin ROI → thin Onboarding → Collateral deferred | **Proposed, awaiting confirmation** | — |
-| D-05 | Badge reframed as "AI: 76% of work \| Humans: 100% of closes", computed live | **Proposed, awaiting confirmation** | — |
-| D-06 | Takeover SLA of 10 business minutes, 09:00–21:00 IST | **Proposed, awaiting confirmation** | — |
+| D-04 | 30-day order: Sales Agent + CRM slice → thin ROI → thin Onboarding → Collateral deferred | Confirmed | 15 Oct 2026 |
+| D-05 | Badge reframed as "AI: X% of work \| Humans: 100% of closes", where X is the live, audited Autonomy Rate (R1 1b) | Confirmed | 15 Oct 2026 |
+| D-06 | Takeover SLA of 10 business minutes, 09:00–21:00 IST | Confirmed | 15 Oct 2026 |
 | D-07 | Quality first: time estimates are for planning only, not cut-off points. Submit when R8 passes, inside the 72 h deadline. | Confirmed | Today |
 | D-08 | Default LLM for the WhatsApp agent | Open, decided in R3 | — |
 | D-09 | Final Task 4 top 4 | Open, decided in R4 | — |

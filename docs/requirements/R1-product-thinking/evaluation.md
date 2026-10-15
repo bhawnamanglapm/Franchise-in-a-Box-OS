@@ -16,13 +16,13 @@
 | Ambiguity | Resolution | Assumption |
 |---|---|---|
 | Team size for "30 days" | 2 engineers + 1 designer + PM, using AI tools | A7 |
-| What 76% is measured by | Computed three ways: count 76%, time 79%, value 56% | A5, A19, A20 |
+| What 76% is measured by | Computed three ways: count 68% strict / 81% generous, time 87%, value 68%; day-30 slice 76.5% | A5, A19, A20, A34 |
 | Who the users are | Consultants, brand founders, prospects | A6 |
 | Which feature is "unclear" | Conversation Takeover. The brief says only "Includes HITL takeover". | A18 |
 
 ## Position taken (draft complete, see Phase 2 in chat)
 - **1a:** (1) Sales Agent, thin, and (2) CRM, thin, ship as one lead-to-close slice → (3) thin ROI Engine (approved numbers for the agent) → (4) thin Onboarding → (5) Collateral Studio deferred. Existing brands let revenue work start on day 1.
-- **1b:** 76% only holds by action-type count with approval steps credited to AI. Redefine as an audited **Autonomy Rate**; show it with cost per signed franchisee and human hours per signed franchisee.
+- **1b:** 76% is plausible for workload (68–87%) but not for value (68%), and a 20% human edit rate moves it 14 points. Redefine as an audited **Autonomy Rate**; show it with cost per signed franchisee and human hours per signed franchisee.
 - **1c:** Takeover spec with 7 states, 9 transitions, SLA, 24 h window, opt-out, and measurable acceptance criteria.
 
 ## Risks
@@ -36,4 +36,4 @@
 - **Estimate:** 1.5 h (mostly done in Phase 2; remaining work is finalising and formatting)
 - **Priority:** P0. Every downstream requirement depends on it.
 - **Dependencies:** Phase 0 lens. **Feeds:** R4, R3, R2B (1c spec), R2A (1b onboarding actions).
-- **Status:** Draft complete. Awaiting D-04, D-05, D-06.
+- **Status:** Output written to `outputs/R1-product-thinking/`. D-04, D-05, D-06 confirmed; A23 verified. Remaining: import the CSV into the Sheet tab (T1.04–T1.05).
