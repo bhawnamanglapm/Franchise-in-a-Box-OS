@@ -1,46 +1,48 @@
 # R2B features status
 
-Checks every feature in [`features.md`](../../docs/requirements/R2B-whatsapp-agent-panel/features.md) against what is built. Updated as the build goes. **Last checked: 15 Oct 2026, after the engine step (46 unit tests passing).**
+Checks every feature in [`features.md`](../../docs/requirements/R2B-whatsapp-agent-panel/features.md) against what is built. Updated as the build goes. **Last checked: 15 Oct 2026, after the UI build and the B-only change (46 unit tests passing; commits 8b30977, 5c2b7a4, da0463c).**
 
-**Status key:** **Done** = built and proven · **Logic done** = engine built and unit-tested, no screen yet · **Partial** = some of it built · **Not started** · **Blocked** = waits on another requirement · **Won't** = out of scope by design
+**Status key:** **Built** = on screen; the logic is unit-tested where noted · **Seen** = also visible in the [screenshots](screenshots/) · **Partial** = some of it built · **Not started** · **Blocked** = waits on another requirement · **Dropped** / **Won't** = out of scope by decision. Nothing is marked **Done** until the 9-step Playwright run passes through the real UI.
 
-**Summary:** the engine behind 13 features is built and tested. No feature is visible yet, because the UI is the next step. 2 features are blocked on R2C and R2A.
+**Summary:** 19 features are built, and 14 of them are visible in the screenshots. 2 are partial (mock data has no Devanagari chat; the metrics strip lacks SLA % and takeovers today), 1 waits on R5 (approved facts), and the cross-prototype footer is dropped (D-10). The 9-step Playwright run is next.
 
 ## Screens and features
 
 | ID | Feature | MoSCoW | Status | Evidence / what's missing |
 |---|---|---|---|---|
-| F2B.01 | App shell + design tokens | M | Partial | All 5 hex tokens + Inter / JetBrains Mono are in `tailwind.config.js` (commit faa361a). Still missing: the shell, the nav, and a check of the hex values in the built CSS |
-| F2B.02 | Computed autonomy badge | M | Logic done | `engine/autonomy.ts` computes it from the ACTION_EVENT log with std minutes from `ai-human-split.csv`. Test "Autonomy Rate (1b §5)" proves it is computed and drops after a takeover. Badge + tooltip UI not built |
-| F2B.03 | Inbox list | M | Not started | — |
-| F2B.04 | SLA countdown | M | Logic done | `claimTimeLeft()` in `machine.ts`. Test AC3 proves escalation at exactly 10 business minutes, and 09:10 for after-hours flags. Countdown chip and red-under-2-min styling not built |
-| F2B.05 | Conversation thread | M | Logic done | The engine writes system events into the thread ("AI paused: Neha took over", "AI reply cancelled: …", "Escalated to Ravi…"). Bubbles not built |
-| F2B.06 | Realistic mock data | M | Partial | `data/conversations.ts`: 10 chats, 2 brands, EN + Hinglish, ₹ lakh, Tier 1/2 cities, masked phones, replayed through the engine. **Gap:** no message in Devanagari Hindi yet (the trigger tests cover `बंद करो`, but the seed has none) |
-| F2B.07 | Trigger engine | M | Logic done | `engine/triggers.ts`: rules F3.A1–A8 run on every inbound message. 23 tests. Uses the **draft** R3 rules (see D-12) |
-| F2B.08 | "Why flagged" card | M | Logic done | Every hit carries rule, label and the actual value (e.g. "Stated investment ₹50L, brand threshold ₹40L"); test AC1. Card not built |
-| F2B.09 | Takeover state machine | M | Logic done | `engine/machine.ts`: 7 states, T1–T9, "Only if" guards, `state_version` 409, requestId de-dup, queued reply cancel. Tests AC1–AC11 |
-| F2B.10 | Take over / Claim / Return buttons | M | Logic done | Commands and guards exist: Return needs a reason, A7 must be resolved, the draft must be empty (test AC4). Buttons not built |
-| F2B.11 | Composer rules | M | Logic done | Send is refused unless the person owns the chat; 4,096 limit (AC5). "AI paused" banner and disabled composer not built |
-| F2B.12 | Simulate inbound message box | M | Logic done | The `inbound` command runs the rules and the state machine. Box not built |
-| F2B.13 | Takeover panel | S | Partial | `summarise()` in `engine/agent.ts` gives budget, city, timeline, objections, last question, score, suggested reply. **Not unit-tested yet.** Panel not built |
-| F2B.14 | 24 h window indicator | S | Logic done | Free text refused after 24 h, template allowed (test AC6); `windowLeft()` for the countdown. Indicator and template picker not built |
-| F2B.15 | Opt-out | S | Logic done | STOP / band karo / Unsubscribe from any open state; every send blocked; START opts back in (test AC7). UI not built |
-| F2B.16 | Claim conflict demo | S | Logic done | Test AC2: the second claim gets "Already claimed by Priya at 14:00". "Simulate second consultant" button not built |
-| F2B.17 | Empty / loading / error states | S | Partial | Engine: failed send + retry without duplicates, failed takeover keeps the previous state (AC10, AC11). Empty, skeleton and error UI not built |
-| F2B.23 | Agent status strip | S | Logic done | Active / Paused / Error with auto-detection and recovery; only the manager can pause (tests AC11 + "agent pause"). Strip not built |
-| F2B.18 | Metrics strip | C | Not started | — |
-| F2B.19 | Stretch: live LLM reply | C | Not started | Out of scope for now (needs R3's model choice, D-08). Goes on the "1 more day" list unless time allows |
-| F2B.20 | Real WhatsApp / Supabase backend | W | Won't | By design (A11, A17) |
-| F2B.21 | Cross-prototype footer | S | Blocked | R2A and R2C don't exist yet. Plan: "coming soon" links until they ship (T2B.18) |
-| F2B.22 | Approved facts from R2C | S | Blocked | R2C not built. `data/approvedFacts.ts` holds **illustrative placeholders**, labelled in the file and to be labelled in the UI (A32) |
+| F2B.01 | App shell + design tokens | M | Built, Seen | Nav with the 5 modules (only Sales Agent active), header, footer. All 5 hex tokens found in the built CSS (hex or `rgb()` form); Inter + JetBrains Mono for numbers |
+| F2B.02 | Computed autonomy badge | M | Built, Seen | "AI: 66% of work \| Humans: 100% of closes", computed from the event log; falls to 60% after a claim (desktop screenshots). Tooltip shows the model / rules / human split. Test "Autonomy Rate (1b §5)" |
+| F2B.03 | Inbox list | M | Built, Seen | 10 chats, state chips, brand tags, previews, filters All / Needs human / Mine with counts |
+| F2B.04 | SLA countdown | M | Built, Seen | "6:00 to claim" chips; FLAGGED sorted by time left; red under 2 min and "SLA missed" (styling in code, not yet in a screenshot). Test AC3 |
+| F2B.05 | Conversation thread | M | Built, Seen | Bubbles for prospect / AI / human, system pills ("Claimed by Neha"), Today / Yesterday separators, "Not delivered" + Retry |
+| F2B.06 | Realistic mock data | M | Partial | EN + Hinglish, ₹ lakh, Tier 1/2 cities, 2 brands, masked phones. **Gap:** no Devanagari Hindi in the seed chats. A Devanagari message is one click away in Simulate ("Hindi" example) but not yet screenshotted |
+| F2B.07 | Trigger engine | M | Built | Rules F3.A1–A8 on every inbound message, 23 tests. Uses the **draft** R3 rules (D-12) |
+| F2B.08 | "Why flagged" card | M | Built, Seen | Rule code, label and the actual value ("Stated investment ₹45L, brand threshold ₹40L"); Resolve button for compliance flags |
+| F2B.09 | Takeover state machine | M | Built | 7 states, T1–T9, guards, `state_version` 409, requestId de-dup, queued-reply cancel. Tests AC1–AC11 |
+| F2B.10 | Take over / Claim / Return buttons | M | Built, Seen | Claim, Return to AI, Won, Lost seen. Return dialog lists what blocks it (no reason, open compliance flag, unsent draft); not yet screenshotted |
+| F2B.11 | Composer rules | M | Built, Seen | Locked unless you own the chat; "AI paused" banner; "204 / 4,096" counter; Send disabled over the limit (AC5) |
+| F2B.12 | Simulate inbound message box | M | Built, Seen | Side column on desktop, bottom sheet on phones; 8 example messages; outage / fail-next / second-consultant toggles; Reset |
+| F2B.13 | Takeover panel | S | Built, Seen | Lead summary (budget, city, timeline, objections, last question), score bar, suggested reply + "Use reply". **`summarise()` has no unit test yet** |
+| F2B.14 | 24 h window indicator | S | Built, Seen | "Reply window 23h 55m left" in the chat header (seen). Template picker after 24 h is built (test AC6) but not yet screenshotted |
+| F2B.15 | Opt-out | S | Built | STOP / band karo / बंद करो → OPTED_OUT, composer locked in red; START opts back in (test AC7). Not yet screenshotted |
+| F2B.16 | Claim conflict demo | S | Built | "Second consultant" toggle in Simulate → Priya claims first → toast "Already claimed by Priya" (test AC2). Not yet screenshotted |
+| F2B.17 | Empty / loading / error states | S | Built | Skeleton rows, empty-filter copy, failed send + Retry, error boundary with Reset, error toasts. Not yet screenshotted |
+| F2B.23 | Agent status strip | S | Built, Seen | Per-brand Active / Paused / Error with last send; only the manager (Ravi) can pause |
+| F2B.24 | Agent Switchboard | M | Built, Seen | Header row: WhatsApp AI live; Meta Ads, Voice AI, Email greyed "not part of this prototype" (da0463c) |
+| F2B.25 | Live tracking | M | Built, Seen | Leads 10 · Messages today 22 · Active chats 8 · Needs human 3, recomputed every tick (da0463c) |
+| F2B.18 | Metrics strip | C | Partial | Covered in part by F2B.25 (active chats, needs human) and the badge (autonomy %). "In SLA %" and "takeovers today" not shown |
+| F2B.19 | Stretch: live LLM reply | C | Not started | Needs R3's model choice (D-08). On the "1 more day" list |
+| F2B.20 | Real WhatsApp / Supabase backend | W | Won't | By design (A11, A17). The footer says data is mocked and nothing is sent |
+| F2B.21 | Cross-prototype footer | — | Dropped | Task 2 is Option B only (D-10). The footer now states the scope instead |
+| F2B.22 | Approved facts from R5 | S | Blocked | Waits on R5. `data/approvedFacts.ts` holds **illustrative placeholders**, labelled in the UI ("illustrative" tag on fact-based replies, footer note) (A32, T2B.18) |
 
 ## Write-up components
 
 | ID | Component | MoSCoW | Status | Evidence / what's missing |
 |---|---|---|---|---|
-| F2B.W1 | Live URL | M | Not started | Deploy comes after the UI and the 9-step test |
-| F2B.W2 | Exact prompts used, in order | M | Partial | Recorded verbatim in [build-log.md](build-log.md) as they happen |
-| F2B.W3 | What AI got wrong | M | Partial | 4 real entries in the build log so far (component, symptom, cause) |
-| F2B.W4 | What I fixed manually | M | Partial | Each of the 4 entries has its fix. Write-up not drafted |
-| F2B.W5 | 1 more day improvements | M | Not started | The list fills in as items are left unbuilt |
-| F2B.W6 | 3 screenshots + optional Loom | C | Not started | Screenshots come at the UI checkpoint |
+| F2B.W1 | Live URL | M | Not started | Deploy comes after the 9-step Playwright run |
+| F2B.W2 | Exact prompts used, in order | M | Partial | 7 prompts logged verbatim in [build-log.md](build-log.md) |
+| F2B.W3 | What AI got wrong | M | Partial | 12 entries in the build log (component, symptom, cause) |
+| F2B.W4 | What I fixed manually | M | Partial | Each entry has its fix plus "Caught by" and "Fixed by", so the write-up can say honestly who did what |
+| F2B.W5 | 1 more day improvements | M | Not started | Candidates so far: live LLM (F2B.19), Devanagari seed chat, `summarise()` tests, timer-cleared tests, metrics strip gaps, R5 facts |
+| F2B.W6 | 3 screenshots + optional Loom | C | Partial | 6 screenshots in [screenshots/](screenshots/); 3 to be picked for the write-up |

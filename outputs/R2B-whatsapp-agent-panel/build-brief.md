@@ -6,6 +6,8 @@
 
 ## Plan: build Prototype B, the WhatsApp AI Agent Panel (R2B)
 
+> **Note, 15 Oct 2026:** this is the plan as approved. Since then Task 2 became Option B only (D-10): there are no A/C footer links, and the agent's facts will come from the R5 model instead of R2C.
+
 ## Context
 Task 2 asks for a working prototype with a live URL and a write-up covering: the prompts used, what the AI got wrong, what was fixed, and what to do with one more day.
 - You chose to build **R2B first**, with **Claude Code building it** instead of Lovable. That changes decision D-01.
