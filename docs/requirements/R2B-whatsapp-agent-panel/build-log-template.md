@@ -1,11 +1,10 @@
-# R2: Build log (fill in while building, and only with real entries)
+# R2B: WhatsApp AI Agent Panel: build log (fill in while building, and only with real entries)
 
 > Rule: every row is written during the build, at the moment it happens. Nothing is reconstructed afterwards or invented. The Task 2 write-up is copied from this log.
 
 ## Session info
 - Tool(s): Lovable / Claude Code
 - Start time:
-- Freeze time (start + 2 h):
 - Deployed URL:
 
 ## Prompt log
@@ -29,7 +28,7 @@
 - Timers (SLA, 24 h) not cleared on state change
 - Mobile layout overflow
 
-## Unbuilt at freeze → "1 more day"
+## Unbuilt items → "1 more day"
 | Item | Linked 1c acceptance criterion | Est. |
 |---|---|---|
 | | | |

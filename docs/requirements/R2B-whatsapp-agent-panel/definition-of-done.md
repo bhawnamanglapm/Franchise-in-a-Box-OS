@@ -1,4 +1,4 @@
-# R2: Prototype: definition of done
+# R2B: WhatsApp AI Agent Panel: definition of done
 
 ## Product
 - [ ] Public URL loads in incognito with no login
@@ -10,6 +10,8 @@
 - [ ] Mock data includes Hinglish and ₹ values, and no real company names except FreshBrew from the brief
 - [ ] Usable at 375 px width
 - [ ] All 5 test-script steps pass
+- [ ] Numbers the agent quotes match the R2C approved Model Card (A32)
+- [ ] Footer links to the Option A and Option C URLs work
 
 ## Write-up
 - [ ] Exact prompts listed in order (copied from the log, unedited)

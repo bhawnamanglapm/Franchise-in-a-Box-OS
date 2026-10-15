@@ -1,7 +1,7 @@
-# R2: Working Prototype (Task 2): evaluation
+# R2B: WhatsApp AI Agent Panel (Task 2, Option B): evaluation
 
 ## What the brief asks
-Choose one: A Onboarding Wizard · **B WhatsApp AI Agent Panel** · C ROI Dashboard. The submission must include:
+Task 2 lists three options: A Onboarding Wizard · **B WhatsApp AI Agent Panel** · C ROI Dashboard. We build **all three as separate working prototypes** (D-10); this folder covers **Option B**. Each prototype's submission must include:
 1. Live URL (Vercel / Netlify / etc.)
 2. Exact prompts used
 3. What AI got wrong
@@ -19,26 +19,28 @@ Choose one: A Onboarding Wizard · **B WhatsApp AI Agent Panel** · C ROI Dashbo
 
 ## Decision
 **Option B**, built in **Lovable** with GitHub sync; targeted fixes in Claude Code (D-01).
-- **Why:** it sits on the revenue path (franchisee funnel), it ties together R1 1c + R3 + R4 #1–2 + R6A, it fits the candidate's lead-to-closure and handoff experience, and it stands out against likely A/C submissions.
-- **Logic:** scripted AI replies + deterministic rules. The stretch goal is one live LLM reply using the R3 prompt, attempted only if done before the 2 h freeze (A17).
+- **Why it is built first of the three:** it sits on the revenue path (franchisee funnel), it ties together R1 1c + R3 + R4 #1–2 + R6A, and it fits the candidate's lead-to-closure and handoff experience.
+- **Logic:** scripted AI replies + deterministic rules. The stretch goal is one live LLM reply using the R3 prompt, attempted only if time allows (A17).
+- **Link to the other prototypes:** the facts the agent quotes match the Model Card approved in R2C (A32); the footer links to the A and C URLs.
 
 ## Ambiguities and how we resolve them
 | Ambiguity | Resolution | Assumption |
 |---|---|---|
 | "Working": real backend? | Mock data + client-side state; stated openly | A11, A17 |
 | Hosting | `*.lovable.app` or Vercel | A15 |
-| Brands in mock data | FreshBrew (QSR, from the brief) + one fictional gym brand. No real company names. | New: A26 |
+| Brands in mock data | FreshBrew (QSR, from the brief) + one fictional gym brand. No real company names. | A26 |
 
 ## Risks
 | Risk | Likelihood | Mitigation |
 |---|---|---|
 | Looks like a static chat mock | Medium | Visible state changes, a "Why flagged" card, and a simulate box on the first screen |
 | Lovable generates generic light-theme UI | High | The first prompt sets design tokens; check the hex values in the code |
-| Scope creep past 2 h | High | Freeze rule; unbuilt items move to the "1 more day" list |
+| Scope creep past 2 h | High | Build Must features first (MoSCoW); unbuilt items move to the "1 more day" list |
 | Stretch LLM goal uses a different provider than R3's choice | Medium | Call the R3 default model, or state the mismatch in the write-up |
+| Agent quotes numbers that differ from the C dashboard | Medium | Mock facts are copied from the R2C approved Model Card (A32) |
 | Link breaks after submission | Low | Don't redeploy after submitting; keep the PDF screenshots as backup |
 
 ## Effort and priority
-- **Estimate:** 2.75 h (2 h build, 0.75 h deploy, test and write-up) · **Priority:** P0 (est. 20% weight)
+- **Estimate:** 2.75 h (2 h build, 0.75 h deploy, test and write-up) · **Priority:** P0 (Task 2 est. 20% weight, shared across A/B/C)
 - **Depends on:** R1 1c (spec), R3 (triggers, prompt), R4 (scope) · **Feeds:** R7 (proof), R8
-- **Status:** Not started. The build brief and prompt sequence are written in Phase 5.
+- **Status:** Not started. The build brief and prompt sequence are written after R3.
