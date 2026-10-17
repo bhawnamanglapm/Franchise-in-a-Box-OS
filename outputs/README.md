@@ -7,10 +7,10 @@ Finished deliverables, one folder per requirement. The plans behind them live in
 | 1 | R1 Product Thinking (Task 1) | [R1-product-thinking](R1-product-thinking/README.md) | Done |
 | 2 | R4 Prioritisation (Task 4) | [R4-prioritisation](R4-prioritisation/task4-prioritisation.md) | Done |
 | 3 | R3 AI Agent Design (Task 3) | [R3-ai-agent-design](R3-ai-agent-design/task3-ai-agent-design.md) | Done |
-| 4 | R2B WhatsApp AI Agent Panel (Task 2, Option B) | [R2B-whatsapp-agent-panel](R2B-whatsapp-agent-panel/README.md) | Done: live, 9-step test passes, write-up drafted. T2B.18 (R5 figures) waits on R5 |
-| 5 | R5 Financial Model (Task 5) | — | Not started |
+| 4 | R2B WhatsApp AI Agent Panel (Task 2, Option B) | [R2B-whatsapp-agent-panel](R2B-whatsapp-agent-panel/README.md) | Done: live, 9-step test passes, R5 figures swapped in (T2B.18) |
+| 5 | R5 Financial Model (Task 5) | [R5-financial-model](R5-financial-model/README.md) | Done: Google Sheet built and checked. Owner to set "anyone with the link" sharing |
 | — | R2C ROI Dashboard | — | Not being built (D-10: Task 2 is Option B only) |
 | — | R2A Onboarding Wizard | — | Not being built (D-10) |
-| 8 | R6 Automation + Market Research (Task 6) | — | Not started |
-| 9 | R7 How You Work (Task 7) | — | Not started |
-| 10 | R8 Submission assembly | — | Not started |
+| 8 | R6 Automation + Market Research (Task 6) | [R6-automation-research](R6-automation-research/README.md) | Done: 6A designed (not built), 6B researched with dated sources |
+| 9 | R7 How You Work (Task 7) | [R7-how-you-work](R7-how-you-work/task7-how-you-work.md) | Drafted. Owner to fill the placeholders (ratings, complex-problem details, links) |
+| 10 | R8 Submission assembly | [R8-submission](R8-submission/README.md) | Assembled and checked. Waiting on Task 7 placeholders, then the Google Doc, sharing and PDF (owner) |

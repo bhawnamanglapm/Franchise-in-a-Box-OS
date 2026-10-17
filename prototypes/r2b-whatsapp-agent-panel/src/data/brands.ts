@@ -2,7 +2,7 @@ import type { Brand, User } from '../engine/types'
 
 // FreshBrew comes from the brief; IronPulse Fitness is fictional (A26). No real company names.
 export const BRANDS: Record<string, Brand> = {
-  freshbrew: { id: 'freshbrew', name: 'FreshBrew', category: 'QSR café', fullInvestmentLakh: 40 },
+  freshbrew: { id: 'freshbrew', name: 'FreshBrew', category: 'QSR café', fullInvestmentLakh: 32 },
   ironpulse: { id: 'ironpulse', name: 'IronPulse Fitness', category: 'Gym', fullInvestmentLakh: 60 },
 }
 

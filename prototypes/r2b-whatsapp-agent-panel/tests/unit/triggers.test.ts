@@ -26,7 +26,7 @@ describe('trigger rules (draft F3.A1–A9)', () => {
   it('A1 + A2 fire together and both carry their value (one flag, every reason)', () => {
     const ev = evaluate('Mere paas 45 lakh hai, agreement kab sign kar sakte hain?', ctx())
     expect(ev.hits.map((h) => h.rule)).toEqual(['A1', 'A2'])
-    expect(ev.hits[1].reason).toBe('Stated investment ₹45L, brand threshold ₹40L')
+    expect(ev.hits[1].reason).toBe('Stated investment ₹45L, brand threshold ₹32L')
   })
   it('A2 does not fire below the threshold', () => {
     expect(rules('My budget is 25 lakh')).toEqual([])

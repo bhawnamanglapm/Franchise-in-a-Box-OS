@@ -215,7 +215,7 @@ flowchart TB
     B4["Inbox + thread + Why-flagged + takeover [P]"]
     BG["Computed autonomy badge [P]"]
     MD["Mock data: FreshBrew + fictional gym [M]"]
-    FX["Agent facts: illustrative until R5 [M]"]
+    FX["Agent facts: FreshBrew from R5 model, rest illustrative [M]"]
   end
   R5S["R5 Google Sheet"]
   LLM2["Optional live LLM (stretch)"]
@@ -270,7 +270,7 @@ flowchart TB
     direction LR
     D1["2 brands + 4 users<br/>FreshBrew + fictional gym"]
     D2["10 sample chats (F2B.06)<br/>English, Hinglish,<br/>Rs lakh, Tier 1/2 cities"]
-    D3["Brand facts + templates (F2B.22)<br/>illustrative until R5 model"]
+    D3["Brand facts + templates (F2B.22)<br/>FreshBrew from R5 model"]
     D4["Event log"]
   end
 
@@ -279,7 +279,7 @@ flowchart TB
     X1["Real WhatsApp + Supabase<br/>database and login (F2B.20)"]
     X2["Meta Ads, Voice, Email agents<br/>(switchboard tiles only)"]
     X4["Live AI model<br/>(F2B.19, stretch)"]
-    X5["R5 approved figures<br/>(replace illustrative facts)"]
+    X5["Live link to the R5 Sheet<br/>(figures copied in by hand today)"]
   end
 
   R --> S --> A

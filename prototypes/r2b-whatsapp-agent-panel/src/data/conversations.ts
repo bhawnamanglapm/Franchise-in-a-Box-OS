@@ -99,7 +99,7 @@ export function seedWorld(realNow: number = Date.now()): World {
   // c1: Hinglish, AI is qualifying (asks for budget next). The reviewer continues this one.
   say(today(13, 54), 'c1', 'Namaste, mujhe FreshBrew franchise ke baare mein jaanna hai')
 
-  // c5: high intent + deal value (₹45L ≥ ₹40L) → flagged 4 minutes ago.
+  // c5: high intent + deal value (₹45L ≥ ₹32L) → flagged 4 minutes ago.
   say(today(13, 56), 'c5', 'Mere paas 45 lakh ka budget hai. Agreement kab sign kar sakte hain?')
 
   // c6: legal / financial (A7) → flagged 2 minutes ago; must be resolved before hand-back.

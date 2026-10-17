@@ -1,8 +1,12 @@
 // The only numbers the agent may quote (A32).
 //
-// ILLUSTRATIVE PLACEHOLDERS. The brief gives no FreshBrew figures and the financial model (R5) isn't
-// built yet. Every value here is shown in the UI as "illustrative" and gets replaced by the approved
-// figures from the R5 Sheet (task T2B.18). Nothing here is a sourced fact.
+// FreshBrew investment, fee, royalty, payback and outlet size come from the base case of the Task 5
+// financial model (outputs/R5-financial-model, task T2B.18). That model is built from third-party
+// listings and labelled estimates, so these are model figures, not a franchisor disclosure.
+// Training/support and every IronPulse fact are still illustrative placeholders: the brief gives no
+// figures for them. Each fact carries its source so the UI can say which is which.
+
+export type FactSource = 'model' | 'illustrative'
 
 export interface Fact {
   topic: string
@@ -11,9 +15,17 @@ export interface Fact {
   keywords: string[]
   en: string
   hi: string
+  /** 'model': base case of the R5 financial model. 'illustrative': placeholder, no source. */
+  source: FactSource
 }
 
-export const FACTS_STATUS = 'Illustrative: replaced by the approved figures from the financial model (R5)'
+export const FACTS_STATUS =
+  'FreshBrew investment, fee, royalty, payback and size: R5 financial model base case (estimates). Training/support and IronPulse: illustrative'
+
+export const SOURCE_LABEL: Record<FactSource, string> = {
+  model: 'from R5 model',
+  illustrative: 'illustrative',
+}
 
 export const APPROVED_FACTS: Record<string, Fact[]> = {
   freshbrew: [
@@ -21,15 +33,17 @@ export const APPROVED_FACTS: Record<string, Fact[]> = {
       topic: 'investment',
       label: 'Total investment',
       keywords: ['investment', 'invest', 'cost', 'kitna lagega', 'kitna paisa', 'kharcha', 'total', 'capital'],
-      en: 'The total investment for one FreshBrew outlet is about ₹35–40 lakh, including fit-out and equipment.',
-      hi: 'Ek FreshBrew outlet ka total investment lagbhag ₹35–40 lakh hai, fit-out aur equipment mila ke.',
+      en: 'The total investment for one FreshBrew outlet is about ₹32 lakh: ₹24 lakh for fit-out and equipment, the ₹6 lakh franchise fee and ₹2 lakh working capital.',
+      hi: 'Ek FreshBrew outlet ka total investment lagbhag ₹32 lakh hai: ₹24 lakh fit-out aur equipment, ₹6 lakh franchise fee aur ₹2 lakh working capital.',
+      source: 'model',
     },
     {
       topic: 'fee',
       label: 'Franchise fee',
       keywords: ['franchise fee', 'fee', 'fees', 'joining'],
-      en: 'The one-time franchise fee is ₹8 lakh.',
-      hi: 'One-time franchise fee ₹8 lakh hai.',
+      en: 'The one-time franchise fee is ₹6 lakh.',
+      hi: 'One-time franchise fee ₹6 lakh hai.',
+      source: 'model',
     },
     {
       topic: 'royalty',
@@ -37,20 +51,23 @@ export const APPROVED_FACTS: Record<string, Fact[]> = {
       keywords: ['royalty', 'commission', 'monthly share'],
       en: 'Royalty is 6% of monthly gross sales.',
       hi: 'Royalty monthly gross sales ka 6% hai.',
+      source: 'model',
     },
     {
       topic: 'payback',
       label: 'Payback',
       keywords: ['payback', 'roi', 'kitne time', 'kab tak wapas', 'break even', 'breakeven', 'recover'],
-      en: 'In our base-case model, payback is around 30–36 months. It depends on sales, so I can share the model with its assumptions.',
-      hi: 'Base-case model mein payback lagbhag 30–36 mahine hai. Ye sales par depend karta hai, main assumptions ke saath model share kar sakti hoon.',
+      en: 'In our model, at ₹8 lakh of monthly sales payback is about 29 months. At ₹10 lakh it is about 17 months; at ₹6 lakh it takes more than 3 years. I can share the model with its assumptions.',
+      hi: 'Hamare model mein ₹8 lakh monthly sales par payback lagbhag 29 mahine hai. ₹10 lakh par lagbhag 17 mahine, aur ₹6 lakh par 3 saal se zyada. Main assumptions ke saath model share kar sakti hoon.',
+      source: 'model',
     },
     {
       topic: 'area',
       label: 'Space needed',
       keywords: ['sq ft', 'sqft', 'square', 'area', 'space', 'jagah', 'shop size'],
-      en: 'A FreshBrew outlet needs 600–900 sq ft, ideally on the ground floor with good footfall.',
-      hi: 'FreshBrew outlet ke liye 600–900 sq ft chahiye, ground floor aur achhi footfall wali jagah best hai.',
+      en: 'A FreshBrew outlet needs about 400–700 sq ft (our model uses 600), ideally on the ground floor with good footfall.',
+      hi: 'FreshBrew outlet ke liye lagbhag 400–700 sq ft chahiye (model mein 600), ground floor aur achhi footfall wali jagah best hai.',
+      source: 'model',
     },
     {
       topic: 'support',
@@ -58,6 +75,7 @@ export const APPROVED_FACTS: Record<string, Fact[]> = {
       keywords: ['training', 'support', 'help', 'staff', 'madad'],
       en: 'We give 2 weeks of training for you and your staff, plus launch and marketing support.',
       hi: 'Hum aapko aur aapke staff ko 2 hafte ki training dete hain, saath mein launch aur marketing support bhi.',
+      source: 'illustrative',
     },
   ],
   ironpulse: [
@@ -67,6 +85,7 @@ export const APPROVED_FACTS: Record<string, Fact[]> = {
       keywords: ['investment', 'invest', 'cost', 'kitna lagega', 'kitna paisa', 'kharcha', 'total', 'capital'],
       en: 'The total investment for an IronPulse gym is about ₹55–60 lakh, including equipment.',
       hi: 'IronPulse gym ka total investment lagbhag ₹55–60 lakh hai, equipment mila ke.',
+      source: 'illustrative',
     },
     {
       topic: 'fee',
@@ -74,6 +93,7 @@ export const APPROVED_FACTS: Record<string, Fact[]> = {
       keywords: ['franchise fee', 'fee', 'fees', 'joining'],
       en: 'The one-time franchise fee is ₹10 lakh.',
       hi: 'One-time franchise fee ₹10 lakh hai.',
+      source: 'illustrative',
     },
     {
       topic: 'royalty',
@@ -81,6 +101,7 @@ export const APPROVED_FACTS: Record<string, Fact[]> = {
       keywords: ['royalty', 'commission', 'monthly share'],
       en: 'Royalty is 7% of monthly membership revenue.',
       hi: 'Royalty monthly membership revenue ka 7% hai.',
+      source: 'illustrative',
     },
     {
       topic: 'area',
@@ -88,6 +109,7 @@ export const APPROVED_FACTS: Record<string, Fact[]> = {
       keywords: ['sq ft', 'sqft', 'square', 'area', 'space', 'jagah'],
       en: 'An IronPulse gym needs 3,000–4,000 sq ft.',
       hi: 'IronPulse gym ke liye 3,000–4,000 sq ft chahiye.',
+      source: 'illustrative',
     },
   ],
 }

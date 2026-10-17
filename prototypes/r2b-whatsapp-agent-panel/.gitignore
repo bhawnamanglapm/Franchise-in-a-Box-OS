@@ -5,3 +5,5 @@ playwright-report/
 .vercel/
 *.tsbuildinfo
 tests/e2e/.results/
+.vercel
+.env*

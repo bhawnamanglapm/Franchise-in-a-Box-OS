@@ -122,7 +122,7 @@ Prototype B ([live](https://fiab-r2b-whatsapp-agent-panel.vercel.app)) demos Mod
 
 - **Agent Switchboard:** Meta Ads, Voice AI and Email appear as disabled tiles marked "not part of this prototype". In production they are Month 2 (Meta Ads is #4 for the QSR partner).
 - **The "AI: 76%" badge (cut)** never appears. The header shows the Autonomy Rate computed live from the action log.
-- **Approved facts** in the prototype are labelled illustrative until the financial model (Task 5) supplies approved figures; that stands in for #3.
+- **Approved facts** in the prototype come from the financial model (Task 5) base case, tagged by source; that stands in for #3.
 - **Won / Lost** buttons in the prototype are the thin edge of #4.
 - The donut, benchmarks, AI insights and Readiness Score belong to prototypes A and C, which were not built (D-10), so none of the cut features is shown as if it were live.
 

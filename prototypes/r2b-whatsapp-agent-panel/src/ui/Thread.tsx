@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { APPROVED_FACTS, FACTS_STATUS } from '../data/approvedFacts'
+import { APPROVED_FACTS, FACTS_STATUS, SOURCE_LABEL } from '../data/approvedFacts'
 import { USERS } from '../data/brands'
 import { HOUR, fmtCountdown, fmtTime } from '../engine/clock'
 import type { Conversation, Message } from '../engine/types'
@@ -80,7 +80,8 @@ function Bubble({ m, c, viewer }: { m: Message; c: Conversation; viewer: string 
         <p className="whitespace-pre-wrap break-words">{m.text}</p>
         {fact && (
           <p className="mt-1.5 text-[10px] text-muted" title={FACTS_STATUS}>
-            Approved fact: {fact.label} · <span className="text-alert">illustrative</span>
+            Approved fact: {fact.label} ·{' '}
+            <span className={fact.source === 'model' ? 'text-success' : 'text-alert'}>{SOURCE_LABEL[fact.source]}</span>
           </p>
         )}
       </div>

@@ -26,7 +26,7 @@ describe('AC1: a matching message flags the conversation with every reason', () 
     const c = w.conversations.c1
     expect(c.state).toBe('FLAGGED')
     expect(c.flags.map((f) => f.rule)).toEqual(['A1', 'A2'])
-    expect(c.flags[1].reason).toBe('Stated investment ₹50L, brand threshold ₹40L')
+    expect(c.flags[1].reason).toBe('Stated investment ₹50L, brand threshold ₹32L')
     expect(aiMsgs(w, 'c1').length - before).toBe(1) // the holding message
     expect(aiMsgs(w, 'c1').at(-1)!.text).toMatch(/franchise team/)
 

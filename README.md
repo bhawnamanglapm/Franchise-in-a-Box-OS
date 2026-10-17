@@ -3,7 +3,7 @@
 Take-home assignment for the **AI Product Manager / AI Product Builder** role at Scale100x.ai.
 This repo is the working space for the submission: planning, requirement breakdowns, architecture and the code for the Task 2 prototype (Option B).
 
-> **Status:** R1 (Task 1) output done in [`outputs/R1-product-thinking/`](outputs/R1-product-thinking/README.md). R4 (Task 4) done in [`outputs/R4-prioritisation/`](outputs/R4-prioritisation/task4-prioritisation.md). R3 (Task 3) done in [`outputs/R3-ai-agent-design/`](outputs/R3-ai-agent-design/task3-ai-agent-design.md). Task 2 is **Option B only** (D-10): the WhatsApp AI Agent Panel is built in [`prototypes/r2b-whatsapp-agent-panel/`](prototypes/r2b-whatsapp-agent-panel/) and live at **https://fiab-r2b-whatsapp-agent-panel.vercel.app**. All 9 test steps pass in Playwright (desktop + 375 px, local + live), and the [Task 2B write-up](outputs/R2B-whatsapp-agent-panel/README.md) is drafted. Next: the R5 model, then swap its figures into B.
+> **Status:** R1 (Task 1) output done in [`outputs/R1-product-thinking/`](outputs/R1-product-thinking/README.md). R4 (Task 4) done in [`outputs/R4-prioritisation/`](outputs/R4-prioritisation/task4-prioritisation.md). R3 (Task 3) done in [`outputs/R3-ai-agent-design/`](outputs/R3-ai-agent-design/task3-ai-agent-design.md). Task 2 is **Option B only** (D-10): the WhatsApp AI Agent Panel is built in [`prototypes/r2b-whatsapp-agent-panel/`](prototypes/r2b-whatsapp-agent-panel/) and live at **https://fiab-r2b-whatsapp-agent-panel.vercel.app**. All 9 test steps pass in Playwright (desktop + 375 px, local + live), and the [Task 2B write-up](outputs/R2B-whatsapp-agent-panel/README.md) is done. R5 (Task 5) model is done in [`outputs/R5-financial-model/`](outputs/R5-financial-model/README.md), and B now quotes its figures. R6 (Task 6) is done in [`outputs/R6-automation-research/`](outputs/R6-automation-research/README.md). R7 (Task 7) is drafted with placeholders only the candidate can fill. R8: the submission is assembled in [`outputs/R8-submission/`](outputs/R8-submission/README.md); next is filling Task 7, then the Google Doc, sharing and PDF.
 > **Time:** ~11 h of focused work estimated. **Quality comes first, and estimates are for planning only, not cut-off points (D-07).** Steps run in the order below; submit as soon as R8 passes, inside the 72 h deadline.
 
 ---
@@ -167,10 +167,10 @@ Detailed, numbered tasks live in each requirement's `tasks.md`. Master view:
 | 5 | Write the shared Prompt 1 shell + prototype B build brief and prompts | R2B | (in 4) | Decide | Claude |
 | 6 | Build prototype B in Claude Code (D-01); log prompt → error → fix | R2B | 2 h | Build | Claude Code builds, you review |
 | 7 | Deploy B, run 9-step test, write Task 2 Option B section | R2B | 0.75 h | Build | You |
-| 8 | Build FreshBrew model in Sheets; run integrity checks | R5 | 2 h | Build | You + Claude |
+| 8 | ~~Build FreshBrew model in Sheets; run integrity checks~~ Done 17 Oct 2026 | R5 | 2 h | Build | You + Claude |
 | 9 | ~~Build prototype C~~ Dropped: Task 2 is B only (D-10) | R2C | — | — | — |
 | 10 | ~~Build prototype A~~ Dropped: Task 2 is B only (D-10) | R2A | — | — | — |
-| 11 | Swap B's illustrative facts for R5's approved figures; redeploy B | R2B | 10 m | Build | You |
+| 11 | ~~Swap B's illustrative facts for R5's approved figures; redeploy B~~ Done 17 Oct 2026 | R2B | 10 m | Build | You |
 | 12 | 6A lead-flow design + diagram | R6 | 0.4 h | Finish | You + Claude |
 | 13 | 6B research: verify every number and source | R6 | 0.6 h | Finish | Claude drafts, you verify |
 | 14 | Task 7 answers with proof links | R7 | 0.5 h | Finish | You |
@@ -195,7 +195,7 @@ The submission is done when **all** of the following are true:
 - [ ] The system prompt is 150–250 words, and the count is shown.
 - [ ] No number appears without a source or a stated assumption ID.
 - [ ] R1, R3, R4, R6A and R2B tell one consistent story. Any change between R1 and R4 is explained.
-- [ ] R2B's agent quotes only figures approved from the R5 Sheet, or labels them illustrative (A32).
+- [x] R2B's agent quotes only figures approved from the R5 Sheet, or labels them illustrative (A32).
 - [ ] The founder skim test passes: the main decisions can be read from headings and TL;DRs alone.
 - [ ] Task 7 contains only real tools and real experience. Nothing is invented.
 - [ ] Submitted as soon as R8 passes, inside the 72 h deadline.

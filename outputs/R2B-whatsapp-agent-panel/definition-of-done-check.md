@@ -2,7 +2,7 @@
 
 Ticks every item in [`definition-of-done.md`](../../docs/requirements/R2B-whatsapp-agent-panel/definition-of-done.md). An item is ticked only with evidence. **Last checked: 16 Oct 2026, after the Playwright 9-step run and the write-up.**
 
-**Result: all 17 applicable checklist items ticked.** Still to do outside the checklist: your review of the write-up and a final look at the live URL. Two items are not applicable (no stretch LLM; nothing submitted yet). One item is ticked on the "labelled illustrative" branch and changes to "matches R5" after T2B.18.
+**Result: all 17 applicable checklist items ticked.** Still to do outside the checklist: your review of the write-up and a final look at the live URL. Two items are not applicable (no stretch LLM; nothing submitted yet). The facts item now reads "matches R5" (T2B.18 done 17 Oct 2026).
 
 "Playwright" below means [`nine-step.spec.ts`](../../prototypes/r2b-whatsapp-agent-panel/tests/e2e/nine-step.spec.ts), 4 of 4 runs passing on 16 Oct 2026 (1440 px and 375 px, local build and live URL, each in a fresh browser profile).
 
@@ -19,7 +19,7 @@ Ticks every item in [`definition-of-done.md`](../../docs/requirements/R2B-whatsa
 | [x] | Mock data includes Hinglish and ₹ values, and no real company names except FreshBrew | Done | Hinglish chats, ₹ lakh amounts. Brands: FreshBrew (brief) + IronPulse Fitness (fictional, A26). Names fictional, phones masked. *Not checked against company registers.* No Devanagari in the seed (on the "1 more day" list) |
 | [x] | Usable at 375 px width | Done | Playwright runs the whole script at 375 px and asserts the page is no wider than 375 px |
 | [x] | All 9 test-script steps pass | Done | Playwright, 4 of 4 runs |
-| [x] | Numbers the agent quotes match the R5 figures, or are labelled illustrative in the UI (A32) | Done (illustrative) | Labelled "illustrative" in the UI and footer. Becomes "matches R5" after T2B.18 |
+| [x] | Numbers the agent quotes match the R5 figures, or are labelled illustrative in the UI (A32) | Done (matches R5) | FreshBrew investment ₹32L, fee ₹6L, royalty 6%, payback ~29 months at ₹8L/month, 400–700 sq ft: the R5 base case. Tagged "from R5 model" in the UI. Training/support and IronPulse stay tagged "illustrative" |
 
 ## Write-up
 
@@ -39,4 +39,4 @@ Ticks every item in [`definition-of-done.md`](../../docs/requirements/R2B-whatsa
 |---|---|---|---|
 | [x] | Code synced to GitHub | Done | Pushed to `main` with this commit |
 | [x] | No API keys in client code | Done | Key-pattern scan of `src/`, `tests/`, `index.html`, both configs and `dist/` found nothing (16 Oct) |
-| — | No redeploy after submission | Not applicable yet | Checked at submission. One planned redeploy before submission: the R5 facts (T2B.18) |
+| — | No redeploy after submission | Not applicable yet | Checked at submission. The planned R5-facts redeploy (T2B.18) was done 17 Oct 2026 and retested on the live URL |

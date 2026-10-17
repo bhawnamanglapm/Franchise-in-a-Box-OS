@@ -4,7 +4,7 @@
 
 A sales consultant's inbox for the WhatsApp AI agent. The AI answers prospects from approved facts. When a message needs a person (purchase intent, a big budget, a complaint, a legal or money question, a request for a human), the chat is flagged with the rule and the value that fired it. A consultant claims it, replies, and hands it back to the AI with a reason. The "AI share of work" badge is computed from the event log, so it moves as you work.
 
-**Status: built, deployed and tested.** All 9 steps of the test script pass in a fresh browser at 1440 px and 375 px, both locally and on the live URL. Brand facts are still illustrative until the R5 financial model is done (T2B.18).
+**Status: built, deployed and tested.** All 9 steps of the test script pass in a fresh browser at 1440 px and 375 px, both locally and on the live URL. FreshBrew's investment, fee, royalty, payback and outlet size now come from the [Task 5 financial model](../R5-financial-model/README.md) base case (T2B.18, redeployed and retested 17 Oct 2026).
 
 ## Try it in 60 seconds
 
@@ -21,7 +21,7 @@ A sales consultant's inbox for the WhatsApp AI agent. The AI answers prospects f
 | The state machine (7 states, guards, version check, repeat-click de-dup, cancel of a queued AI reply), the trigger rules (the same table as the R3 design), SLA and 24 h timers on a business-hours clock, and the autonomy badge computed from the event log | WhatsApp: nothing is sent. Prospect messages come from the Simulate box |
 | 52 unit tests on the engine, and a Playwright run of the 9-step script through the real UI | The AI's replies are scripted from approved facts, not a model call (the live LLM is on the "1 more day" list) |
 | | Data lives in the browser (no Supabase, no login). The "second consultant" is simulated in the same browser |
-| | Brand facts (₹ amounts, fees) are **illustrative** and labelled so on screen, until the R5 model supplies approved figures |
+| | FreshBrew's ₹ figures come from the R5 model's base case, which is built from third-party listings and estimates, not a franchisor disclosure. Training/support and all IronPulse (fictional gym) facts are **illustrative**. Each fact-based reply is tagged "from R5 model" or "illustrative" on screen |
 
 ## Proof: the 9-step test
 
