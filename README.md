@@ -90,7 +90,7 @@ These are reference points to position the product, not researched claims. Verif
 | Google Sheets | Financial model (R5), AI/Human split tab (R1) | Yes |
 | Google Docs | Written submission (assumed available, A16) | Assumed |
 | GitHub | Version control | Yes (this repo) |
-| Zapier / Make | **Designed, not built** in 6A. Stated honestly. | No |
+| Zapier / Make / n8n | 6A is designed, not run in production. A [practice lab](practice/lead-flow-automation/README.md) runs the flow against fake APIs (n8n workflows, 23 tests) | Fake APIs only |
 
 Product stack (from the brief): React + Tailwind + Supabase. The prototype uses React + Tailwind with in-browser mock data instead of Supabase (A11). WhatsApp via a BSP (business solution provider). Meta Lead Ads.
 
