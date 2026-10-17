@@ -79,7 +79,7 @@ The status strip shows "Enabled" and "Last successful send" side by side, so "on
 | Human handling | **Return to AI**, **Mark Won**, **Mark Lost** |
 | Won / Lost / Opted out | None (read-only) |
 
-**"Why flagged" card.** Pinned at the top while the conversation waits for a person. It lists every reason in plain words with the actual value, e.g. *Deal value: stated investment ₹45L, brand threshold ₹40L*; *Asked for a person: "call me"*.
+**"Why flagged" card.** Pinned at the top while the conversation waits for a person. It lists every reason in plain words with the actual value, e.g. *Deal value: stated investment ₹45L, brand threshold ₹32L*; *Asked for a person: "call me"*.
 
 **Takeover panel** (right side, once a consultant owns the chat): a 5-point AI summary (budget, city, timeline, objections, last unanswered question), the lead score, and one suggested reply. The suggestion goes into the message box only when clicked and is **never sent automatically**.
 

@@ -33,7 +33,7 @@ Checks [`evaluation.md`](../../docs/requirements/R2B-whatsapp-agent-panel/evalua
 | Backend | Brief names React + Tailwind + Supabase | No Supabase: mock data and client-side state, stated openly (A11, A17) |
 | Hosting | `*.lovable.app` or Vercel | Vercel (meets A15) |
 | Logic | Scripted replies + deterministic rules; stretch LLM | Unchanged. The stretch LLM (F2B.19) is out of scope for now |
-| Agent's facts | Copied from R2C's Model Card; footer links to A and C | From the R5 financial model (A32); labelled illustrative until then. No footer links (F2B.21 dropped) |
+| Agent's facts | Copied from R2C's Model Card; footer links to A and C | From the R5 financial model base case (A32), tagged "from R5 model"; facts R5 does not cover stay tagged "illustrative". No footer links (F2B.21 dropped) |
 
 ## 4. Ambiguities
 
@@ -54,10 +54,10 @@ Checks [`evaluation.md`](../../docs/requirements/R2B-whatsapp-agent-panel/evalua
 | Generic light-theme UI | Closed: tokens checked in the built CSS |
 | Scope creep past 2 h | **Realised.** Engine + UI took well over the 2 h estimate (D-07 says estimates are not cut-offs) |
 | Stretch LLM uses a different provider than R3 | Not applicable: the stretch isn't being built |
-| Agent quotes numbers that differ from the R5 model | Open until R5. Facts are in one file and labelled "illustrative" (T2B.18) |
+| Agent quotes numbers that differ from the R5 model | Closed (T2B.18). FreshBrew facts match the R5 base case; one file, each fact tagged with its source |
 | Link breaks after submission | Not applicable yet |
 
 ## 6. Effort and status
 
 - **Estimate in evaluation.md:** 2.75 h. **Actual so far:** not timed precisely; the build started at 15:47 IST and the last logged prompt was at 16:52 IST on 15 Oct 2026. Claude Code work between prompts was not timed.
-- **Status:** Done, except T2B.18 (swap in the R5 figures and redeploy) and your review of the write-up.
+- **Status:** Done, including T2B.18 (R5 figures swapped in, redeployed and retested 17 Oct 2026). Your review of the write-up remains.

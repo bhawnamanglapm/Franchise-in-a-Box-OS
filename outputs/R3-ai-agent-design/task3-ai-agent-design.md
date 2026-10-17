@@ -8,7 +8,7 @@ This agent is Task 4's #1 feature, and its handoffs feed #2, human takeover ([Ta
 
 ## Part A. When a human takes over
 
-Every message from a prospect is checked against all eight rules. One flag lists every rule that fired, and each reason quotes the words or number that triggered it, e.g. `Asked about "agreement"` or `Stated investment ₹45L, brand threshold ₹40L`. Each rule has two halves:
+Every message from a prospect is checked against all eight rules. One flag lists every rule that fired, and each reason quotes the words or number that triggered it, e.g. `Asked about "agreement"` or `Stated investment ₹45L, brand threshold ₹32L`. Each rule has two halves:
 - **A keyword or number half.** It is deterministic and runs in prototype B today.
 - **A classifier half.** It is added in production. The two thresholds are starting points, to be tuned on the golden set (Part C).
 

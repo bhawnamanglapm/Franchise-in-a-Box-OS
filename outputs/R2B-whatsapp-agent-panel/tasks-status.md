@@ -26,7 +26,7 @@ With Claude Code building (D-01 revised), "Prompt N" tasks became build steps do
 | T2B.15 | Fix any blocker; redeploy once | Claude | Done, nothing to fix | The run found no blocker, so no redeploy |
 | T2B.16 | Write-up from the log | Claude drafts, you review | Drafted, your review pending | [README.md](README.md) |
 | T2B.17 | 3 screenshots | Claude (Playwright) | Done | Flagged (desktop), claimed (desktop), opted out (375 px), taken by the Playwright run; in the write-up |
-| T2B.18 | After R5: replace illustrative facts with R5's approved figures; redeploy | You | Blocked | Waits on R5 |
+| T2B.18 | After R5: replace illustrative facts with R5's approved figures; redeploy | Claude Code | Done | 17 Oct 2026: facts swapped, 52 unit tests + build pass, redeployed, 9-step test passes on the live URL |
 
 ## 9-step test script
 

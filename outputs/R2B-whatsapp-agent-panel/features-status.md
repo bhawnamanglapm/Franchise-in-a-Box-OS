@@ -4,7 +4,7 @@ Checks every feature in [`features.md`](../../docs/requirements/R2B-whatsapp-age
 
 **Status key:** **Built** = on screen; the logic is unit-tested where noted · **Seen** = also visible in the [screenshots](screenshots/) · **Partial** = some of it built · **Not started** · **Blocked** = waits on another requirement · **Dropped** / **Won't** = out of scope by decision. **Tested** = driven through the real UI by the 9-step Playwright run (desktop + 375 px, local + live).
 
-**Summary:** 19 features are built, and 14 of them are visible in the screenshots. 2 are partial (mock data has no Devanagari chat; the metrics strip lacks SLA % and takeovers today), 1 waits on R5 (approved facts), and the cross-prototype footer is dropped (D-10). The 9-step Playwright run passes 4 of 4 runs; the features it drives are marked **Tested**. All six write-up items are done.
+**Summary:** 20 features are built, and 14 of them are visible in the screenshots. 2 are partial (mock data has no Devanagari chat; the metrics strip lacks SLA % and takeovers today), approved facts now come from R5, and the cross-prototype footer is dropped (D-10). The 9-step Playwright run passes 4 of 4 runs; the features it drives are marked **Tested**. All six write-up items are done.
 
 ## Screens and features
 
@@ -17,7 +17,7 @@ Checks every feature in [`features.md`](../../docs/requirements/R2B-whatsapp-age
 | F2B.05 | Conversation thread | M | Built, Seen | Bubbles for prospect / AI / human, system pills ("Claimed by Neha"), Today / Yesterday separators, "Not delivered" + Retry |
 | F2B.06 | Realistic mock data | M | Partial | EN + Hinglish, ₹ lakh, Tier 1/2 cities, 2 brands, masked phones. **Gap:** no Devanagari Hindi in the seed chats. A Devanagari message is one click away in Simulate ("Hindi" example) but not yet screenshotted |
 | F2B.07 | Trigger engine | M | Built, Tested | Rules F3.A1–A8 on every inbound message, 23 tests. R3 was written from this trigger table, so they match (D-12) |
-| F2B.08 | "Why flagged" card | M | Built, Seen | Rule code, label and the actual value ("Stated investment ₹45L, brand threshold ₹40L"); Resolve button for compliance flags |
+| F2B.08 | "Why flagged" card | M | Built, Seen | Rule code, label and the actual value ("Stated investment ₹45L, brand threshold ₹32L"); Resolve button for compliance flags |
 | F2B.09 | Takeover state machine | M | Built, Tested | 7 states, T1–T9, guards, `state_version` 409, requestId de-dup, queued-reply cancel. Tests AC1–AC11 |
 | F2B.10 | Take over / Claim / Return buttons | M | Built, Seen, Tested | Claim, Return to AI, Won, Lost seen. Return dialog lists what blocks it (no reason, open compliance flag, unsent draft); not yet screenshotted |
 | F2B.11 | Composer rules | M | Built, Seen, Tested | Locked unless you own the chat; "AI paused" banner; "204 / 4,096" counter; Send disabled over the limit (AC5) |
@@ -34,7 +34,7 @@ Checks every feature in [`features.md`](../../docs/requirements/R2B-whatsapp-age
 | F2B.19 | Stretch: live LLM reply | C | Not started | Needs R3's model choice (D-08). On the "1 more day" list |
 | F2B.20 | Real WhatsApp / Supabase backend | W | Won't | By design (A11, A17). The footer says data is mocked and nothing is sent |
 | F2B.21 | Cross-prototype footer | — | Dropped | Task 2 is Option B only (D-10). The footer now states the scope instead |
-| F2B.22 | Approved facts from R5 | S | Blocked | Waits on R5. `data/approvedFacts.ts` holds **illustrative placeholders**, labelled in the UI ("illustrative" tag on fact-based replies, footer note) (A32, T2B.18) |
+| F2B.22 | Approved facts from R5 | S | Built, Seen, Tested | `data/approvedFacts.ts`: FreshBrew investment, fee, royalty, payback and size from the R5 base case; each fact tagged "from R5 model" or "illustrative" in the UI (A32, T2B.18). FreshBrew A2 threshold set to the model's ₹32L |
 
 ## Write-up components
 

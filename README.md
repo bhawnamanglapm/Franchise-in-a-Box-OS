@@ -167,10 +167,10 @@ Detailed, numbered tasks live in each requirement's `tasks.md`. Master view:
 | 5 | Write the shared Prompt 1 shell + prototype B build brief and prompts | R2B | (in 4) | Decide | Claude |
 | 6 | Build prototype B in Claude Code (D-01); log prompt → error → fix | R2B | 2 h | Build | Claude Code builds, you review |
 | 7 | Deploy B, run 9-step test, write Task 2 Option B section | R2B | 0.75 h | Build | You |
-| 8 | Build FreshBrew model in Sheets; run integrity checks | R5 | 2 h | Build | You + Claude |
+| 8 | ~~Build FreshBrew model in Sheets; run integrity checks~~ Done 17 Oct 2026 | R5 | 2 h | Build | You + Claude |
 | 9 | ~~Build prototype C~~ Dropped: Task 2 is B only (D-10) | R2C | — | — | — |
 | 10 | ~~Build prototype A~~ Dropped: Task 2 is B only (D-10) | R2A | — | — | — |
-| 11 | Swap B's illustrative facts for R5's approved figures; redeploy B | R2B | 10 m | Build | You |
+| 11 | ~~Swap B's illustrative facts for R5's approved figures; redeploy B~~ Done 17 Oct 2026 | R2B | 10 m | Build | You |
 | 12 | 6A lead-flow design + diagram | R6 | 0.4 h | Finish | You + Claude |
 | 13 | 6B research: verify every number and source | R6 | 0.6 h | Finish | Claude drafts, you verify |
 | 14 | Task 7 answers with proof links | R7 | 0.5 h | Finish | You |
@@ -195,7 +195,7 @@ The submission is done when **all** of the following are true:
 - [ ] The system prompt is 150–250 words, and the count is shown.
 - [ ] No number appears without a source or a stated assumption ID.
 - [ ] R1, R3, R4, R6A and R2B tell one consistent story. Any change between R1 and R4 is explained.
-- [ ] R2B's agent quotes only figures approved from the R5 Sheet, or labels them illustrative (A32).
+- [x] R2B's agent quotes only figures approved from the R5 Sheet, or labels them illustrative (A32).
 - [ ] The founder skim test passes: the main decisions can be read from headings and TL;DRs alone.
 - [ ] Task 7 contains only real tools and real experience. Nothing is invented.
 - [ ] Submitted as soon as R8 passes, inside the 72 h deadline.

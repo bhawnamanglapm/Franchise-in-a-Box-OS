@@ -2,7 +2,7 @@ component,layer,module,technology,responsibility,inputs,outputs,in_prototype,30_
 Onboarding Portal UI,Client,1 Brand Onboarding,React + Tailwind,4-step brand intake and file upload,Brand details; deck; P&L,Brand record; files,"No (A/C not built, D-10)",Thin (consultant-filled),Consultant / Brand founder
 AI Readiness Score,AI,1 Brand Onboarding,Rules v0 then model,RAG sub-scores for brand readiness,Brand record,Score + sub-scores,"No (A/C not built, D-10)",Rule-based v0,Consultant
 ROI Engine UI,Client,2 ROI Engine,React + Tailwind,Franchise Model Card and 3-yr ROI,Brand data; assumptions,Model card; projections,"No (A/C not built, D-10)",Thin,Consultant
-Approved Facts Store,Data,2 ROI Engine,Supabase Postgres,Holds human-approved numbers the agent may quote,Approved model card,Facts for grounding,Mocked (B: illustrative facts file until R5 figures),Yes,Consultant (approver)
+Approved Facts Store,Data,2 ROI Engine,Supabase Postgres,Holds human-approved numbers the agent may quote,Approved model card,Facts for grounding,Mocked (B: facts file holding the R5 base-case figures),Yes,Consultant (approver)
 Collateral Studio,AI,3 Collateral,LLM + templates,Decks; brochures; ad creatives; WhatsApp scripts,Brand data,Assets,No,Deferred,Designer
 Meta Lead Ads Webhook,External,4 Sales Agent,Meta Graph API webhook,Delivers new lead form submissions,Ad form,Lead payload,Mocked (B),Yes,System
 Ingestion Edge Function,Backend,4 Sales Agent,Supabase Edge Function,Validate; dedupe; store consent; create lead,Lead payload,Lead + consent records,Mocked (B),Yes,System
