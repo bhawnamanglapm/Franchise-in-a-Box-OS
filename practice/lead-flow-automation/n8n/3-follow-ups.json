@@ -1,0 +1,302 @@
+{
+  "name": "Lead flow 3 · Follow-up reminders",
+  "nodes": [
+    {
+      "id": "7180001d-dc63-4502-b9e5-54724bc8fbb5",
+      "name": "Note 3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -400
+      ],
+      "parameters": {
+        "content": "## 3 · Follow-ups (every hour)\nFinds leads stuck mid-qualification. No reply 4 h after our last message → one **template** reminder (the 24 h window is likely closed, so free text would fail with error 131047). After 2 reminders → exercise N5: hand off as ATTEMPTED_TO_CONTACT.",
+        "width": 520,
+        "height": 220
+      }
+    },
+    {
+      "id": "c08c509e-ea1b-47bf-a9d3-c766fe46b1f1",
+      "name": "Every hour",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "1872fc20-e74f-4f08-9b76-4578b1e851b5",
+      "name": "Config",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "jsCode": "// ✏️ Edit these. For the practice lab they point at the fake APIs (npm run mocks).\n// For real use: graph.facebook.com / api.hubapi.com, and move tokens into n8n Credentials.\nreturn [{ json: {\n  graphUrl: 'http://localhost:4010/meta/v21.0',\n  waUrl: 'http://localhost:4010/whatsapp/v21.0',\n  hubspotUrl: 'http://localhost:4010/hubspot',\n  pageToken: 'test-page-token',\n  waToken: 'test-wa-token',\n  waPhoneNumberId: '100000000000001',\n  hubspotToken: 'test-hubspot-token',\n  brand: 'FreshBrew',\n  minBudgetLakh: 25,\n  consultants: [\n    { email: 'neha@example.com', name: 'Neha', phone: '919800000001', cities: ['mumbai', 'pune'], available: true },\n    { email: 'priya@example.com', name: 'Priya', phone: '919800000002', cities: ['delhi', 'gurugram', 'noida'], available: true },\n    { email: 'arjun@example.com', name: 'Arjun', phone: '919800000003', cities: ['bengaluru', 'bangalore', 'chennai'], available: true },\n  ],\n} }]"
+      }
+    },
+    {
+      "id": "22c06b8e-c576-4c40-83e7-ea653c90af66",
+      "name": "HubSpot: stalled leads",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Config\"].json.hubspotUrl }}/crm/v3/objects/contacts/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.hubspotToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ filterGroups: [{ filters: [{ propertyName: 'fib_qual_step', operator: 'IN', values: ['awaiting_optin_reply','awaiting_budget','awaiting_city','awaiting_timeline'] }] }], properties: ['firstname','phone','fib_wa_opt_out','fib_last_outbound_at','fib_last_inbound_at','fib_reminders_sent'], limit: 100 }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "33d1aa66-ecb0-40be-8bc5-190ef6c008b0",
+      "name": "Due for a reminder",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const out = [];\nfor (const c of $json.results ?? []) {\n  const p = c.properties;\n  if (p.fib_wa_opt_out === 'true') continue;\n  const lastOut = new Date(p.fib_last_outbound_at ?? 0), lastIn = new Date(p.fib_last_inbound_at ?? 0);\n  if (lastIn > lastOut) continue;                       // they replied; our turn, not theirs\n  if (Date.now() - lastOut < 4 * 3600e3) continue;     // too soon\n  const sent = Number(p.fib_reminders_sent ?? 0);\n  out.push({ json: { id: c.id, phone: p.phone, firstname: p.firstname || 'there', sent, giveUp: sent >= 2 } });\n}\nreturn out;"
+      }
+    },
+    {
+      "id": "03f821d9-6b38-4ed5-8289-9f026926076e",
+      "name": "Still reminding?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        960,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "aaf98b4a-d94d-43c3-9020-4de907a79ad5",
+              "leftValue": "={{ !$json.giveUp }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "36f1f0e9-b176-4229-a388-9b1f0739d0ba",
+      "name": "WhatsApp: reminder template",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        -200
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Config\"].json.waUrl }}/{{ $node[\"Config\"].json.waPhoneNumberId }}/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.waToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ messaging_product: 'whatsapp', to: $json.phone, type: 'template', template: { name: 'lead_reminder', language: { code: 'en' }, components: [{ type: 'body', parameters: [{ type: 'text', text: $json.firstname }, { type: 'text', text: $node[\"Config\"].json.brand }] }] } }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "ea63d630-88c6-4a40-9397-3e47a2bc6de5",
+      "name": "HubSpot: count reminder",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1440,
+        -200
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $node[\"Config\"].json.hubspotUrl }}/crm/v3/objects/contacts/{{ $node[\"Due for a reminder\"].json.id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.hubspotToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ properties: { fib_reminders_sent: String($node[\"Due for a reminder\"].json.sent + 1), fib_last_outbound_at: new Date().toISOString() } }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "473c9ea7-33a7-416b-9c79-2b8e344505ae",
+      "name": "HubSpot: mark attempted",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        200
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $node[\"Config\"].json.hubspotUrl }}/crm/v3/objects/contacts/{{ $json.id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.hubspotToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ properties: { hs_lead_status: 'ATTEMPTED_TO_CONTACT', fib_qual_step: 'handoff_queue' } }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    }
+  ],
+  "connections": {
+    "Every hour": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: stalled leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HubSpot: stalled leads": {
+      "main": [
+        [
+          {
+            "node": "Due for a reminder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Due for a reminder": {
+      "main": [
+        [
+          {
+            "node": "Still reminding?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Still reminding?": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp: reminder template",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HubSpot: mark attempted",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp: reminder template": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: count reminder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

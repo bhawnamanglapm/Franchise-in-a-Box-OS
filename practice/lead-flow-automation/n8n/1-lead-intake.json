@@ -1,0 +1,671 @@
+{
+  "name": "Lead flow 1 · Meta lead intake",
+  "nodes": [
+    {
+      "id": "16863139-906b-4786-afa9-3dc1be4ea21b",
+      "name": "Note 1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -400
+      ],
+      "parameters": {
+        "content": "## 1 · Lead intake\nMeta Lead Ads webhook → fetch the lead → dedupe in HubSpot → create/update contact → WhatsApp welcome template (only with consent).\n\n**Practice:** run `npm run mocks` with `FLOW_URL=http://localhost:5678/webhook`, activate this workflow, then `curl -X POST localhost:4010/_test/lead ...` (see README).\n\n**Exercises left for you:** verify X-Hub-Signature-256 (Ex N1), no-consent → consultant task (Ex N2).",
+        "width": 520,
+        "height": 300
+      }
+    },
+    {
+      "id": "e216b25a-3741-43d2-83de-1ed6c2751142",
+      "name": "Meta leadgen webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "a421dba7-4ab4-4424-ae58-aab77eeb1afb",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "webhooks/meta",
+        "responseMode": "onReceived",
+        "options": {}
+      }
+    },
+    {
+      "id": "a77bc830-edf7-4cb6-b4ae-71ef5970936c",
+      "name": "Meta verify (GET)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        400
+      ],
+      "webhookId": "39c28465-eeef-417a-8f4d-7c98b93a2719",
+      "parameters": {
+        "path": "webhooks/meta",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "96a857a4-9725-4eb7-8f34-679bf1487817",
+      "name": "Echo challenge",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        240,
+        400
+      ],
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.query['hub.verify_token'] === 'test-verify-token' ? $json.query['hub.challenge'] : 'forbidden' }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "d0f4c48c-3794-4fc9-b974-4e9c7d76a7f0",
+      "name": "Config",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "jsCode": "// ✏️ Edit these. For the practice lab they point at the fake APIs (npm run mocks).\n// For real use: graph.facebook.com / api.hubapi.com, and move tokens into n8n Credentials.\nreturn [{ json: {\n  graphUrl: 'http://localhost:4010/meta/v21.0',\n  waUrl: 'http://localhost:4010/whatsapp/v21.0',\n  hubspotUrl: 'http://localhost:4010/hubspot',\n  pageToken: 'test-page-token',\n  waToken: 'test-wa-token',\n  waPhoneNumberId: '100000000000001',\n  hubspotToken: 'test-hubspot-token',\n  brand: 'FreshBrew',\n  minBudgetLakh: 25,\n  consultants: [\n    { email: 'neha@example.com', name: 'Neha', phone: '919800000001', cities: ['mumbai', 'pune'], available: true },\n    { email: 'priya@example.com', name: 'Priya', phone: '919800000002', cities: ['delhi', 'gurugram', 'noida'], available: true },\n    { email: 'arjun@example.com', name: 'Arjun', phone: '919800000003', cities: ['bengaluru', 'bangalore', 'chennai'], available: true },\n  ],\n} }]"
+      }
+    },
+    {
+      "id": "8d4e497c-f459-4740-91d0-db3c61d400c4",
+      "name": "Extract leadgen ids",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "jsCode": "// One webhook can carry several leads. Emit one item per lead.\nconst body = $('Meta leadgen webhook').first().json.body;\nconst out = [];\nfor (const e of body.entry ?? []) for (const ch of e.changes ?? [])\n  if (ch.field === 'leadgen') out.push({ json: { leadgen_id: ch.value.leadgen_id } });\nreturn out;"
+      }
+    },
+    {
+      "id": "be3e6701-2648-4f3b-85ef-4aa2d4c50672",
+      "name": "HubSpot: seen this lead id?",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Config\"].json.hubspotUrl }}/crm/v3/objects/contacts/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.hubspotToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ filterGroups: [{ filters: [{ propertyName: 'fib_meta_lead_id', operator: 'EQ', value: $json.leadgen_id }] }], limit: 1 }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "e32aa394-8c81-4414-a2f2-c2911f9dd26b",
+      "name": "New lead id?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        960,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "c6a8893e-0f4a-494c-be20-f58014a368c1",
+              "leftValue": "={{ $json.total === 0 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "2f9d8233-77fc-469b-8d6b-f851a09933cb",
+      "name": "Meta: get lead",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        0
+      ],
+      "parameters": {
+        "url": "={{ $node[\"Config\"].json.graphUrl }}/{{ $node[\"Extract leadgen ids\"].json.leadgen_id }}?fields=id,created_time,field_data,ad_id,form_id,campaign_name",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.pageToken }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "50133362-fac5-4a48-8ce2-01d567dfbf17",
+      "name": "Normalise lead",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// field_data [{name, values}] → flat fields; phone → 91XXXXXXXXXX; consent → boolean.\nconst f = Object.fromEntries(($json.field_data ?? []).map(x => [x.name, x.values?.[0] ?? '']));\nlet d = String(f.phone_number ?? '').replace(/\\D/g, '');\nif (d.startsWith('00')) d = d.slice(2);\nif (d.length === 11 && d.startsWith('0')) d = d.slice(1);\nif (d.length === 10) d = '91' + d;\nconst phone = /^91[6-9]\\d{9}$/.test(d) ? d : null;\nconst [first, ...rest] = String(f.full_name ?? '').trim().split(/\\s+/);\nreturn { json: {\n  metaLeadId: $json.id, phone, email: (f.email || '').toLowerCase() || null,\n  firstname: first || '', lastname: rest.join(' '), city: (f.city || '').trim(),\n  consent: ['yes', 'true', 'i agree', 'agree'].includes(String(f.whatsapp_consent ?? '').toLowerCase()),\n  source: 'meta_lead_ads:' + ($json.campaign_name ?? ''),\n} };"
+      }
+    },
+    {
+      "id": "f65a6ea5-4087-4acc-b9c2-30a7bcec880f",
+      "name": "HubSpot: find by phone",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1680,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Config\"].json.hubspotUrl }}/crm/v3/objects/contacts/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.hubspotToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ filterGroups: [{ filters: [{ propertyName: 'phone', operator: 'EQ', value: $json.phone ?? 'none' }] }], properties: ['fib_wa_opt_out', 'fib_qual_step'], limit: 1 }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "e0b039ae-7a1f-4e74-9012-1e144b84a307",
+      "name": "Build contact",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1920,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const lead = $('Normalise lead').item.json;\nconst existing = $json.results?.[0] ?? null;\nconst props = { firstname: lead.firstname, lastname: lead.lastname, phone: lead.phone, email: lead.email, city: lead.city,\n  fib_meta_lead_id: lead.metaLeadId, fib_source: lead.source, fib_whatsapp_consent: String(lead.consent), hs_lead_status: 'NEW' };\nfor (const k of Object.keys(props)) if (props[k] === null || props[k] === '') delete props[k];\nconst canMessage = !!lead.phone && lead.consent && existing?.properties?.fib_wa_opt_out !== 'true'\n  && existing?.properties?.fib_qual_step !== 'handed_off';\nreturn { json: { existingId: existing?.id ?? null, props, lead, canMessage } };"
+      }
+    },
+    {
+      "id": "faa4fe96-3775-4a6e-902d-aab620a0c862",
+      "name": "Existing contact?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2160,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "31e91777-8070-4f61-962d-0b47742d69a8",
+              "leftValue": "={{ !!$json.existingId }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b5dc0a9a-7142-4e7a-b139-5752f5e6862a",
+      "name": "HubSpot: update contact",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2400,
+        -200
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $node[\"Config\"].json.hubspotUrl }}/crm/v3/objects/contacts/{{ $json.existingId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.hubspotToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ properties: $json.props }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "c682410c-95f1-4838-9c16-1bf5bb2b4843",
+      "name": "HubSpot: create contact",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2400,
+        200
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Config\"].json.hubspotUrl }}/crm/v3/objects/contacts",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.hubspotToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ properties: { ...$json.props, lifecyclestage: 'lead', fib_qual_step: 'new', fib_reminders_sent: '0' } }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "409af708-25ed-4408-aca0-dcc7b208ddd5",
+      "name": "Keep contact id",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2640,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "return { json: { contactId: $json.id, ...$('Build contact').item.json } };"
+      }
+    },
+    {
+      "id": "c73a17c9-b92b-448f-8e2d-f1aab4c0f5db",
+      "name": "Consent & can message?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2880,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "990bcd3f-a927-4411-b257-b13664e23c67",
+              "leftValue": "={{ $json.canMessage }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "bacde576-b685-41c3-9a99-cfb1af29caa6",
+      "name": "WhatsApp: welcome template",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3120,
+        -200
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Config\"].json.waUrl }}/{{ $node[\"Config\"].json.waPhoneNumberId }}/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.waToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ messaging_product: 'whatsapp', to: $json.lead.phone, type: 'template', template: { name: 'lead_welcome', language: { code: 'en' }, components: [{ type: 'body', parameters: [{ type: 'text', text: $json.lead.firstname || 'there' }, { type: 'text', text: $node[\"Config\"].json.brand }] }] } }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "9f78c2a8-8659-43d8-8015-0f48965c2c2d",
+      "name": "HubSpot: step = awaiting reply",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3360,
+        -200
+      ],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $node[\"Config\"].json.hubspotUrl }}/crm/v3/objects/contacts/{{ $node[\"Keep contact id\"].json.contactId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.hubspotToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ properties: { fib_qual_step: 'awaiting_optin_reply', fib_last_outbound_at: new Date().toISOString(), fib_reminders_sent: '0' } }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "25bb1c61-7a02-4fa0-bbae-006aa8bc6f2b",
+      "name": "HubSpot: note (no WhatsApp)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3120,
+        200
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Config\"].json.hubspotUrl }}/crm/v3/objects/notes",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $node[\"Config\"].json.hubspotToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ properties: { hs_timestamp: new Date().toISOString(), hs_note_body: 'No WhatsApp consent, no valid phone, opted out or already with a consultant. TODO (exercise N2): route to a consultant for a call.' }, associations: [{ to: { id: $json.contactId }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 202 }] }] }) }}",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    }
+  ],
+  "connections": {
+    "Meta leadgen webhook": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Extract leadgen ids",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract leadgen ids": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: seen this lead id?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HubSpot: seen this lead id?": {
+      "main": [
+        [
+          {
+            "node": "New lead id?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "New lead id?": {
+      "main": [
+        [
+          {
+            "node": "Meta: get lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Meta: get lead": {
+      "main": [
+        [
+          {
+            "node": "Normalise lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalise lead": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: find by phone",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HubSpot: find by phone": {
+      "main": [
+        [
+          {
+            "node": "Build contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build contact": {
+      "main": [
+        [
+          {
+            "node": "Existing contact?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Existing contact?": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: update contact",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HubSpot: create contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HubSpot: update contact": {
+      "main": [
+        [
+          {
+            "node": "Keep contact id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HubSpot: create contact": {
+      "main": [
+        [
+          {
+            "node": "Keep contact id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Keep contact id": {
+      "main": [
+        [
+          {
+            "node": "Consent & can message?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consent & can message?": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp: welcome template",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HubSpot: note (no WhatsApp)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp: welcome template": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: step = awaiting reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Meta verify (GET)": {
+      "main": [
+        [
+          {
+            "node": "Echo challenge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}
