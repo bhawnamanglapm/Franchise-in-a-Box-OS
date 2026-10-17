@@ -19,7 +19,7 @@ Each rating is backed by something in this submission.
 
 | Skill | Rating (1–5) | Proof |
 |---|---|---|
-| Turning a vague brief into specs | 4 | 35 written assumptions and 12 decisions; the developer-ready takeover spec (Task 1c) |
+| Turning a vague brief into specs | 4 | 35 written assumptions and 13 decisions; the developer-ready takeover spec (Task 1c) |
 | AI agent design | 4 | 8 measurable triggers that run as code in the prototype; a 40-conversation test plan (Task 3) |
 | Prototyping with AI tools | 4 | Live prototype passing its 9-step test; a log of what the AI got wrong and how it was fixed |
 | Financial modelling | 3 | Task 5 model with 10 automatic checks, 3 hand checks and dated sources |

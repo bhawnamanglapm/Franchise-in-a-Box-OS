@@ -1548,7 +1548,7 @@ Format: at most 60 words and one question per reply. Return JSON: reply, handoff
 <h3>Task 6A: Lead-flow automation (Meta Ads → WhatsApp → CRM → Consultant)</h3>
 <blockquote>
 <p><strong>TL;DR.</strong> A new Meta lead gets a WhatsApp reply within minutes, is qualified by the AI agent, and lands in the CRM with a 5-point summary. A consultant is pulled in only at the <strong>8 Task 3 triggers</strong> (buying intent, big budget, complaint, legal/money topic, request for a person, and so on). On Task 1's volumes this takes about <strong>274 hours a month of manual lead handling off one brand's team, roughly 1.7 consultants</strong>. All minute figures are estimates to calibrate in the pilot. The biggest risk is <strong>WhatsApp templates and consent</strong>: outside the 24-hour window only an approved template can be sent, and India's DPDP consent rules apply.</p>
-<p><strong>This is designed, not built.</strong> I have not used Zapier or Make in production (A14). The same flow runs in prototype B with mock data: the trigger rules, takeover and hand-back are real code there; Meta, WhatsApp and the CRM are simulated.</p>
+<p><strong>This is designed, not built.</strong> I have not used Zapier or Make in production (A14). The same flow runs in prototype B with mock data: the trigger rules, takeover and hand-back are real code there; Meta, WhatsApp and the CRM are simulated. A <a href="https://github.com/bhawnamanglapm/Franchise-in-a-Box-OS/blob/main/practice/lead-flow-automation/README.md">practice lab</a> also runs this flow end to end against fake Meta, WhatsApp and HubSpot APIs (plain Node and 3 n8n workflows, 23 passing tests); it has not been connected to real accounts.</p>
 </blockquote>
 <h4>1. Tools</h4>
 <table>
@@ -2163,9 +2163,9 @@ Format: at most 60 words and one question per reply. Return JSON: reply, handoff
 </tr>
 </tbody>
 </table>
-<p>Not claimed: Zapier, Make. Task 6A is a design, not a build.</p>
+<p>Not claimed: Zapier, Make, or any live automation. Task 6A runs only against fake APIs.</p>
 <h3>2. Self-rating</h3>
-<p><strong>[Confirm or change each rating.]</strong> The proof column is filled from this submission.</p>
+<p>Each rating is backed by something in this submission.</p>
 <table>
 <thead>
 <tr>
@@ -2177,28 +2177,28 @@ Format: at most 60 words and one question per reply. Return JSON: reply, handoff
 <tbody>
 <tr>
 <td>Turning a vague brief into specs</td>
-<td><strong>[ ]</strong></td>
-<td>35 written assumptions and 12 decisions; the developer-ready takeover spec (Task 1c)</td>
+<td>4</td>
+<td>35 written assumptions and 13 decisions; the developer-ready takeover spec (Task 1c)</td>
 </tr>
 <tr>
 <td>AI agent design</td>
-<td><strong>[ ]</strong></td>
+<td>4</td>
 <td>8 measurable triggers that run as code in the prototype; a 40-conversation test plan (Task 3)</td>
 </tr>
 <tr>
 <td>Prototyping with AI tools</td>
-<td><strong>[ ]</strong></td>
+<td>4</td>
 <td>Live prototype passing its 9-step test; a log of what the AI got wrong and how it was fixed</td>
 </tr>
 <tr>
 <td>Financial modelling</td>
-<td><strong>[ ]</strong></td>
+<td>3</td>
 <td>Task 5 model with 10 automatic checks, 3 hand checks and dated sources</td>
 </tr>
 <tr>
 <td>Building automations hands-on (Zapier / Make)</td>
-<td><strong>[ ] (suggest ≤ 3)</strong></td>
-<td>Designed the flow in 6A but have not run it in production. <strong>[Plan to close the gap, e.g. build the 6A flow in Make on a test page]</strong></td>
+<td>2</td>
+<td>Designed the 6A flow, then built a <a href="https://github.com/bhawnamanglapm/Franchise-in-a-Box-OS/blob/main/practice/lead-flow-automation/README.md">practice version</a> with Claude Code against fake Meta, WhatsApp and HubSpot APIs (n8n workflows, 23 tests). Not yet run on real accounts. Next: connect it to a Meta test page and a WhatsApp test number</td>
 </tr>
 </tbody>
 </table>
@@ -2210,14 +2210,22 @@ Format: at most 60 words and one question per reply. Return JSON: reply, handoff
 <li><strong>Build the thinnest version that can be tested.</strong> One prototype (Option B) instead of three (D-10), with real rules and scripted replies.</li>
 <li><strong>Check against the definition of done, then fix.</strong> The 9-step test, the model's Checks tab, and one shared set of numbers: the prototype quotes the model's ₹32L base case.</li>
 </ol>
-<h3>4. A complex problem I solved</h3>
-<p><strong>[Owner input needed.</strong> Pick PCMS (built 0→1 at Bajaj Finserv) or partner-portal adoption (2% → 45%), then answer:]
-- <strong>Situation:</strong> <strong>[what the product was, who used it, what was broken]</strong>
-- <strong>Constraint:</strong> <strong>[e.g. regulation, team, timeline]</strong>
-- <strong>My role and decision:</strong> <strong>[what you personally decided or built]</strong>
-- <strong>Result:</strong> partner-portal adoption from 2% to 45% <strong>[over what period; how measured]</strong>; Heroes Award <strong>[year]</strong>
-- <strong>What I'd do differently:</strong> <strong>[one honest learning]</strong></p>
-<p><strong>Why it matters here:</strong> <strong>[one line linking partner onboarding in lending to onboarding franchise partners: the same funnel of sign-up, qualification, documents and payouts]</strong></p>
+<h3>4. A complex problem I solved: partner portal revamp</h3>
+<ul>
+<li><strong>Situation:</strong> Bajaj's fixed-deposit (FD) distribution partners (brokers) had a partner portal, but only 2% of them used it. Onboarding a partner was manual and took about 7 days: a physical form, physical document submission, approval by the Partner Experience (PE) and audit teams, and only then a broker code.</li>
+<li><strong>What we built:</strong> a revamp that moved onboarding and the partner's day-to-day work into the portal:</li>
+<li>onboarding: an existing partner's details are retrieved automatically; for a new partner, details and documents are fetched through API integrations, submitted online and e-signed</li>
+<li>online FD booking for customers, through the partner's broker code</li>
+<li>reports for partners</li>
+<li>invoice generation</li>
+<li>e-agreements, so partners can renew online when their agreement comes up after 3 years</li>
+<li>customer and partner support</li>
+<li><strong>Constraint:</strong> old core systems, regulation, and a fixed timeline.</li>
+<li><strong>My role and decision:</strong> I put online FD booking first, ahead of the other features.</li>
+<li><strong>Result:</strong> within three months of go-live, partner-portal adoption rose from 2% to 45%, tracked through partners onboarded on the portal, FDs booked through it, and partner logins. Onboarding time fell from about 7 days to 1 day. Heroes Award, 2023.</li>
+<li><strong>What I'd do differently:</strong> build a stronger go-to-market plan for partners alongside the product.</li>
+</ul>
+<p><strong>Why it matters here:</strong> franchise partners go through the same steps as FD partners: sign up, sign an agreement, transact, get paid, ask for help, renew. The revamp moved those steps from offline to self-serve, which is the job of the Scale100x platform.</p>
 <h3>5. Working under ambiguity</h3>
 <table>
 <thead>
@@ -2241,7 +2249,7 @@ Format: at most 60 words and one question per reply. Return JSON: reply, handoff
 </tr>
 </tbody>
 </table>
-<p><strong>Links:</strong> <a href="https://github.com/bhawnamanglapm">GitHub</a> · <strong>[LinkedIn]</strong> · <strong>[PMgirlz]</strong></p>
+<p><strong>Links:</strong> <a href="https://github.com/bhawnamanglapm">GitHub</a> · <a href="https://www.linkedin.com/in/bhawnamangla/">LinkedIn</a> · <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7016279225519222785">PMgirlz newsletter on LinkedIn</a></p>
 <h2>Completeness check against the brief</h2>
 <table>
 <thead>
