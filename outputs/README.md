@@ -12,5 +12,5 @@ Finished deliverables, one folder per requirement. The plans behind them live in
 | — | R2C ROI Dashboard | — | Not being built (D-10: Task 2 is Option B only) |
 | — | R2A Onboarding Wizard | — | Not being built (D-10) |
 | 8 | R6 Automation + Market Research (Task 6) | [R6-automation-research](R6-automation-research/README.md) | Done: 6A designed (not built), 6B researched with dated sources |
-| 9 | R7 How You Work (Task 7) | — | Not started |
+| 9 | R7 How You Work (Task 7) | [R7-how-you-work](R7-how-you-work/task7-how-you-work.md) | Drafted. Owner to fill the placeholders (ratings, complex-problem details, links) |
 | 10 | R8 Submission assembly | — | Not started |
