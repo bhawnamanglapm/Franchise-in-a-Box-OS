@@ -12,5 +12,5 @@ Finished deliverables, one folder per requirement. The plans behind them live in
 | — | R2C ROI Dashboard | — | Not being built (D-10: Task 2 is Option B only) |
 | — | R2A Onboarding Wizard | — | Not being built (D-10) |
 | 8 | R6 Automation + Market Research (Task 6) | [R6-automation-research](R6-automation-research/README.md) | Done: 6A designed (not built), 6B researched with dated sources |
-| 9 | R7 How You Work (Task 7) | [R7-how-you-work](R7-how-you-work/task7-how-you-work.md) | Drafted. Owner to fill the placeholders (ratings, complex-problem details, links) |
-| 10 | R8 Submission assembly | [R8-submission](R8-submission/README.md) | Assembled and checked. Waiting on Task 7 placeholders, then the Google Doc, sharing and PDF (owner) |
+| 9 | R7 How You Work (Task 7) | [R7-how-you-work](R7-how-you-work/task7-how-you-work.md) | Filled with the owner's facts. Only the Lovable project link is left ([prompt pack](../docs/requirements/R2A-onboarding-wizard/lovable-prompts.md)) |
+| 10 | R8 Submission assembly | [R8-submission](R8-submission/README.md) | Assembled and checked. Waiting on the Lovable link, then the Google Doc, sharing and PDF |
