@@ -24,7 +24,7 @@ export interface Brand {
   id: string
   name: string
   category: string
-  /** A2 threshold: the brand's full franchise investment, in ₹ lakh (illustrative until the R5 model sets it). */
+  /** A2 threshold: the brand's full franchise investment, in ₹ lakh (FreshBrew: ₹32L, R5 model base case; IronPulse: illustrative). */
   fullInvestmentLakh: number
 }
 
@@ -34,7 +34,7 @@ export type TriggerId = 'A1' | 'A2' | 'A3' | 'A4' | 'A5' | 'A6' | 'A7' | 'A8' | 
 export interface TriggerHit {
   rule: TriggerId
   label: string
-  /** Plain-words reason with the actual value, e.g. "Stated investment ₹45L, brand threshold ₹40L". */
+  /** Plain-words reason with the actual value, e.g. "Stated investment ₹45L, brand threshold ₹32L". */
   reason: string
   /** Legal / financial / compliance flags must be marked resolved before Return to AI (T6). */
   compliance: boolean
