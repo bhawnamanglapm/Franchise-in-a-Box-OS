@@ -11,7 +11,7 @@
 
 ## Inputs (from the candidate; never invent beyond these)
 - Senior PM, fintech and B2B SaaS
-- Built PCMS (Partner Credit Management System) 0→1 at Bajaj Finserv; partner portal adoption 2% → 45%; Heroes Award
+- Built PCMS (Payout Calculation Management System) 0→1 at Bajaj Finserv; partner portal adoption 2% → 45%; Heroes Award
 - Domain: partner portals, payout/settlement, eKYC, Account Aggregator, RBI Digital Lending compliance
 - MBA in Business Analytics
 - Founder of PMgirlz and Pehchan the Traveller
