@@ -11,6 +11,6 @@ Finished deliverables, one folder per requirement. The plans behind them live in
 | 5 | R5 Financial Model (Task 5) | [R5-financial-model](R5-financial-model/README.md) | Done: Google Sheet built and checked. Owner to set "anyone with the link" sharing |
 | — | R2C ROI Dashboard | — | Not being built (D-10: Task 2 is Option B only) |
 | — | R2A Onboarding Wizard | — | Not being built (D-10) |
-| 8 | R6 Automation + Market Research (Task 6) | — | Not started |
+| 8 | R6 Automation + Market Research (Task 6) | [R6-automation-research](R6-automation-research/README.md) | Done: 6A designed (not built), 6B researched with dated sources |
 | 9 | R7 How You Work (Task 7) | — | Not started |
 | 10 | R8 Submission assembly | — | Not started |
