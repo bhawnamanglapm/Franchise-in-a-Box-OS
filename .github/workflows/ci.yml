@@ -1,0 +1,41 @@
+# Runs the offline checks on every push and pull request.
+# Playwright browser tests (npm run e2e) stay manual: they need a browser and a deployed URL.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  prototype:
+    name: Prototype B (unit tests + build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: prototypes/r2b-whatsapp-agent-panel
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: prototypes/r2b-whatsapp-agent-panel/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+
+  practice-lab:
+    name: Lead-flow practice lab (fake APIs)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: practice/lead-flow-automation
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm test
