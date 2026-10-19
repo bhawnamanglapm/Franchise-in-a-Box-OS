@@ -25,4 +25,4 @@ A new Meta lead gets an approved WhatsApp template within 5 minutes, the Task 3 
 
 - The lead-flow practice lab was merged on 17 Oct 2026 (D-13). Next step: point it at a Meta test page and a WhatsApp test number.
 - City-level EV 2W registrations (Vahan) would firm up the 6B city ranking.
-- The DPDP phase dates should be checked against the Gazette notification.
+- DPDP dates checked 19 Oct 2026 against the government's PIB backgrounder: notified 14 Nov 2025, 18-month phased compliance (so around May 2027). The exact Gazette day (law firms say 13 Nov 2025) is not confirmed; the Gazette PDF could not be opened.
