@@ -17,7 +17,7 @@ All assumptions are stated openly in the submission. IDs are cited wherever an a
 | A9 | Task 6B framing | Should Scale100x take on EV two-wheeler servicing brands as a franchise category, and where should those brands open first? | Confirmed (D-03) | R6 |
 | A10 | High-value | A deal at contract or payment stage, or a qualified lead whose stated investment covers the full franchise investment | The brief's "high-value actions" is undefined | R3 |
 | A11 | Prototype | The Task 2 prototype (B) is a front end with realistic mock data and stateful interactions; logic runs in the browser. No real WhatsApp, database (the brief's Supabase is not used), auth or LLM connection, except the optional stretch goal. Stated in the write-up. | Keeps the build focused on a working flow; stated openly | R2B |
-| A12 | Compliance | DPDP Act 2023 consent and WhatsApp template rules apply. The agent never guarantees ROI. DPDP Rules status to be verified before citing. | Absent from the brief | R3, R6 |
+| A12 | Compliance | DPDP Act 2023 consent and WhatsApp template rules apply. The agent never guarantees ROI. DPDP Rules status checked 19 Oct 2026 (PIB: notified 14 Nov 2025, 18-month phased compliance); exact Gazette day not confirmed. | Absent from the brief | R3, R6 |
 | A13 | Sources | Only Scale100x's services list and founder names are publicly sourced (job postings) | Web search, Oct 2026 | All |
 | A14 | Tools | Candidate's real tools: Claude, Claude Code, Lovable, Google Sheets | Confirmed by candidate | R2B, R5, R7 |
 | A15 | Hosting | A Vercel deploy satisfies "Vercel / Netlify / etc.". The prototype gets one public URL with no login. | Brief wording | R2B |
